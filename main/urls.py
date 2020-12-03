@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from main import views
 
+
 app_name ='main'
 
 admin.site.site_title = "MAGLIAMATTA Admin Portal"
@@ -27,11 +28,13 @@ admin.site.index_title = "Welcome to MAGLIAMATTA Portal"
 
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('main/<int:product_id>', views.details, name='details'),
+    path('cart', views.cart, name='cart'),
 
 
 ]
 
 
-# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

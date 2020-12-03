@@ -26,7 +26,7 @@ class Product(models.Model):
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=350)
     text = models.TextField(blank=True)
-    price = models.FloatField()
+    price = models.DecimalField(decimal_places=2, max_digits=7)
     image = models.ImageField(upload_to='portfolio/images/')
     discount = models.BooleanField()
     url = models.URLField(blank=True)
