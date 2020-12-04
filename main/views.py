@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product
 
 # Create your views here.
+# https://mdbootstrap.com/freebies/jquery/e-commerce/
 
 def item_list(request):
     productsall = Product.objects.all()
-    return render(request, 'main/item_list.html', {'products': productsall})
+    return render(request, 'main/home-page.html', {'products': productsall})
 
 
 def home(request):
