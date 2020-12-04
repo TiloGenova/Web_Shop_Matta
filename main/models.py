@@ -28,7 +28,7 @@ class Product(models.Model):
     description = models.CharField(max_length=350)
     text = models.TextField(blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=7)
-    discountprice = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, blank=True)
+    discount_price = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, blank=True)
     image = models.ImageField(upload_to='portfolio/images/')
     discount = models.BooleanField()
     new = models.BooleanField(default=False)
@@ -37,29 +37,32 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-#User = settings.AUTH_USER_MODEL
 
-
-
-
-
-
-'''class CartManager(models.Manager):
-    def new_cart(self, user=None):
-        return self.model.objects.create(user=user)
-
-
-class Cart(models.Model):
-    #user = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT)  # also for users without lockin
-    products = models.ManyToManyField(Product, blank=True)  # blank=True  empty cart possible
-    timestamp = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    total = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
-    #subtotal = models.DecimalField()
-    #discount =
-    objects = CartManager()
+class OrderItem(models.Model):
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id'''
+        return self.title
+
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
+
+
+
 
 
