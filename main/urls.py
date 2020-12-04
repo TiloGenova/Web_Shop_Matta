@@ -29,7 +29,8 @@ admin.site.index_title = "Welcome to MAGLIAMATTA Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    path('accounts/login/', include('allauth.urls')),
+
     path('', views.home, name='home'),
     path('<int:product_id>', views.details, name='details'),
     # path('cart', views.cart, name='cart'),
