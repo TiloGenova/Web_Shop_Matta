@@ -8,3 +8,4 @@ class ActivityAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product)
+
