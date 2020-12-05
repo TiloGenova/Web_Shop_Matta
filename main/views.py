@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, Order, OrderItem
 
 # Create your views here.
 # https://mdbootstrap.com/freebies/jquery/e-commerce/
@@ -27,3 +27,5 @@ def details(request, product_id):
     return render(request, 'main/details.html', {'product': product})
 
 
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)

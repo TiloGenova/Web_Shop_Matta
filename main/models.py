@@ -1,5 +1,5 @@
 #from __future__ import unicode_literals
-from django.db import models
+from django.db import models,
 from django.conf import settings
 
 
@@ -40,6 +40,7 @@ class Product(models.Model):
     label = models.CharField(max_length=1, choices=LABEL_CHOICE)
     new = models.BooleanField(default=False)
     url = models.URLField(blank=True)
+    quantity = models.IntegerField(default=1)
 
 
 
