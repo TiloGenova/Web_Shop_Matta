@@ -6,7 +6,7 @@ from .models import Product
 
 def item_list(request):
     productsall = Product.objects.all()
-    return render(request, 'main/home-page.html', {'products': productsall})
+    return render(request, 'main/item_list.html', {'products': productsall})
 
 
 def home(request):
