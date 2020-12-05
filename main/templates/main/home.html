@@ -84,7 +84,7 @@
         {% for product in products %}
         <div class="col-lg-4 col-md-6"  >
             <div >
-                <img src="{{ product.image.url }}" class="img-fluid" width="400" >
+                <a href="{% url 'main:details' product.id %}"><img  src="{{ product.image.url }}" class="img-fluid" width="400" ></a>
 
                 <h3>{{ product.title }}</h3>
                 <p>{{ product.description }}</p>
@@ -98,7 +98,10 @@
                 <p>saved first on: {{ product.date }}</p>
 <div>PREIS / DISCOUNT-PREIS :
                 {% if product.discount_price %}
-                    {{ product.discount_price }}€
+                    <del>{{ product.price }}€</del>
+                    <h1>
+                        <span style="color:red">{{ product.discount_price }}€</span>
+                    </h1>
                 {% else  %}
                     <h1>{{ product.price }}€</h1>
 
