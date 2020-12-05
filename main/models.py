@@ -15,6 +15,12 @@ class Product(models.Model):
         ('socks', 'Socks'),
     )
 
+    LABEL_CHOICE = (
+        ('P', 'primary'),
+        ('S', "secondary"),
+        ('D', 'danger'),
+    )
+
     SIZETYPES = models.TextChoices('Size', 'S S/M M M/L L')
     GENDER = models.TextChoices('Gender', 'WOMEN MEN')
 
@@ -31,6 +37,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, blank=True)
     image = models.ImageField(upload_to='portfolio/images/')
     discount = models.BooleanField()
+    label = models.CharField(max_length=1, choices=LABEL_CHOICE)
     new = models.BooleanField(default=False)
     url = models.URLField(blank=True)
 
