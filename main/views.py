@@ -13,6 +13,7 @@ def home(request):
 
     productsall = Product.objects.all()
     productswomen = Product.objects.filter(gender='WOMAN')
+
     return render(request, 'main/home.html', {'products': productsall, 'productswomen': productswomen})
 
 

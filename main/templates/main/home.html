@@ -96,11 +96,12 @@
                 <p>label {{ product.label }}</p>
 
                 <p>saved first on: {{ product.date }}</p>
-<div>DISCOUNT NOCH FALSCH:
-                {% if Product.price > Product.discount_price %}
+<div>PREIS / DISCOUNT-PREIS :
+                {% if product.discount_price %}
                     {{ product.discount_price }}€
-                {% else %}
-                    {{ product.price }}
+                {% else  %}
+                    <h1>{{ product.price }}€</h1>
+
                 {% endif %}
 </div>
 
