@@ -27,5 +27,11 @@ def details(request, product_id):
     return render(request, 'main/details.html', {'product': product})
 
 
-def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
+def cart(request):
+    context = {}
+    return render(request, 'main/cart.html', context)
+
+
+def checkout(request):
+    context = {}
+    return render(request, 'main/checkout.html', context)
