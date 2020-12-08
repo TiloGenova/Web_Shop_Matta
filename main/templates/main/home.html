@@ -84,10 +84,11 @@
     <div class="row"  >
         {% for product in products %}
         <div class="col-lg-4 col-md-6"  >
-            <div >
-                <a href="{% url 'main:details' product.id %}"><img  src="{{ product.image.url }}" class="img-fluid" width="400" ></a>
+            <div class="box-element product">
+                <a  href="{% url 'main:details' product.id %}"><img  src="{{ product.image.url }}" class="img-fluid" width="400" ></a>
 
-                <h3>{{ product.title }}</h3>
+                <h3><strong>{{ product.title }}</strong></h3>
+                <hr>
                 <p>{{ product.description }}</p>
                 <p>Size: {{ product.size }}</p>
                 <p>Price: {{ product.price }}€</p>
@@ -110,9 +111,9 @@
 </div>
 
                 <!--BUTTON color=#d98d76-->
-                <a href="{% url 'main:details' product.id %}" class="btn btn-secondary btn-sm active"
-                   role="button" aria-pressed="true">Leggi tutto</a>
-                <a href="{#}" class="btn btn-secondary btn-sm active"
+                <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
+                   role="button" aria-pressed="true">Details</a>
+                <a href="{#}" class="btn btn-outline-secondary add-btn"
                    role="button" aria-pressed="true">Carello</a>
                 <br/>
                 <br/>
