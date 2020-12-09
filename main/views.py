@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Order, OrderItem
+from .models import *
 
 # Create your views here.
 # https://mdbootstrap.com/freebies/jquery/e-commerce/
@@ -27,8 +27,20 @@ def details(request, product_id):
     return render(request, 'main/details.html', {'product': product})
 
 
+
+
 def cart(request):
-    context = {}
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        #query the parent object(order), the child object in all lower case  (orderitem)
+        #  _set.all   > all the order items
+
+    else:
+        items = []   # if user is not logged in
+    context = {'items': items}
     return render(request, 'main/cart.html', context)
 
 
