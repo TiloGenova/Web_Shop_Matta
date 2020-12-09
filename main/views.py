@@ -40,7 +40,10 @@ def cart(request):
 
     else:
         items = []   # if user is not logged in
-    context = {'items': items}
+        order = {'get_cart_total':0, 'get_cart_items':0}
+
+
+    context = {'items': items, 'order': order}
     return render(request, 'main/cart.html', context)
 
 
