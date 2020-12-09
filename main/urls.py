@@ -18,13 +18,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', include('allauth.urls')),
 
-    path('', views.home, name='home'),
-    path('list/', item_list, name='item-list'),
+    path('', views.home, name="home"),
+    path('base/', views.base, name="base"),
+    path('list/', item_list, name="item-list"),
 
-    path('<int:product_id>', views.details, name='details'),
+    path('<int:product_id>', views.details, name="details"),
 
-    path('cart/', views.cart, name='cart'),
-    path('checkout/', views.checkout, name='checkout'),
+    path('cart/', views.cart, name="cart"),
+    path('checkout/', views.checkout, name="checkout"),
 
 
 ]

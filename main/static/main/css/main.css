@@ -9,7 +9,9 @@ h1,h2,h3,h4,h5,h6{
 	box-shadow:hsl(0, 0%, 60%) 0 0 10px;
 	background-color: #fff;
 	border-radius: 7px;
+	border: 100px;
 	padding: 10px;
+
 }
 
 .thumbnail{
@@ -29,7 +31,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #cart-icon{
-	width:25px;
+	width:33px;
 	display: inline-block;
 	margin-left: 15px;
 }
