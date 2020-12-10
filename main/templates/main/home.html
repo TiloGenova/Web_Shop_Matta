@@ -114,8 +114,17 @@
                 <!--BUTTON color=#d98d76-->
                 <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
                    role="button" aria-pressed="true">Details</a>
-                <a href="{#}" class="btn btn-outline-secondary add-btn"
+
+                <button data-product="{{product.id}}" data-action = "add"
+                        class = "btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+                <!--   update-cart   - to set event handler
+                       custom attribut: 'data-....'
+                       data-product = product.id
+                       data-action  = add     when button is clicked - item is added to cart-->
+
+                <!--<a href="{#}" class="btn btn-outline-secondary add-btn"
                    role="button" aria-pressed="true">Carello</a>
+                   -->
                 <br/>
                 <br/>
                 <br/>
