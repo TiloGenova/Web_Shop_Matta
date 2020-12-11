@@ -40,7 +40,7 @@ class Product(models.Model):
     discount = models.BooleanField()
     label = models.CharField(max_length=1, choices=LABEL_CHOICE)
     new = models.BooleanField(default=False)
-    digital = models.BooleanField(default=False, null=True, blank=True)
+    digital = models.BooleanField(default=False)
     url = models.URLField(blank=True)
 
 
@@ -88,6 +88,15 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
+
+    @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for i in orderitems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
 
 
 

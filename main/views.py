@@ -19,12 +19,12 @@ def home(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
-        #query the parent object(order), the child object in all lower case  (orderitem)
+        # query the parent object(order), the child object in all lower case  (orderitem)
         #  _set.all   > all the order items
 
     else:
         items = []   # if user is not logged in
-        order = {'get_cart_total':0, 'get_cart_items':0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
 
@@ -58,7 +58,7 @@ def cart(request):
 
     else:
         items = []   # if user is not logged in
-        order = {'get_cart_total':0, 'get_cart_items':0}
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems = order['get_cart_items']
 
 
@@ -78,7 +78,7 @@ def checkout(request):
 
     else:
         items = []   # if user is not logged in
-        order = {'get_cart_total':0, 'get_cart_items':0}
+        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems = order['get_cart_items']
 
 
