@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from django.http import JsonResponse
 
 # Create your views here.
 # https://mdbootstrap.com/freebies/jquery/e-commerce/
@@ -25,7 +26,6 @@ def details(request, product_id):
     #ERRORHANDLING!?
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'main/details.html', {'product': product})
-
 
 
 
@@ -63,3 +63,7 @@ def checkout(request):
 
     context = {'items': items, 'order': order}
     return render(request, 'main/checkout.html', context)
+
+
+def updateItem(request):
+    return JsonResponse('Item was added YEAH', safe=False)  # to just to return a message   no template
