@@ -98,6 +98,7 @@
                 <p>discount {{ product.discount }}</p>
                 <p>label {{ product.label }}</p>
                 <p>saved first on: {{ product.date }}</p>
+                <p>Product_ID: {{ product.id }}</p>
 
 <div>PREIS / DISCOUNT-PREIS :
                 {% if product.discount_price %}
@@ -115,7 +116,7 @@
                 <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
                    role="button" aria-pressed="true">Details</a>
 
-                <button data-product="{{product.id}}" data-action = "add"
+                <button data-product="{{product.id}}" data-action="add"
                         class = "btn btn-outline-secondary add-btn update-cart">Add to cart</button>
                 <!--   update-cart   - to set event handler
                        custom attribut: 'data-....'
