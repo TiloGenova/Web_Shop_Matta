@@ -112,3 +112,8 @@ def updateItem(request):
 
 
     return JsonResponse('Item was added YEAH', safe=False)  # to just to return a message   no template
+
+
+def processOrder(request):
+    print('Data:', request.body)
+    return JsonResponse('Payment complete!', safe=False)
