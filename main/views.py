@@ -3,6 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from .utils import cookieCart
 
 # Create your views here.
 # https://mdbootstrap.com/freebies/jquery/e-commerce/
@@ -24,10 +25,10 @@ def home(request):
         #  _set.all   > all the order items
 
     else:
-        items = []   # if user is not logged in
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = order['get_cart_items']
-
+        cookieData = cookieCart(request)   #function in utils.py
+        cartItems = cookieData['cartItems']
+        # order = cookieData['order']
+        # items = cookieData['items']
 
 
     productsall = Product.objects.all()
@@ -58,40 +59,17 @@ def cart(request):
         #  _set.all   > all the order items
 
     else:  #USER IS NOT LOGGED IN 
-        try:
-            cart = json.loads(request.COOKIES['cart']) # json.loads  to parse it and to turn it back into a python dict
-        except:
-            cart = {}
-        print('Cart:', cart)
-        items = []   # if user is not logged in
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems = order['get_cart_items']
+        cookieData = cookieCart(request)   #function in utils.py
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
 
 
-        for i in cart:   # sum of items to show in cart
-            cartItems +=cart[i]["quantity"]
-
-            product = Product.objects.get(id=i)
-            total = (product.price * cart[i]['quantity'])
-
-            order['get_cart_total'] += total
-            order['get_cart_items'] += cart[i]['quantity']
-            
-            
-            item = {
-                'product':{
-                    'id': product.id,
-                    'name': product.title,
-                    'price': product.price,
-                    'imageURL': product.imageURL,
-                },
-                'quantity': cart[i]["quantity"],
-                'get_total': total
-            }
-            items.append(item)
 
     context = {'items': items, 'order': order,'cartItems':cartItems}
     return render(request, 'main/cart.html', context)
+
+
 
 
 def checkout(request):
@@ -105,9 +83,10 @@ def checkout(request):
         #  _set.all   > all the order items
 
     else:
-        items = []   # if user is not logged in
-        order = {'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems = order['get_cart_items']
+        cookieData = cookieCart(request)   #function in utils.py
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
 
 
     context = {'items': items, 'order': order,'cartItems':cartItems}
