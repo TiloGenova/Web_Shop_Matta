@@ -58,6 +58,11 @@ def cart(request):
         #  _set.all   > all the order items
 
     else:
+        try:
+            cart = json.loads(request.COOKIES['cart']) # json.loads  to parse it and to turn it back into a python dict
+        except:
+            cart = {}
+        print('Cart:', cart)
         items = []   # if user is not logged in
         order = {'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems = order['get_cart_items']
