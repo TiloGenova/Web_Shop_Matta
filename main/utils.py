@@ -49,3 +49,23 @@ def cookieCart(request):
 
 
     return{'cartItems': cartItems, 'order': order, 'items': items}
+
+
+def cartData(request):
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+        #query the parent object(order), the child object in all lower case  (orderitem)
+        #  _set.all   > all the order items
+
+    else:
+        cookieData = cookieCart(request)   #function in utils.py
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
+
+
+    return {'cartItems': cartItems, 'order': order, 'items': items}

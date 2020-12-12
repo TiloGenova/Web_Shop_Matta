@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart
+from .utils import cookieCart, cartData
 
 # Create your views here.
 # https://mdbootstrap.com/freebies/jquery/e-commerce/
@@ -15,20 +15,8 @@ def item_list(request):
 
 def home(request):
 
-
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-        # query the parent object(order), the child object in all lower case  (orderitem)
-        #  _set.all   > all the order items
-
-    else:
-        cookieData = cookieCart(request)   #function in utils.py
-        cartItems = cookieData['cartItems']
-        # order = cookieData['order']
-        # items = cookieData['items']
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
 
 
     productsall = Product.objects.all()
@@ -50,20 +38,10 @@ def details(request, product_id):
 
 def cart(request):
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-        #query the parent object(order), the child object in all lower case  (orderitem)
-        #  _set.all   > all the order items
-
-    else:  #USER IS NOT LOGGED IN 
-        cookieData = cookieCart(request)   #function in utils.py
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
-
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
 
     context = {'items': items, 'order': order,'cartItems':cartItems}
@@ -74,19 +52,10 @@ def cart(request):
 
 def checkout(request):
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-        #query the parent object(order), the child object in all lower case  (orderitem)
-        #  _set.all   > all the order items
-
-    else:
-        cookieData = cookieCart(request)   #function in utils.py
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
 
     context = {'items': items, 'order': order,'cartItems':cartItems}
