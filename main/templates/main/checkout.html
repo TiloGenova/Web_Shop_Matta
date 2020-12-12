@@ -5,77 +5,84 @@
 
 <br>
 <br>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="box-element" id="form-wrapper">
-            <form id="form">
-                <div id="user-info">
-                    <div class="form-field">
-                        <input required class="form-control" type="text" name="name" placeholder="Name..">
-                    </div>
-                    <div class="form-field">
-                        <input required class="form-control" type="email" name="email" placeholder="Email..">
-                    </div>
-                </div>
+<div class="container">
+    <div class="row">
 
-                <div id="shipping-info">
-                    <hr>
-                    <p>Shipping Information:</p>
-                    <hr>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="address" placeholder="Via..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="city" placeholder="Citta..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="state" placeholder="Regione..">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="CAP">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="country" placeholder="Paese">
-                    </div>
-                </div>
-
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a  class="btn btn-outline-dark" href="{% url 'main:cart' %}">&#x2190; Back to Cart</a>
                 <hr>
-                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
-            </form>
-        </div>
-
-        <br>
-        <div class="box-element hidden" id="payment-info">
-            <small>Paypal Options</small>
-            <button id="make-payment">Make Payment</button>
-        </div>
-
-    </div>
-
-    <div class="col-lg-6">
-        <div class="box-element">
-            <a  class="btn btn-outline-dark" href="{% url 'main:cart' %}">&#x2190; Back to Cart</a>
-            <hr>
-            <h3>Order Summary</h3>
-            <hr>
-            {% for item in items %}
-            <div class="cart-row">
-                <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-                <div style="flex:2"><p>{{item.product.title}}</p></div>
-                <div style="flex:1"><p>
-                    {% if item.product.discount_price %}
-                    {{ item.product.discount_price }}€
-                    {% else  %}
-                    {{ item.product.price }}€
-                    {% endif %}</p></div>
-                <div style="flex:1"><p>{{ item.quantity }}</p></div>
+                <h3>Order Summary</h3>
+                <hr>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                    <div style="flex:2"><p>{{item.product.title}}</p></div>
+                    <div style="flex:1"><p>
+                        {% if item.product.discount_price %}
+                        {{ item.product.discount_price }}€
+                        {% else  %}
+                        {{ item.product.price }}€
+                        {% endif %}</p></div>
+                    <div style="flex:1"><p>{{ item.quantity }}</p></div>
+                </div>
+                {% endfor %}
+                <h5>Items:   {{ order.get_cart_items }}</h5>
+                <h5>Total:   {{ order.get_cart_total }}€</h5>
             </div>
-            {% endfor %}
-            <h5>Items:   {{ order.get_cart_items }}</h5>
-            <h5>Total:   {{ order.get_cart_total }}€</h5>
+
+
+            <div class="col-lg-12">
+                <div class="box-element" id="form-wrapper">
+                    <form id="form">
+                        <div id="user-info">
+                            <div class="form-field">
+                                <input required class="form-control" type="text" name="name" placeholder="Name..">
+                            </div>
+                            <div class="form-field">
+                                <input required class="form-control" type="email" name="email" placeholder="Email..">
+                            </div>
+                        </div>
+
+                        <div id="shipping-info">
+                            <hr>
+                            <p>Shipping Information:</p>
+                            <hr>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="address" placeholder="Via..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="city" placeholder="Citta..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="state" placeholder="Regione..">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="zipcode" placeholder="CAP">
+                            </div>
+                            <div class="form-field">
+                                <input class="form-control" type="text" name="country" placeholder="Paese">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+                    </form>
+                </div>
+
+            <br>
+            <div class="box-element hidden" id="payment-info">
+                <small>Paypal Options</small>
+                <button id="make-payment">Make Payment</button>
+            </div>
+
+        </div>
+
+
         </div>
     </div>
 </div>
+
 
     <script type="text/javascript ">
         var shipping = '{{order.shipping}}'
