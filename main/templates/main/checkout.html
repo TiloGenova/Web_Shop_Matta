@@ -32,10 +32,10 @@
                         <input class="form-control" type="text" name="state" placeholder="Regione..">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="CAP..">
+                        <input class="form-control" type="text" name="zipcode" placeholder="CAP">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="country" placeholder="CAP..">
+                        <input class="form-control" type="text" name="country" placeholder="Paese">
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
 
     <script type="text/javascript ">
         var shipping = '{{order.shipping}}'
-        var total = '{{ order.get_cart_total|floatformat:2 }}'
+        var total = '{{ order.get_cart_total }}'
 
 
         if (shipping == 'False'){
@@ -130,6 +130,7 @@
                 'total': total,
             }
 
+
              var shippingInfo = {
                 'address': null,
                 'city': null,
@@ -137,6 +138,7 @@
                 'zipcode': null,
                 'country': null,
             }
+
 
              if(shipping != 'False'){
                 shippingInfo.address = form.address.value
@@ -146,12 +148,11 @@
                 shippingInfo.country = form.country.value
              }
 
+
              if(user == 'AnonymousUser'){
                 userFormData.name = form.name.value
                 userFormData.email = form.email.value
              }
-
-
 
 
              var url = '/process_order/'
