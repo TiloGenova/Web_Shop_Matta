@@ -23,7 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="deed226e-dfd4-452f-819c-54889b61e196">
+        <schema name="main" object-types="dataset trigger, index, constraint, view, table, column" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="deed226e-dfd4-452f-819c-54889b61e196">
@@ -35,6 +39,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="deed226e-dfd4-452f-819c-54889b61e196" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="deed226e-dfd4-452f-819c-54889b61e196" dataset="main.main_shippingaddress" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -65,10 +72,10 @@
       <connection id="deed226e-dfd4-452f-819c-54889b61e196" active="true">
         <database>
           <name value="Matta" />
-          <description value="" />
+          <description value="Matta" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
-          <database-version value="9999.0" />
+          <database-version value="3.21" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
@@ -77,7 +84,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="sqlite.db" schema="main" />
+            <file path="C:\Matta\db.sqlite3" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
