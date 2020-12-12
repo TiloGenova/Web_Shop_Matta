@@ -146,25 +146,29 @@
                 shippingInfo.country = form.country.value
              }
 
-             if(user == 'AnonymousUser' != 'False'){
+             if(user == 'AnonymousUser'){
                 userFormData.name = form.name.value
                 userFormData.email = form.email.value
              }
 
-             var url = "/process_order/"
+
+
+
+             var url = '/process_order/'
              fetch(url,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json',
                     'X-CSRFToken':csrftoken,
                 },
-             body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+             body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}
+             )
              })
              .then((response) => response.json())
              .then((data) => {
                 console.log('Success:', data);
                 alert('Transaction completed');
-                window.location.href = "{% url 'home' %}"
+                window.location.href = "{% url 'main:home' %}"
              })
 
 
