@@ -9,12 +9,11 @@
 <br>
 <div class="container">
     <div class="row" >
-        <div class="col-lg-12"   >
+        <!--div class="col-lg-12"   >
             <div class="box-element">
                 <a class="btn btn-outline-dark" href="{% url 'main:home' %}">&#x2190; Continue Shopping</a>
                 <br>
                 <br>
-
                 <table class="table">
                     <tr>
                         <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
@@ -22,15 +21,27 @@
                         <th>
                             <a style="float:right; margin:5px;" class="btn btn-success" href="{% url 'main:checkout'%}">Checkout</a>
                         </th>
-
                     </tr>
                 </table>
-            </div>
+            </div-->
             <br>
 
-
-            <div class="col-lg-12">
+        <div class="col-lg-12">
             <div class="box-element">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block" href="{% url 'main:home' %}">&#x2190; Continue Shopping</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 style="text-align:center;">Carello</h3>
+                    </div>
+                    <div class="col-lg-3">
+                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block" href="{% url 'main:checkout'%}">Checkout</a>
+                    </div>
+                </div>
+
+                <hr>
                 <div class="cart-row">
                     <div style="flex:2"></div>
                     <div style="flex:2"><strong>Item</strong></div>
@@ -60,7 +71,16 @@
                     </div>
                     <div style="flex:1"><p>{{item.get_total}}</p></div>
                 </div>
+
                 {% endfor %}
+
+                <table class="table">
+                    <tr>
+                        <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
+                        <th><h5>Total: <strong>{{ order.get_cart_total }}€</strong></h5></th>
+                    </tr>
+                </table>
+
             </div>
         </div>
     </div>
