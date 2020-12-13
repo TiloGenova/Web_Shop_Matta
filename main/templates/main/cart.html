@@ -8,6 +8,8 @@
 <br>
 <br>
 <div class="container">
+
+
     <div class="row" >
         <!--div class="col-lg-12"   >
             <div class="box-element">
@@ -24,20 +26,22 @@
                     </tr>
                 </table>
             </div-->
-            <br>
+        <br>
 
         <div class="col-lg-12">
             <div class="box-element">
 
                 <div class="row">
                     <div class="col-lg-3">
-                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block" href="{% url 'main:home' %}">&#x2190; Continue Shopping</a>
+                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block"
+                           href="{% url 'main:home' %}">&#10502; Continue Shopping</a>
                     </div>
                     <div class="col-lg-6">
-                        <h3 style="text-align:center;">Carello</h3>
+                        <h2 style="text-align:center;">Carello</h2>
                     </div>
                     <div class="col-lg-3">
-                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block" href="{% url 'main:checkout'%}">Checkout</a>
+                        <a style="; margin:10px;" class="btn btn-outline-dark btn-block"
+                           href="{% url 'main:checkout'%}">Checkout &#10503</a>
                     </div>
                 </div>
 
@@ -74,12 +78,21 @@
 
                 {% endfor %}
 
-                <table class="table">
+                <div class="cart-row">
+                    <div style="flex:1"></div>
+                    <div style="flex:1"></div>
+                    <div style="flex:1"></div>
+                    <div style="flex:1"></div>
+                    <div style="flex:1"><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></div>
+                    <div style="flex:1"><h5>Total: <strong>{{ order.get_cart_total }}€</strong></h5></div>
+                </div>
+
+                <!--table class="table">
                     <tr>
                         <th><h5>Items: <strong>{{ order.get_cart_items }}</strong></h5></th>
                         <th><h5>Total: <strong>{{ order.get_cart_total }}€</strong></h5></th>
                     </tr>
-                </table>
+                </table-->
 
             </div>
         </div>
