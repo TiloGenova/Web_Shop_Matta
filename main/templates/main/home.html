@@ -134,11 +134,26 @@
 </div>
 
                 <!--BUTTON color=#d98d76-->
-                <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
-                   role="button" aria-pressed="true">Details</a>
 
-                <button data-product="{{product.id}}" data-action="add"
-                        class = "btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
+                           role="button" aria-pressed="true">Details</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2 style="text-align:center;"></h2>
+                    </div>
+                    <div class="col-lg-4">
+                        <button data-product="{{product.id}}" data-action="add"
+                                class = "btn btn-outline-secondary add-btn update-cart">Carello</button>
+                    </div>
+                </div>
+
+
+
                 <!--   update-cart   - to set event handler
                        custom attribut: 'data-....'
                        data-product = product.id
