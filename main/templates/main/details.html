@@ -10,61 +10,82 @@ margin-top: 1em;
 margin-bottom: 1 em;
 margin-left: 0;
 margin-right: 0;
-padding-left: 30px;
+padding-left: 0px;
 }
 </style>
-<br/>
+
 <br/>
 <div class="container">
-    <div class="row">
-        <div class="col-lg-8 mt-4 text-center">
+        <div class="row">
+            <div class="col-lg-8 mt-4 text-center">
+                <div class="box-element">
+                    <h1 style="mt-2; font-size: 35px; margin: 0px; text-align: left;">{{ product.title }}</h1>
+                    <img src="{{ product.image.url }}" class="img-fluid mt-2 pb-2"  height="600">
+                    <br/>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <a style="" class="btn btn-outline-dark btn-block"
+                                   href="{% url 'main:home' %}">&#10502; Shop</a>
+                            </div>
+                            <div class="col-lg-4">
+                                <h2 style="text-align:center;">Details</h2>
+                            </div>
+                            <div class="col-lg-4">
+                                <button style="" data-product="{{product.id}}" data-action="add"
+                                        class = "btn btn-outline-secondary add-btn update-cart btn-block ">Carello &#10503</button>
+                            </div>
+                        </div>
 
-            <h1 style="mt-4; font-size: 40px; margin: 0px; text-align: left;">{{ product.title }}</h1>
 
-            <img src="{{ product.image.url }}" class="img-fluid mt-4"  height="600">
-            <br/>
-            <h2 class="mt-4" style="font-size: 20px; margin: 0px; text-align: left;
-                                    color:#d98d76">{{ product.description }}</h2><br/>
-            <p style="font-size: 16px; line-height: 24px; text-align: left;">
-                                    {{ product.text }}</p>
-            <!--  |linebreaks   to devide paragraphs -->
-            <p style="font-size: 16px; line-height: 24px; text-align: left;">
-                {{ product.price }}€<br>
-                {{ product.discountprice }}€<br>
-                Size: {{ product.size }}<br>
-                Discount: {{ product.discount }}</p>
+                    <h1 class="mt-2" style="pt-3; font-size: 25px; margin: 0px; text-align: left;">{{ product.title }}</h1>
+                    <h2 class="mt-2" style="font-size: 20px; margin: 0px; text-align: left;
+                                        color:#d98d76">{{ product.description }}</h2><br/>
+                    <p style="font-size: 16px; line-height: 24px; text-align: left;">
+                                        {{ product.text }}</p>
+                    <!--  |linebreaks   to devide paragraphs -->
+                    <p style="font-size: 16px; line-height: 24px; text-align: left;">
+                    {{ product.price }}€<br>
+                    {{ product.discountprice }}€<br>
+                    Size: {{ product.size }}<br>
+                    Discount: {{ product.discount }}</p>
+                    <br>
+                    <a style="mt-4; font-size: 16px; line-height: 24px; text-align: left"
+                            class="nav-link " href="{{ product.url }}" target="_blank">{{ activity.url }}</a>
 
-            <a style="mt-4; font-size: 16px; line-height: 24px; text-align: left"
-               class="nav-link " href="{{ product.url }}" target="_blank">{{ activity.url }}</a>
-
-            <a href="{#}" class="btn btn-secondary btn-sm active"
-               role="button" aria-pressed="true">put in Carello</a>
-        </div>
-        <div class="col-8 col-sm-4">
-            <div class="container-sm">
-                <!-- Content here -->
-                <br/>
-                <br/>
-                <h6 style="font-size: 20px; margin: 0px; text-align: left;">Cerca</h6>
-                <br/>
-                <br/>
-                <br/>
-                <h6 style="font-size: 20px; margin: 0px; text-align: left;">RANDOM PRODUCT CARDS SMALL </h6>
-                <ul>
-                    <li>After ski</li>
-                    <li>Attivita sportive</li>
-                    <li>Castelli & Forti</li>
-                    <li>Cena in quota</li>
-                    <li>Enogastronomia</li>
-                    <li>In evidenza</li>
-                    <li>Luoghi d'interesse</li>
-                    <li>Piatti tipici</li>
-                    <li>Spa&Wellness</li>
-                    <li>Sport in primo piano</li>
-                </ul>
-
+                </div>
             </div>
-        </div>
+
+
+
+
+
+            <div class="col-lg-4  col-sm-12 mt-4">
+                <div class="box-element">
+                    <div class="container-sm">
+                        <!-- Content here -->
+                        <br/>
+                        <br/>
+                        <h6 style="font-size: 20px; margin: 0px; text-align: left;">Cerca</h6>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h6 style="font-size: 20px; margin: 0px; text-align: left;">RANDOM PRODUCT CARDS SMALL </h6>
+                        <ul>
+                            <li>After ski</li>
+                            <li>Attivita sportive</li>
+                            <li>Castelli & Forti</li>
+                            <li>Cena in quota</li>
+                            <li>Enogastronomia</li>
+                            <li>In evidenza</li>
+                            <li>Luoghi d'interesse</li>
+                            <li>Piatti tipici</li>
+                            <li>Spa&Wellness</li>
+                            <li>Sport in primo piano</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 
@@ -72,6 +93,4 @@ padding-left: 30px;
 <br/>
 <br/>
 <br/>
-<br/>
-
 {% endblock %}
