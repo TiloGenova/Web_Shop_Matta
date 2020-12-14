@@ -57,8 +57,10 @@
                 {% for item in items %}
                 <div class="cart-row">
                     <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-                    <div style="flex:2"><p>{{item.product.title}}</p></div>
+                    <div style="flex:2"><p>{{item.product.title}} {{ item.product.size }}
+                        {{ item.product.label }}</p></div>
                     <div style="flex:1"><p>
+
                         {% if item.product.discount_price %}
                             {{ item.product.discount_price }}€
                         {% else  %}
@@ -68,9 +70,11 @@
                     <div style="flex:1">
                         <p class="quantity">{{ item.quantity }}</p>
                         <div class="quantity">
-                            <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'main/images/arrowup.png' %}">
+                            <img data-product="{{item.product.id}}" data-action="add"
+                                 class="chg-quantity update-cart" src="{% static  'main/images/arrowup.png' %}">
 
-                            <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'main/images/arrowdown.png' %}">
+                            <img data-product="{{item.product.id}}" data-action="remove"
+                                 class="chg-quantity update-cart" src="{% static  'main/images/arrowdown.png' %}">
                         </div>
                     </div>
                     <div style="flex:1"><p>{{item.get_total}}</p></div>
@@ -98,6 +102,12 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
 
 {% endblock content %}
 

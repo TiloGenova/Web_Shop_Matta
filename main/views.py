@@ -33,7 +33,10 @@ def details(request, product_id):
     #ERRORHANDLING!?
     productsall = Product.objects.all()
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'main/details.html', {'products': productsall, 'product': product})
+
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+    return render(request, 'main/details.html', {'products': productsall, 'product': product, 'cartItems': cartItems})
 
 
 
