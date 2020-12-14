@@ -17,7 +17,7 @@ padding-left: 0px;
 <br/>
 <div class="container">
         <div class="row">
-            <div class="col-lg-8 mt-4 text-center">
+            <div class="col-lg-9 mt-4 text-center">
                 <div class="box-element">
                     <h1 style="mt-2; font-size: 35px; margin: 0px; text-align: left;">{{ product.title }}</h1>
                     <img src="{{ product.image.url }}" class="img-fluid mt-2 pb-2"  height="600">
@@ -55,39 +55,33 @@ padding-left: 0px;
                 </div>
             </div>
 
-
-
-
-
-            <div class="col-lg-4  col-sm-12 mt-4">
+            <div class="col-lg-3  col-sm-12 mt-4">
                 <div class="box-element">
-                    <div class="container-sm">
-                        <!-- Content here -->
-                        <br/>
-                        <br/>
-                        <h6 style="font-size: 20px; margin: 0px; text-align: left;">Cerca</h6>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <h6 style="font-size: 20px; margin: 0px; text-align: left;">RANDOM PRODUCT CARDS SMALL </h6>
-                        <ul>
-                            <li>After ski</li>
-                            <li>Attivita sportive</li>
-                            <li>Castelli & Forti</li>
-                            <li>Cena in quota</li>
-                            <li>Enogastronomia</li>
-                            <li>In evidenza</li>
-                            <li>Luoghi d'interesse</li>
-                            <li>Piatti tipici</li>
-                            <li>Spa&Wellness</li>
-                            <li>Sport in primo piano</li>
-                        </ul>
 
-                    </div>
+                    <!-- Content here -->
+                    <h6 class="pb-1 mb-1" style="; pb-0; font-size: 25px; margin: 0px; text-align: left;">Other Products </h6>
+
+                    {% for product in products %}
+
+                        <a  href="{% url 'main:details' product.id %}"><img  src="{{ product.imageURL }}"
+                                                                             class="img-fluid pb-2" width="400" ></a>
+                        <h4>{{ product.title }}</h4>
+                        <p>Size: {{ product.size }}</p>
+                        <hr>
+
+                    {% endfor %}
+
+                </div>
+            </div>
                 </div>
             </div>
     </div>
 </div>
+
+
+
+
+
 
 
 <br/>
