@@ -120,8 +120,9 @@
                 <p>label {{ product.label }}</p>
                 <p>saved first on: {{ product.date }}</p>
                 <p>Product_ID: {{ product.id }}</p>
+                <p>Gender: {{ product.gender }}</p>
 
-<div>PREIS / DISCOUNT-PREIS :
+            <div>PREIS / DISCOUNT-PREIS :
                 {% if product.discount_price %}
                     <del>{{ product.price }}€</del>
                     <h1>
@@ -152,22 +153,152 @@
                     </div>
                 </div>
 
+                <!--   update-cart   - to set event handler
+                       custom attribut: 'data-....'
+                       data-product = product.id
+                       data-action  = add     when button is clicked - item is added to cart-->
+                <!--<a href="{#}" class="btn btn-outline-secondary add-btn"
+                   role="button" aria-pressed="true">Carello</a>
+                   -->
+            </div>
+        </div>
+        {% endfor %}
 
+
+    </div>
+</div>
+<hr>
+<hr>
+<h2 class="mt-5 text-center" >DONNE</h2>
+<hr>
+<div class=" container">
+    <div class="row"  >
+        {% for product in products %}
+        {% if product.gender == 'WOMEN' %}
+        <div class="col-lg-4 col-md-6"  >
+            <div class="box-element product">
+
+                <a  href="{% url 'main:details' product.id %}"><img  src="{{ product.imageURL }}" class="img-fluid pb-2" width="400" ></a>
+
+                <h3><strong>{{ product.title }}</strong></h3>
+                <hr>
+                <p>{{ product.description }}</p>
+                <p>Size: {{ product.size }}</p>
+                <p>Price: {{ product.price }}€</p>
+                <p>Discountprice: {{ product.discount_price }}€</p>
+                <p>active {{ product.active }}</p>
+                <p>discount {{ product.discount }}</p>
+                <p>label {{ product.label }}</p>
+                <p>saved first on: {{ product.date }}</p>
+                <p>Product_ID: {{ product.id }}</p>
+                <p>Gender: {{ product.gender }}</p>
+
+                <div>PREIS / DISCOUNT-PREIS :
+                    {% if product.discount_price %}
+                    <del>{{ product.price }}€</del>
+                    <h1>
+                        <span style="color:red">{{ product.discount_price }}€</span>
+                    </h1>
+                    {% else  %}
+                    <h1>{{ product.price }}€</h1>
+
+                    {% endif %}
+                </div>
+
+                <!--BUTTON color=#d98d76-->
+
+
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
+                           role="button" aria-pressed="true">Details</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2 style="text-align:center;"></h2>
+                    </div>
+                    <div class="col-lg-4">
+                        <button data-product="{{product.id}}" data-action="add"
+                                class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                    </div>
+                </div>
 
                 <!--   update-cart   - to set event handler
                        custom attribut: 'data-....'
                        data-product = product.id
                        data-action  = add     when button is clicked - item is added to cart-->
-
                 <!--<a href="{#}" class="btn btn-outline-secondary add-btn"
                    role="button" aria-pressed="true">Carello</a>
                    -->
-
             </div>
         </div>
+        {% endif%}
         {% endfor %}
+
+
     </div>
 </div>
+<hr>
+<hr>
+<h2 class="mt-5 text-center" >UOMINI</h2>
+<hr>
+<div class=" container">
+    <div class="row"  >
+
+        {% for product in products %}
+        {% if product.gender == 'MEN' %}
+        <div class="col-lg-4 col-md-6"  >
+            <div class="box-element product">
+                <a  href="{% url 'main:details' product.id %}"><img  src="{{ product.imageURL }}" class="img-fluid pb-2" width="400" ></a>
+
+                <h3><strong>{{ product.title }}</strong></h3>
+                <hr>
+                <p>{{ product.description }}</p>
+                <p>Size: {{ product.size }}</p>
+                <p>Price: {{ product.price }}€</p>
+                <p>Discountprice: {{ product.discount_price }}€</p>
+                <p>active {{ product.active }}</p>
+                <p>discount {{ product.discount }}</p>
+                <p>label {{ product.label }}</p>
+                <p>saved first on: {{ product.date }}</p>
+                <p>Product_ID: {{ product.id }}</p>
+
+
+                <div>PREIS / DISCOUNT-PREIS :
+                    {% if product.discount_price %}
+                    <del>{{ product.price }}€</del>
+                    <h1>
+                        <span style="color:red">{{ product.discount_price }}€</span>
+                    </h1>
+                    {% else  %}
+                    <h1>{{ product.price }}€</h1>
+
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
+                           role="button" aria-pressed="true">Details</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <h2 style="text-align:center;"></h2>
+                    </div>
+                    <div class="col-lg-4">
+                        <button data-product="{{product.id}}" data-action="add"
+                                class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+    </div>
+</div>
+
 
 <body>
 
