@@ -25,7 +25,7 @@ def cookieCart(request):
             product = Product.objects.get(id=i)
 
             #total = (product.price * cart[i]['quantity'])
-            if product.discount_price > 0:
+            if product.discount.price > 0:
                 total = (product.discount_price * cart[i]['quantity'])
             else:
                 total = (product.price * cart[i]['quantity'])

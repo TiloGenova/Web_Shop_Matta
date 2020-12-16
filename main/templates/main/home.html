@@ -102,7 +102,6 @@
 <div class="container">
     <h2  class="mt-5 text-left" >PRODUCT OVERVIEW</h2>
 </div>
-<hr>
 <div class=" container">
     <div class="row"  >
         {% for product in products %}
@@ -186,19 +185,12 @@
                 <a  href="{% url 'main:details' product.id %}"><img  src="{{ product.imageURL }}" class="img-fluid pb-2" width="400" ></a>
 
                 <h3><strong>{{ product.title }}</strong></h3>
+                <p>Size: {{ product.size }}</p>
                 <hr>
                 <p>{{ product.description }}</p>
-                <p>Size: {{ product.size }}</p>
-                <p>Price: {{ product.price }}€</p>
-                <p>Discountprice: {{ product.discount_price }}€</p>
-                <p>active {{ product.active }}</p>
-                <p>discount {{ product.discount }}</p>
-                <p>label {{ product.label }}</p>
-                <p>saved first on: {{ product.date }}</p>
-                <p>Product_ID: {{ product.id }}</p>
-                <p>Gender: {{ product.gender }}</p>
+                <p>Product_No.: {{ product.id }}</p>
 
-                <div>PREIS / DISCOUNT-PREIS :
+                <div>PREZZO :
                     {% if product.discount_price %}
                     <del>{{ product.price }}€</del>
                     <h1>
