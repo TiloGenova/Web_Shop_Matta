@@ -190,7 +190,11 @@
                                 <div class="overlay">
                                     {% if product.discount_Flag %}
                                         <a  href="{% url 'main:details' product.id %}"><img
-                                            src="{% static 'main/promozione.png' %}" class="img-fluid pb-2" width="100" ></a>
+                                            src="{% static 'main/promozione_red.png' %}" class="img-fluid pb-2" width="100" ></a>
+                                    {% endif %}
+                                    {% if product.NEW_Flag %}
+                                    <a  href="{% url 'main:details' product.id %}"><img
+                                            src="{% static 'main/novita_green.png' %}" class="img-fluid pb-2" width="100" ></a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -222,7 +226,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
-                                       role="button" aria-pressed="true">Details</a>
+                                       role="button" aria-pressed="true">Dettagli</a>
                                 </div>
                                 <div class="col-lg-4">
                                     <h2 style="text-align:center;"></h2>

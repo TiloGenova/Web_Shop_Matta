@@ -132,7 +132,7 @@ h1,h2,h3,h4,h5,h6{
   left: -26px;
   right: 0;
   bottom: 0;
-  transition: .9s ease;
+  transition: 1s ease;
   opacity:0;
   color: white;
   font-size: 20px;
@@ -142,6 +142,6 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /* When you mouse over the container, fade in the overlay title */
-.container:hover .overlay {
+.container-overlay:hover .overlay {
   opacity: 0;    /* value of 1 for standard overlay hover */
 }
