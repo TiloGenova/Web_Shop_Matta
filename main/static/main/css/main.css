@@ -99,3 +99,48 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+
+/* OVERLAY FLAGS */
+/* OVERLAY FLAGS */
+
+* {box-sizing: border-box}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.container-overlay {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Make the image to responsive */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0); /* Black see-through:   rgba(0, 0, 0, 0.5) */
+  color: #f1f1f1;
+  width: 100%;
+  top: -26px;
+  left: -26px;
+  right: 0;
+  bottom: 0;
+  transition: .9s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 0px;
+  text-align: left;
+  opacity: 1 ; /* value of 0 for standard overlay hover */
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.container:hover .overlay {
+  opacity: 0;    /* value of 1 for standard overlay hover */
+}
