@@ -109,7 +109,8 @@ h1,h2,h3,h4,h5,h6{
 .container-overlay {
   position: relative;
   width: 100%;
-  max-width: 300px;
+  max-width: ;
+  padding: 0px;
 }
 
 /* Make the image to responsive */
