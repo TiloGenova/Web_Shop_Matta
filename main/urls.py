@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from main import views
-from .views import item_list
+
 
 app_name ='main'
 
@@ -15,11 +14,9 @@ admin.site.index_title = "Welcome to MAGLIAMATTA Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', include('allauth.urls')),
 
     path('', views.home, name="home"),
     path('base/', views.base, name="base"),
-    path('list/', item_list, name="item-list"),
 
     path('<int:product_id>', views.details, name="details"),
 
@@ -28,6 +25,8 @@ urlpatterns = [
     path('update_item/', views.updateItem, name="update_item"),
     path('process_order/', views.processOrder, name="process_order"),
 
+    path('register/', views.registerPage, name="register"),
+    path('login/', views.loginPage, name="login"),
 
 
 ]

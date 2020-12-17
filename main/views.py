@@ -3,14 +3,30 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
 from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
-# https://mdbootstrap.com/freebies/jquery/e-commerce/
 
-def item_list(request):
-    productsall = Product.objects.all()
-    return render(request, 'main/home-page.html', {'products': productsall})
+
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+
+    context = {'form': form}
+    return render(request, 'main/register.html', context)
+
+
+def loginPage(request):
+    context = {}
+    return render(request, 'main/login.html', context)
+
 
 
 def home(request):

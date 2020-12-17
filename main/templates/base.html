@@ -87,10 +87,10 @@
 <body>
 
 
-<nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar "
+<nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar pt-0 pb-1 "
       style ="box-shadow:hsl(34, 76%, 34%) 10px 3px 10px;">
     <a href="{% url 'main:home' %}">
-        <img src="{% static 'main/logo2matta.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-2">
+        <img src="{% static 'main/logo2matta.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-0">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -117,6 +117,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"  href="/checkout">PAGAMENTO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/register">REGISTER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/login">LOGIN</a>
                 </li>
                 <div class="form-inline my-2 my-lg-0">
 
