@@ -5,16 +5,45 @@
 
 
 <br/>
+<br/>
+
+
 <div class="container">
-    LOGIN
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin: auto" class="box-element " >
 
+                <h5>LOGIN</h5>
+
+                <div style="margin: auto ; "></div>
+
+
+                <form method="POST" action="">
+                    {% csrf_token %}
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                        </div>
+                        <input type="text" name="username" placeholder="Username..." class="form-control">
+                    </div>
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                        </div>
+                        <input type="password" name="password" placeholder="Password..." class="form-control" >
+                    </div>
+
+
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <input class="btn btn-success btn-block" type="submit" value="Login">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 </div>
-
-
-
-
-
-
 
 <br/>
 <br/>

@@ -1,31 +1,58 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 
 
 def registerPage(request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
 
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-
+                return redirect('/login')
 
     context = {'form': form}
     return render(request, 'main/register.html', context)
 
 
 def loginPage(request):
-    context = {}
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password =request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+                errortext='Username OR password is incorrect'
+        context = {'errortext': errortext}
     return render(request, 'main/login.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('main/login')
+
 
 
 

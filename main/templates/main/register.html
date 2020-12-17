@@ -3,30 +3,50 @@
 {% block content %}
 
 <br/>
+<br/>
+
+
 <div class="container">
-    <h5>Register</h5>
-    <br/><br/>
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin: auto" class="box-element " >
 
-    <form method="post">
-        {% csrf_token %}
+                <h5>Register</h5>
 
-        {{form.username.label}}: {{form.username}}<br>
-        {{form.first_name.label}}: {{form.first_name}}<br>
-        {{form.last_name.label}}: {{form.last_name}}<br>
-        {{form.password1.label}}: {{form.password1}}<br>
-        {{form.password2.label}}: {{form.password2}}<br>
-        <br>
-<ul>
-    <p>Your password can’t be too similar to your other personal information.
-    Your password must contain at least 8 characters.
-    Your password can’t be a commonly used password.
-    Your password can’t be entirely numeric.</p>
-</ul>
+                <div style="margin: auto ; "></div>
 
-        <button type="submit">Submit</button>
-    </form>
+                <form style="margin: auto; text-align: center" method="post">
+                    {% csrf_token %}
 
+                    {{form.username.label}}: {{form.username}}<br><br>
+                    {{form.first_name.label}}: {{form.first_name}}<br><br>
+                    {{form.last_name.label}}: {{form.last_name}}<br><br>
+                    {{form.password1.label}}: {{form.password1}}<br><br>
+                    {{form.password2.label}}: {{form.password2}}<br><br>
+                    <br>
+                        <div style="margin: auto" class="col-md-12">
+                            <p>Your password can’t be too similar to your other personal information.</p>
+                               <p> Your password must contain at least 8 characters.</p>
+                               <p> Your password can’t be a commonly used password.</p>
+                              <p>  Your password can’t be entirely numeric.
+                            </p>
+
+                        </div>
+
+                    <button  class="btn btn-success btn-block" type="submit">Submit</button>
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
 
 
 
