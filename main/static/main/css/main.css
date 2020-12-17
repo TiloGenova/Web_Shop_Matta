@@ -5,6 +5,8 @@ h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
 
+
+
 .box-element{
 	box-shadow:hsl(0, 0%, 60%) 0 0 10px;
 	background-color: #fff;
@@ -13,6 +15,8 @@ h1,h2,h3,h4,h5,h6{
 	padding: 20px;
 
 }
+
+
 
 .thumbnail{
 	width: 100%;
@@ -53,6 +57,7 @@ h1,h2,h3,h4,h5,h6{
 
 .btn{
 	border-radius: 2px;
+	box-shadow:hsl(0, 0%, 70%) 3px 0px 10px;
 
 }
 
@@ -99,6 +104,13 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
 
 /* OVERLAY FLAGS */
 /* OVERLAY FLAGS */

@@ -52,14 +52,15 @@
 <div class="container">
     <div class="row">
         <div class=" col-sm-12 col-md-12 col-lg-8 pb-4">
-            <img src="{% static 'main/main.jpg' %}" alt="Maglia Matta" class="img-fluid"  height="600">
+            <img src="{% static 'main/main.jpg' %}" alt="Maglia Matta" class="img-fluid"  height="600"
+            style ="box-shadow:hsl(34, 76%, 34%) 10px 10px 20px;">
         </div>
         <div class=" col-sm-12 col-md-12 col-lg-4 py-1">
             <div class="container-sm">
                 <!-- Content here -->
                 <h1 style="font-size: 40px; margin: 0px; text-align: left;">MAGLIAMATTA</h1>
                 <br/>
-                <h2 style="font-size: 20px; margin: 0px; text-align: left; color:#d98d76">Produco capi in maglia artigianali, fantasiosi e di buona qualità.
+                <h2 style="font-size: 20px; margin: 0px; text-align: left; color:#995f15">Produco capi in maglia artigianali, fantasiosi e di buona qualità.
                     Se apprezzi i prodotti hand-made, non omologati dalle
                     catene commerciali e ti piace l’idea di avere un capo unico ... sei nel posto giusto.</h2><br/>
                 <p style="font-size: 16px; line-height: 24px; text-align: left;">
@@ -75,27 +76,29 @@
             </div>
         </div>
     </div>
-    <h5>Chi sono e dovi trovi le mie maglie</h5>
-    <p style="font-size: 16px; line-height: 24px; text-align: left;">
+    <div class="container-sm">
+        <h5>Chi sono e dovi trovi le mie maglie</h5>
+        <p style="font-size: 16px; line-height: 24px; text-align: left;">
 
-        Ciao, sono Marta, l’ideatrice di MagliaMatta. Produco capi in maglia artigianali, fantasiosi
-        e di buona qualità. Se apprezzi i prodotti hand-made, non omologati dalle catene commerciali e
-        ti piace l’idea di avere un capo unico...sei nel posto giusto!
+            Ciao, sono Marta, l’ideatrice di MagliaMatta. Produco capi in maglia artigianali, fantasiosi
+            e di buona qualità. Se apprezzi i prodotti hand-made, non omologati dalle catene commerciali e
+            ti piace l’idea di avere un capo unico...sei nel posto giusto!
 
-        Mi trovi CHEZ MOI, nel mio “Piccolo laboratorio di idee”, a Genova, in centro storico. Oppure,
-        almeno una volta al mese, a Milano, in Piazza Piemonte e in zona Piola/Città studi. Seguendo la
-        mia pagina vedrai quando e dove mi sposto, scrivimi se vuoi e/o lasciami una mail per essere avvisata
-        degli eventi a cui partecipo.</p>
+            Mi trovi CHEZ MOI, nel mio “Piccolo laboratorio di idee”, a Genova, in centro storico. Oppure,
+            almeno una volta al mese, a Milano, in Piazza Piemonte e in zona Piola/Città studi. Seguendo la
+            mia pagina vedrai quando e dove mi sposto, scrivimi se vuoi e/o lasciami una mail per essere avvisata
+            degli eventi a cui partecipo.</p>
 
-    <p style="font-size: 16px; line-height: 24px; text-align: left;">
-        Credo che ognuno di noi sia unico, che il modo di vestirci parli di noi, che per ciascuno di noi esista
-        la possibilità di trovare l’abbigliamento che ci fa sentire a nostro agio mettendo in risalto le nostre
-        qualità. Dunque volentieri collaboro con te alla creazione della tua MagliaMatta: possiamo idearla insieme
-        partendo dalle tue idee.
+        <p style="font-size: 16px; line-height: 24px; text-align: left;">
+            Credo che ognuno di noi sia unico, che il modo di vestirci parli di noi, che per ciascuno di noi esista
+            la possibilità di trovare l’abbigliamento che ci fa sentire a nostro agio mettendo in risalto le nostre
+            qualità. Dunque volentieri collaboro con te alla creazione della tua MagliaMatta: possiamo idearla insieme
+            partendo dalle tue idee.
 
-        Come realizzo i miei capi: compro filati di buona qualità in lana o cotone, disegno i modelli e una brava
-        maglierista, ormai collaboratrice stretta, li realizza con la macchina da maglieria in casa, assemblandoli
-        a mano.</p>
+            Come realizzo i miei capi: compro filati di buona qualità in lana o cotone, disegno i modelli e una brava
+            maglierista, ormai collaboratrice stretta, li realizza con la macchina da maglieria in casa, assemblandoli
+            a mano.</p>
+    </div>
 </div>
 <br>
 <hr>
@@ -112,7 +115,9 @@
 
                         <div class="container-overlay">
                             <a  href="{% url 'main:details' product.id %}"><img
-                                    src="{{ product.imageURL }}" class="img-fluid pb-2 pr-0" width="410" ></a>
+                                    src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                    style ="box-shadow:hsl(34, 76%, 34%) 5px -5px 7px;"
+                            ></a>
                             <div class="overlay">
                                 {% if product.discount_Flag %}
                                 <a  href="{% url 'main:details' product.id %}"><img
@@ -125,7 +130,7 @@
                             </div>
                         </div>
 
-                        <h3><strong>{{ product.title }}</strong></h3>
+                        <h3 class="pt-2"><strong>{{ product.title }}</strong></h3>
                         <p>Taglia: {{ product.size }}</p>
                         <hr>
                         <p>{{ product.description }}</p>
@@ -143,21 +148,22 @@
                             {% endif %}
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-4">
+                        <div style="text-align:center;" class="row">
+                            <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                 <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
                                    role="button" aria-pressed="true">Dettagli</a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                 <h2 style="text-align:center;"></h2>
                             </div>
-                            <div class="col-lg-4">
+                            <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                 <button data-product="{{product.id}}" data-action="add"
                                         class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                             </div>
                         </div>
 
                     </div>
+                    <br>
                 </div>
                 {% endif%}
             {% endif%}
@@ -182,10 +188,12 @@
 
                             <div class="container-overlay">
                                 <a  href="{% url 'main:details' product.id %}"><img
-                                        src="{{ product.imageURL }}" class="img-fluid pb-2 pr-0" width="410" ></a>
+                                        src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                        style ="box-shadow:hsl(34, 76%, 34%) 5px -5px 7px;"
+                                ></a>
                                 <div class="overlay">
                                     {% if product.discount_Flag %}
-                                        <a  href="{% url 'main:details' product.id %}"><img
+                                    <a  href="{% url 'main:details' product.id %}"><img
                                             src="{% static 'main/promozione_red.png' %}" class="img-fluid pb-2" width="100" ></a>
                                     {% endif %}
                                     {% if product.NEW_Flag %}
@@ -213,21 +221,22 @@
                                 {% endif %}
                             </div>
 
-                            <div class="row">
-                                <div class="col-lg-4">
+                            <div style="text-align:center;" class="row">
+                                <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                     <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
                                        role="button" aria-pressed="true">Dettagli</a>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                     <h2 style="text-align:center;"></h2>
                                 </div>
-                                <div class="col-lg-4">
+                                <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                     <button data-product="{{product.id}}" data-action="add"
                                             class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                                 </div>
                             </div>
 
                         </div>
+                        <br>
                     </div>
                 {% endif%}
             {% endif%}
@@ -252,7 +261,9 @@
 
                         <div class="container-overlay">
                             <a  href="{% url 'main:details' product.id %}"><img
-                                    src="{{ product.imageURL }}" class="img-fluid pb-2 pr-0" width="410" ></a>
+                                    src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                    style ="box-shadow:hsl(34, 76%, 34%) 5px -5px 7px;"
+                            ></a>
                             <div class="overlay">
                                 {% if product.discount_Flag %}
                                 <a  href="{% url 'main:details' product.id %}"><img
@@ -283,21 +294,22 @@
                             {% endif %}
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-4">
+                        <div style="text-align:center;" class="row">
+                            <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                 <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
                                    role="button" aria-pressed="true">Dettagli</a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                 <h2 style="text-align:center;"></h2>
                             </div>
-                            <div class="col-lg-4">
+                            <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                 <button data-product="{{product.id}}" data-action="add"
                                         class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                             </div>
                         </div>
 
                     </div>
+                    <br>
                 </div>
                 {% endif%}
             {% endif%}

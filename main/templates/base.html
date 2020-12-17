@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,
     initial-scale=1, shrink-to-fit=no">
 
-
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
     <!-- Bootstrap CSS -->
 
@@ -82,11 +82,13 @@
 
     <title>MagliaMatta</title>
     <link rel="shortcut icon" type="image/png" href="#"/>
+
 </head>
 <body>
 
 
-<nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar ">
+<nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar "
+      style ="box-shadow:hsl(34, 76%, 34%) 10px 3px 10px;">
     <a href="{% url 'main:home' %}">
         <img src="{% static 'main/logo2matta.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-2">
     </a>
@@ -95,6 +97,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
 
 
     <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
