@@ -31,7 +31,7 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('/')  # homepage
     else:
         if request.method == 'POST':
             username = request.POST.get('username')

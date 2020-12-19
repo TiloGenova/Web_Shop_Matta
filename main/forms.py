@@ -9,3 +9,4 @@ class CreateUserForm(UserCreationForm):  #takes basically the django class
         model = User
         fields = ['username', 'first_name', 'last_name',
                   'email', 'password1', 'password2']
+#
