@@ -23,6 +23,15 @@ def registerPage(request):
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + user)
 
+                email = form.cleaned_data.get('email')
+                name = form.cleaned_data.get('username')
+                print(email)
+                print(name)
+                #inst = Customer(name=name, email=email)
+                #inst.save()
+               #print('data has been written')
+
+
                 return redirect('/login/')
 
     context = {'form': form}
