@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import datetimefield
 
 
 class Product(models.Model):
@@ -55,7 +56,7 @@ class Customer(models.Model):
 
 
     def __str__(self):
-        return self.user
+        return str(self.id)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
