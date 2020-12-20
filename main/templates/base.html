@@ -140,21 +140,22 @@
 
         </ul>
     </div>
-</nav>
-<h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
-    {% if user.username %}
+    <h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
+        {% if user.username %}
         You are logged in as
         {% if user.first_name %}
-            {{ user.first_name }}...
+        {{ user.first_name }}...
         {% else %}
-            {{ user.username }}...
+        {{ user.username }}...
         {% endif %}
-    {% endif %}
+        {% endif %}
 
-    {% if not user.username %}
+        {% if not user.username %}
         You are NOT logged in!....
-    {% endif %}
-</h2>
+        {% endif %}
+    </h2>
+</nav>
+
 
 
 {% block content %}
