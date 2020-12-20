@@ -22,14 +22,9 @@ def registerPage(request):
                 form.save()
                 user = form.cleaned_data.get('username')
                 messages.success(request, 'Account was created for ' + user)
-
                 email = form.cleaned_data.get('email')
                 name = form.cleaned_data.get('username')
-                print(email)
-                print(name)
-                #inst = Customer(name=name, email=email)
-                #inst.save()
-               #print('data has been written')
+
 
 
                 return redirect('/login/')
@@ -54,7 +49,7 @@ def loginPage(request):
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
-    context={}
+    context = {}
     return render(request, 'main/login.html', context)
 
 
@@ -78,7 +73,8 @@ def home(request):
 
 
 def base(request):
-    return render(request, 'base.html', {})
+    user = User.objects.all()
+    return render(request, 'base.html', {'user': user})
 
 
 def details(request, product_id):

@@ -141,6 +141,19 @@
         </ul>
     </div>
 </nav>
+<h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
+    {% if user.first.name %}
+    You are logged in as
+    {% if user.first_name %}
+    {{ user.first_name }}
+    {% else %}
+    {{ user.username }}
+    {% endif %}
+    {% endif %}
+    {% if not user.firstname %}
+    You are NOT logged in!....
+    {% endif %}
+</h2>
 
 
 {% block content %}
