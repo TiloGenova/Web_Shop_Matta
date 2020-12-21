@@ -7,12 +7,14 @@ from .models import Product, OrderItem, Order, Customer, ShippingAddress, User
 
 class OrderAdmin(admin.ModelAdmin):
     fields = [
+        'id',
         'customer',
         'date_ordered',
         'complete',
         'transaction_id',
     ]
     list_display =[
+        'id',
         'customer',
         'date_ordered',
         'complete',
@@ -24,7 +26,8 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('transaction_id',)
 
 
-    readonly_fields = ['date_ordered']
+    readonly_fields = ['date_ordered','id']
+
     class Meta:
         model = Order
 
