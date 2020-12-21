@@ -89,8 +89,8 @@
 
 <nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar pt-0 pb-1 "
       style ="box-shadow:hsl(34, 76%, 34%) 10px 3px 10px;">
-    <a href="{% url 'main:home' %}">
-        <!--img src="{% static 'main/LOGO_CUT_300.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-0"-->
+    <!--a href="{% url 'main:home' %}"-->
+    <a href="/admin">
         <img src="{% static 'main/magliamatta.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-0">
     </a>
 
@@ -103,7 +103,7 @@
 
     <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
         <ul class="navbar-nav ">
-            <div class="container">
+            <div class="container pr-0">
                 <li class="nav-item ">
                     <a class="nav-link" href="/">MAGLIAMATTA</a>
                 </li>
@@ -113,47 +113,59 @@
                 <li class="nav-item">
                     <a class="nav-link"  href="/#uomini">UOMO</a>
                 </li>
-                <li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link"  href="/cart">CARRELLO</a>
-                </li>
+                </li-->
                 <li class="nav-item">
                     <a class="nav-link"  href="/checkout">PAGAMENTO</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/register">REGISTER</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/login">LOGIN</a>
-                </li>
-                <div class="form-inline my-2 my-lg-0">
+                <div class="form-inline my-2 my-lg-0 pr-1">
 
                     <a href="/cart">
-                        <img id="cart-icon" src="{% static 'main/images/cartblack.png'%}" alt="Cart">
+                        <img id="cart-icon" src="{% static 'main/images/cartblack.png'%}" alt="Cart" class="pl-0 ml-0">
                     </a>
                     <p id="cart-total">{{cartItems}}</p>
-                    <a href="#" class="btn btn-danger">Login</a>
                 </div>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/admin">ADMIN</a>
+                <li>
+                    {% if user.username %}
+                        <a href="/logout" class="btn btn-outline-danger " > LOGOUT
+                            {% if user.first_name %}
+                                {{request.user.first_name}}
+                            {% else %}
+                                {{request.user}}
+                            {% endif %}
+
+                        </a>
+
+                    {% endif %}
+
+                    {% if not user.username %}
+                        <a href="/login" class="btn btn-outline-danger ">LOGIN
+
+                        </a>
+
+                    {% endif %}
+
                 </li>
+
             </div>
 
         </ul>
     </div>
-    <h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
+    <!---h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
         {% if user.username %}
-        You are logged in as
-        {% if user.first_name %}
-        {{ user.first_name }}...
-        {% else %}
-        {{ user.username }}...
-        {% endif %}
+        Ciao
+            {% if user.first_name %}
+                {{ user.first_name }}...
+            {% else %}
+                {{ user.username }}...
+            {% endif %}
         {% endif %}
 
         {% if not user.username %}
-        You are NOT logged in!....
+            NOT logged in!....
         {% endif %}
-    </h2>
+    </h2-->
 </nav>
 
 
