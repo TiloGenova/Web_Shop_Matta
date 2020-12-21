@@ -1,0 +1,17 @@
+{% extends "admin/base_site.html" %}
+
+
+{% load static %}
+{% block branding %}
+<img src="{% static 'main/magliamatta.png' %}" width="250 " height="90"  class="d-inline-block align-top pb-0">
+
+    <!--{{ block.super }}       covers orignal content-->
+{% endblock %}
+
+
+{% block extrastyles %}
+
+<link rel="stylesheet" href="main/static/main/css/adminstyle.css">
+
+
+{% endblock %}

@@ -74,7 +74,7 @@ def home(request):
 
 def base(request):
     user = User.objects.all()
-    return render(request, 'base.html', {'user': user})
+    return render(request, 'base_site.html', {'user': user})
 
 
 def details(request, product_id):

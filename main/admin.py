@@ -1,12 +1,8 @@
 from django.contrib import admin
-from .models import Product, OrderItem, Order, Customer, ShippingAddress
+from .models import Product, OrderItem, Order, Customer, ShippingAddress, User
 
 
 # Register your models here.
-
-class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('category',)
-
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -16,13 +12,40 @@ class OrderAdmin(admin.ModelAdmin):
         'complete',
         'transaction_id',
     ]
+    list_display =[
+        'customer',
+        'date_ordered',
+        'complete',
+        'transaction_id',
+    ]
+
+    ordering = ('date_ordered', 'complete',)
+    search_fields = ('customer', 'date_ordered')
+    list_filter = ('transaction_id',)
+
+
     readonly_fields = ['date_ordered']
     class Meta:
         model = Order
 
 
+def disactivate(modeladmin, request, queryset):
+    queryset.update(active=False)
+disactivate.short_description = 'Disactivate products'
+
+
+
+def activate(modeladmin, request, queryset):
+    queryset.update(active=True)
+activate.short_description = 'Activate products'
+
+
+
+
 class ProductAdmin(admin.ModelAdmin):
+    actions = [disactivate, activate]
     fields = [
+        'image_tag',
         'active',
         'date',
         'NEW_Flag',
@@ -39,9 +62,38 @@ class ProductAdmin(admin.ModelAdmin):
         'digital',
         'url',
     ]
-    readonly_fields = ['date']
+    list_display =[
+        'title',
+        'id',
+        'size',
+        'gender',
+        'active',
+        'date',
+        'NEW_Flag',
+        'category',
+        'price',
+        'discount_price',
+        'discount_Flag',
+        'image',
+        'digital',
+        'url',
+    ]
+
+    readonly_fields = ['date', 'id', 'image_tag']
+
+    def image_tag(self, obj):
+        return u'<img src="%s" />' % obj.image
+
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
+
     class Meta:
         model = Product
+
+
+
+
+
 
 
 class OrderItemAdmin(admin.ModelAdmin):
@@ -51,6 +103,15 @@ class OrderItemAdmin(admin.ModelAdmin):
         'quantity',
         'date_added',
     ]
+
+    list_display =[
+        'product',
+        'order',
+        'quantity',
+        'date_added',
+    ]
+
+
     readonly_fields = ['date_added']
     class Meta:
         model = OrderItem
@@ -68,15 +129,61 @@ class ShippingAddressAdmin(admin.ModelAdmin):
         'date_added',
 
     ]
+
+    list_display =['customer',
+                   'order',
+                   'address',
+                   'city',
+                   'state',
+                   'zipcode',
+                   'country',
+                   'date_added',]
+
     readonly_fields = ['date_added']
     class Meta:
         model = ShippingAddress
 
 
 
+class CustomerAdmin(admin.ModelAdmin):
+    fields = [
+
+        'user',
+        'name',
+        'email',
+
+    ]
+    list_display =[
+        'id',
+        'user',
+        'name',
+        'email',
+    ]
+
+    readonly_fields = ['id',]
+
+    class Meta:
+        model = Customer
 
 
-admin.site.register(Customer)
+class UserAdmin(admin.ModelAdmin):
+    fields = [
+
+
+    ]
+    list_display =[
+        'id',
+
+    ]
+
+    readonly_fields = ['id',]
+
+    class Meta:
+        model = User
+
+
+
+admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
