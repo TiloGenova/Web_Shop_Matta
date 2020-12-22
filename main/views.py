@@ -114,8 +114,12 @@ def checkout(request):
     order = data['order']
     items = data['items']
 
+    #  Shipping  = first entry from Database
+    shippingcost = ShippingCost.objects.all()[:1].get()
 
-    context = {'items': items, 'order': order,'cartItems':cartItems}
+
+    context = {'items': items, 'order': order,'cartItems':cartItems,
+               'shippingcost': shippingcost}
     return render(request, 'main/checkout.html', context)
 
 

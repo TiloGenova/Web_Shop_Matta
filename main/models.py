@@ -31,6 +31,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(decimal_places=2, max_digits=7, default=0.00)
     discount_Flag = models.BooleanField()
     image = models.ImageField(upload_to='media/')
+    stock = models.IntegerField(default=1, null=True, blank=True)
     digital = models.BooleanField(default=False)
     url = models.URLField(blank=True)
 
@@ -106,6 +107,7 @@ class Order(models.Model):
         for i in orderitems:
             if i.product.digital == False:
                 shipping = True
+                shipping_costs = [ShippingCost.costs]
         return shipping
 
 
@@ -140,6 +142,15 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+
+class ShippingCost(models.Model):
+    service = models.CharField(max_length=200, null=False)
+    costs = models.DecimalField(decimal_places=2, max_digits=7, default=0.00)
+
+    def __str__(self):
+        return self.service
 
 
 

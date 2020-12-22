@@ -3,6 +3,7 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
+{{shippingcost.costs}}
 <br>
 <br>
 <div class="container" style=" justify-content: center;">
@@ -11,7 +12,7 @@
             <div class="box-element" id="form-wrapper">
                 <form id="form">
                     <div id="user-info">
-                        <p>CLIENTE XXXXX UN REGISTRATO:</p>
+                        <p>NUOVO CLIENTE:</p>
                         <ul style="list-style-type:none; padding-right:0px;  ">
                             <!--li>
                                 <div class="form-field">

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, OrderItem, Order, Customer, ShippingAddress, User
+from .models import Product, OrderItem, Order, Customer, ShippingAddress, User, ShippingCost
 
 
 # Register your models here.
@@ -62,10 +62,12 @@ class ProductAdmin(admin.ModelAdmin):
         'discount_price',
         'discount_Flag',
         'image',
+        'stock',
         'digital',
         'url',
     ]
     list_display =[
+        'stock',
         'title',
         'id',
         'size',
@@ -82,13 +84,9 @@ class ProductAdmin(admin.ModelAdmin):
         'url',
     ]
 
-    readonly_fields = ['date', 'id', 'image_tag']
+    readonly_fields = ['date', 'id']
 
-    def image_tag(self, obj):
-        return u'<img src="%s" />' % obj.image
 
-    image_tag.short_description = 'Image'
-    image_tag.allow_tags = True
 
     class Meta:
         model = Product
@@ -185,9 +183,31 @@ class UserAdmin(admin.ModelAdmin):
         model = User
 
 
+class ShippingCostAdmin(admin.ModelAdmin):
+    fields = [
+
+        'service',
+        'costs',
+
+    ]
+    list_display =[
+        'id',
+        'service',
+        'costs',
+    ]
+
+    readonly_fields = ['id',]
+
+    class Meta:
+        model = ShippingCost
+
+
+
+
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(ShippingAddress, ShippingAddressAdmin)
+admin.site.register(ShippingCost, ShippingCostAdmin)

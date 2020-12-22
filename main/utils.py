@@ -24,14 +24,16 @@ def cookieCart(request):
 
             product = Product.objects.get(id=i)
 
+
             #total = (product.price * cart[i]['quantity'])
-            if product.discount.price > 0:
+            if product.discount_price > 0:
                 total = (product.discount_price * cart[i]['quantity'])
             else:
                 total = (product.price * cart[i]['quantity'])
 
 
             order['get_cart_total'] += total
+
             order['get_cart_items'] += cart[i]['quantity']
 
 
@@ -81,6 +83,7 @@ def cartData(request):
     return {'cartItems': cartItems, 'order': order, 'items': items}
 
 
+
 def guestOrder(request, data):
 
     print('User is not logged in...')
@@ -114,3 +117,4 @@ def guestOrder(request, data):
         )
 
     return customer, order
+
