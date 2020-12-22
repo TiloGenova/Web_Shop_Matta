@@ -56,6 +56,13 @@ max-width:300px;
 	margin-left: 15px;
 }
 
+#facebook-icon{
+	width:25px;
+	display: inline-block;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
 #cart-total{
 	display: block;
 	text-align: center;
