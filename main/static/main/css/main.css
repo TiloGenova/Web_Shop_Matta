@@ -13,13 +13,15 @@ h1,h2,h3,h4,h5,h6{
 
 
 
-
+/*
 span{
 position:absolute;
 left:2px;
 top:15px;
 max-width:300px;
 }
+*/
+
 
 .box-element{
 	box-shadow:hsl(0, 0%, 60%) 0 0 10px;
@@ -175,65 +177,69 @@ img {
 
 
 /* FORM INPUT ANIMATION */
-.form{
+.formani{
 	width:50%;
 	position:relative;
 	height:50px;
-	background-color: blue !important;
+	background-color: blue;
 	overflow: hidden;
+	border-style: none ;
 }
 
-.form input{
+.formani input{
  	width:100%;
  	height:50px;
     color: #595f6e ;
-    padding-top:20px;
+    padding-top:10px;
     border: none;
     outline: none;
 
  }
 
- .form label{
+ .formani label{
  	position: absolute;
- 	bottom: -16px;
+ 	bottom: 0px;
  	left: 0%;
  	width:100%;
     height:100%;
     pointer-events: none;
-    border_bottom: 1px solid --black
+    border-style: none;
+    border-bottom: 1px solid black;
+
 
 
  }
 
-.form label::after {
+.formani label::after {
     content: "";
     position: absolute;
+    bottom: -1px;
     left: 0px;
-    bottom: -20px;
     width:100%;
     height:100%;
+
     border-bottom: 3px solid #5fa8d3   ;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 1.5s ease;
 
 }
 
 .content-name{
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     left: 0px;
     transition: all 0.5s ease;
 }
 
-.form input:focus + .label-name  .content-name,
-.form input:valid + .label-name  .content-name{
-    transform: translateY(-80%);
-    font-size: 12px;
+.formani input:focus + .label-name  .content-name,
+.formani input:valid + .label-name  .content-name{
+    transform: translateY(-25px);
+    font-size: 10px;
     color: #5fa8d3;
  	}
 
-.form input:focus + .label-name::after,
-.form input:valid + .label-name::after{
+.formani input:focus + .label-name::after,
+.formani input:valid + .label-name::after{
     transform: translateX(0%);
 
 }

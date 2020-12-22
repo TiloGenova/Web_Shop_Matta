@@ -77,6 +77,11 @@ def base(request):
     return render(request, 'base_site.html', {'user': user})
 
 
+def about(request):
+    context = {}
+    return render(request, 'main/about.html', {})
+
+
 def details(request, product_id):
     #ERRORHANDLING!?
     productsall = Product.objects.all()
