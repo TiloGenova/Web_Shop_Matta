@@ -92,6 +92,7 @@ class Order(models.Model):
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
+
         return total
 
     @property
@@ -107,7 +108,7 @@ class Order(models.Model):
         for i in orderitems:
             if i.product.digital == False:
                 shipping = True
-                shipping_costs = [ShippingCost.costs]
+
         return shipping
 
 
@@ -146,8 +147,9 @@ class ShippingAddress(models.Model):
 
 
 class ShippingCost(models.Model):
-    service = models.CharField(max_length=200, null=False)
+
     costs = models.DecimalField(decimal_places=2, max_digits=7, default=0.00)
+    service = models.CharField(max_length=200, null=False)
 
     def __str__(self):
         return self.service

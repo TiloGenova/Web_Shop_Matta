@@ -185,15 +185,16 @@ class UserAdmin(admin.ModelAdmin):
 
 class ShippingCostAdmin(admin.ModelAdmin):
     fields = [
-
-        'service',
         'costs',
+        'service',
+
 
     ]
     list_display =[
         'id',
-        'service',
         'costs',
+        'service',
+
     ]
 
     readonly_fields = ['id',]

@@ -7,6 +7,8 @@ from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
+import sqlite3
+
 
 # Create your views here.
 
@@ -113,9 +115,30 @@ def checkout(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
+#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    if order.shipping == True:
+        #  Shipping  = first entry from Database
+        #shippingcost= ShippingCost.objects.all()[:1].get()
+        shippingcost= ShippingCost.objects.get(id=1)
+        #print(shippingcost)
+        #order.get_cart_total += shippingcost
 
-    #  Shipping  = first entry from Database
-    shippingcost = ShippingCost.objects.all()[:1].get()
+        #field_name = 'name'
+        #obj = ShippingCost.objects.first()
+        #print(obj)
+        #field_value = getattr(obj, ShippingCost.costs)
+        #print(type(field_value))
+
+        db = sqlite3.connect('db.sqlite3')
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM main_shippingcost")
+        for id, service, costs in cursor:
+            print(costs)
+            shippingcost=costs
+        cursor.close()
+
+
+
 
 
     context = {'items': items, 'order': order,'cartItems':cartItems,
@@ -190,8 +213,6 @@ def processOrder(request):
             zipcode=data['shipping']['zipcode'],
             country=data['shipping']['country'],
         )
-
-
 
 
     return JsonResponse('Payment complete!', safe=False)
