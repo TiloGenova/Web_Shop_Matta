@@ -11,7 +11,33 @@ h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
 
+.parallaxslim {
+  /* The image used */
+  background-image: url("/static/main/woolbr_smv2.png");
 
+  /* Set a specific height */
+  min-height: 50px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("/static/main/woolbr_smv2.png");
+
+  /* Set a specific height */
+  min-height: 300px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 /*
 span{
