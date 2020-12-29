@@ -5,8 +5,20 @@ body{
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    padding-top: 93px;
 
 }
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+
+}
+
+
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
@@ -16,7 +28,7 @@ h1,h2,h3,h4,h5,h6{
   background-image: url("/static/main/woolbr_smv2.png");
 
   /* Set a specific height */
-  min-height: 50px;
+  min-height: 30px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
