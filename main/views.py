@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 import sqlite3
+from decimal import Decimal
 
 
 # Create your views here.
@@ -120,29 +121,24 @@ def checkout(request):
         #  Shipping  = first entry from Database
         #shippingcost= ShippingCost.objects.all()[:1].get()
         shippingcost= ShippingCost.objects.get(id=1)
-        #print(shippingcost)
-        #order.get_cart_total += shippingcost
 
-        #field_name = 'name'
-        #obj = ShippingCost.objects.first()
-        #print(obj)
-        #field_value = getattr(obj, ShippingCost.costs)
-        #print(type(field_value))
 
         db = sqlite3.connect('db.sqlite3')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM main_shippingcost")
         for id, service, costs in cursor:
-            print(costs)
-            shippingcost=costs
+
+            costsdec = Decimal(costs)
+            shippingcost = round(costsdec, 2)
         cursor.close()
 
 
+        totalwshipping = shippingcost + order.get_cart_total
 
 
 
     context = {'items': items, 'order': order,'cartItems':cartItems,
-               'shippingcost': shippingcost}
+               'shippingcost': shippingcost, 'totalwshipping': totalwshipping}
     return render(request, 'main/checkout.html', context)
 
 

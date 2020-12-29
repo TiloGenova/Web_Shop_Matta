@@ -2,9 +2,10 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+{{shippingcost}}
+{{order.get_cart_total}}
+{{totalwshipping}}
 
-{{shippingcost.costs}}
-{{shippingcost.service}}
 <br>
 <br>
 <div class="container" style=" justify-content: center;">
@@ -200,7 +201,7 @@
                     <div style="flex:1"><h6>Consegna:</h6></div>
                     <div style="flex:1"></div>
                     <div style="flex:1"><h6></h6></div>
-                    <div style="flex:7"><h6 style="text-align:right; " class="pr-3">{{shippingcost.service}} {{shippingcost.costs}} €   </h6></div>
+                    <div style="flex:7"><h6 style="text-align:right; " class="pr-3">{{shippingcost}}€   </h6></div>
                 </div>
                 <div class="cart-row">
                     <div style="flex:1"></div>
@@ -208,7 +209,7 @@
                     <div style="flex:2"></div>
                     <div style="flex:1"></div>
                     <div style="flex:1"></div>
-                    <div style="flex:5"><h6 style="text-align:right; " class="pr-3"><strong>Totale: {{ order.get_cart_total }} €</strong></h6></div>
+                    <div style="flex:5"><h6 style="text-align:right; " class="pr-3"><strong>Totale: {{ totalwshipping }} €</strong></h6></div>
                 </div>
 
             </div>
