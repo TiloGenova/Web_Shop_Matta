@@ -117,9 +117,13 @@ def checkout(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    shippingcost = 0
+    global totalwshipping
+    totalwshipping = 0
+
+
     print('ORDER def checkout:', order)
-    print('data def checkout:', data)
+    #print('data def checkout:', data)
 
 
     #shipping = order.shipping
@@ -128,9 +132,6 @@ def checkout(request):
     if request.user.is_authenticated:
         if order.shipping == True:  #user logged in
 
-            #  Shipping  = first entry from Database
-            #shippingcost= ShippingCost.objects.all()[:1].get()
-            #shippingcost= ShippingCost.objects.get(id=1)
 
 
             db = sqlite3.connect('db.sqlite3')
@@ -145,30 +146,35 @@ def checkout(request):
             gct = order.get_cart_total
             #totalwshipping = shippingcost + order.get_cart_total
 
-            global totalwshipping
             totalwshipping = shippingcost + gct
             print('totalwshipping from checkout LOGGED IN:', totalwshipping)
-
+        else:
+            shippingcost = [0]
 
 
     else:
 
         if (order['shipping']) == True: #user NOT logged in
+            try:
+                db = sqlite3.connect('db.sqlite3')
+                cursor = db.cursor()
+                cursor.execute("SELECT * FROM main_shippingcost")
+                for id, service, costs in cursor:
 
-            db = sqlite3.connect('db.sqlite3')
-            cursor = db.cursor()
-            cursor.execute("SELECT * FROM main_shippingcost")
-            for id, service, costs in cursor:
+                    costsdec = Decimal(costs)
+                    shippingcost = round(costsdec, 2)
+                cursor.close()
 
-                costsdec = Decimal(costs)
-                shippingcost = round(costsdec, 2)
-            cursor.close()
+            except:
+                shippingcost =float(0.00)
 
             gct = (order['get_cart_total'])
             #totalwshipping = shippingcost + order.get_cart_total
             #global totalwshipping
             totalwshipping = shippingcost + gct
-            print ('totalwshipping from checkout NOT LOGGED IN:', totalwshipping)
+            print('totalwshipping from checkout NOT LOGGED IN:', totalwshipping)
+        else:
+            shippingcost = 0
 
 
 
@@ -211,7 +217,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def processOrder(request):
-    #checkout(request)  # FOR GETTING TOTALWSHIPPING variable
+
+    #totalwshipping = 0
+
     print('Data:', request.body)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -231,7 +239,7 @@ def processOrder(request):
     totaldec = Decimal(total)
     total = round(totaldec, 2)
 
-    print('TOTAL FLOAT process order:', total)
+    print('TOTAL FLOAT processOrder:', total)
     print('TOTALwshipping:', totalwshipping)   # NOT DEFINED ????? 
     order.transaction_id = transaction_id
 
