@@ -117,23 +117,50 @@ def checkout(request):
     order = data['order']
     items = data['items']
 #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    if order.shipping == True:
-        #  Shipping  = first entry from Database
-        #shippingcost= ShippingCost.objects.all()[:1].get()
-        shippingcost= ShippingCost.objects.get(id=1)
+    print('ORDER def checkout:', order)
+    print('data def checkout:', data)
 
 
-        db = sqlite3.connect('db.sqlite3')
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM main_shippingcost")
-        for id, service, costs in cursor:
+    #shipping = order.shipping
+    #print('shipping:', shipping)
 
-            costsdec = Decimal(costs)
-            shippingcost = round(costsdec, 2)
-        cursor.close()
+    if request.user.is_authenticated:
+        if order.shipping == True:  #user logged in
+
+            #  Shipping  = first entry from Database
+            #shippingcost= ShippingCost.objects.all()[:1].get()
+            #shippingcost= ShippingCost.objects.get(id=1)
 
 
-        totalwshipping = shippingcost + order.get_cart_total
+            db = sqlite3.connect('db.sqlite3')
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM main_shippingcost")
+            for id, service, costs in cursor:
+
+                costsdec = Decimal(costs)
+                shippingcost = round(costsdec, 2)
+            cursor.close()
+
+            gct = order.get_cart_total
+            #totalwshipping = shippingcost + order.get_cart_total
+            totalwshipping = shippingcost + gct
+
+    else:
+
+        if (order['shipping']) == True: #user NOT logged in
+
+            db = sqlite3.connect('db.sqlite3')
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM main_shippingcost")
+            for id, service, costs in cursor:
+
+                costsdec = Decimal(costs)
+                shippingcost = round(costsdec, 2)
+            cursor.close()
+
+            gct = (order['get_cart_total'])
+            #totalwshipping = shippingcost + order.get_cart_total
+            totalwshipping = shippingcost + gct
 
 
 

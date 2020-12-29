@@ -15,7 +15,7 @@ def cookieCart(request):
     items = []   # if user is not logged in
     order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
     cartItems = order['get_cart_items']
-
+    print('Order:', order)
 
     for i in cart:   # sum of items to show in cart
         try:    #Errorhandling  / In case there is no valid product in database
@@ -59,6 +59,7 @@ def cookieCart(request):
         except:
             pass
 
+    print('Order2:', order)
 
     return{'cartItems': cartItems, 'order': order, 'items': items}
 
