@@ -227,7 +227,8 @@
 
     <script>
         //import the variable total into the script
-        var total = '{{ order.get_cart_total }}'
+        //var total = '{{ order.get_cart_total }}'
+        var total = '{{ totalwshipping }}'
 
             // Render the PayPal button into #paypal-button-container
             paypal.Buttons({
@@ -270,7 +271,8 @@
 
     <script type="text/javascript ">
         var shipping = '{{order.shipping}}'
-        var total = '{{ order.get_cart_total }}'
+        //var total = '{{ order.get_cart_total }}'
+        var total = '{{ totalwshipping }}'
 
 
         if (shipping == 'False'){

@@ -110,6 +110,7 @@ def cart(request):
 
 
 
+
 def checkout(request):
 
     data = cartData(request)   #function in utils.py
@@ -143,7 +144,12 @@ def checkout(request):
 
             gct = order.get_cart_total
             #totalwshipping = shippingcost + order.get_cart_total
+
+            global totalwshipping
             totalwshipping = shippingcost + gct
+            print('totalwshipping from checkout LOGGED IN:', totalwshipping)
+
+
 
     else:
 
@@ -160,7 +166,10 @@ def checkout(request):
 
             gct = (order['get_cart_total'])
             #totalwshipping = shippingcost + order.get_cart_total
+            #global totalwshipping
             totalwshipping = shippingcost + gct
+            print ('totalwshipping from checkout NOT LOGGED IN:', totalwshipping)
+
 
 
 
@@ -202,6 +211,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def processOrder(request):
+    #checkout(request)  # FOR GETTING TOTALWSHIPPING variable
     print('Data:', request.body)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -218,10 +228,16 @@ def processOrder(request):
 
     # Following block for logged in and not logged in users
     total = float(data['form']['total'])
+    totaldec = Decimal(total)
+    total = round(totaldec, 2)
+
+    print('TOTAL FLOAT process order:', total)
+    print('TOTALwshipping:', totalwshipping)   # NOT DEFINED ????? 
     order.transaction_id = transaction_id
 
 
-    if total == order.get_cart_total:
+                # if total == order.get_cart_total:  =  without shippingcosts
+    if total == totalwshipping:
         order.complete = True
     order.save()
 
