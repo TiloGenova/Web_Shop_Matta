@@ -23,12 +23,12 @@ h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
 
-.parallaxslim {
+.parallaxbase {
   /* The image used */
   background-image: url("/static/main/woolbr_smv2.png");
 
   /* Set a specific height */
-  min-height: 30px;
+  min-height: 60px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
