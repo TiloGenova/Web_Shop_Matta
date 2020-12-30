@@ -4,36 +4,28 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
 <style>
-$time: 0.3s;
+$time: 1s;
 
 body {
   height: 100vh;
+  width:100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: #bdd8f1;
+  align-items: ;
 }
 
 #gal {
   display: grid;
-  grid-template-rows: repeat(2, 15vh);
-  grid-template-columns: repeat(5, 20vw);
+  grid-template-rows: repeat(1, 20vh);
+  grid-template-columns: repeat(10, 10vw);
   transition: all $time ease(gravity);
-  background-color: #82a6cb;
-  border-radius: 10px;
+  background-color: #995f15;
+  border-radius: 5px;
   padding: 0.25em;
   cursor: zoom-in;
-  grid-gap: .25em;
+  grid-gap: .15em;
 
-  @media (min-width: 40em) {
-    grid-template-columns: repeat(5, 18vw);
-    grid-template-rows: repeat(2, 20vh);
-  }
 
-  @media (min-width: 60em) {
-    grid-template-columns: repeat(10, 8vw);
-    grid-template-rows: 25vh;
-  }
 }
 
 #img {
@@ -49,90 +41,20 @@ body {
   filter: sepia(80%) hue-rotate(180deg);
   }
 
-  &:first-child {
-    border-radius: 10px 10px 0 0;
-  }
-  &:last-child {
-    border-radius: 0 0 10px 10px;
-  }
 
-  @media (min-width: 40em) and (max-width: 59.99em) {
-    &:first-child {
-      border-radius: 10px 0 0 0;
-    }
-    &:nth-child(5) {
-      border-radius: 0 10px 0 0;
-    }
-    &:nth-child(6) {
-      border-radius: 0 0 10px 0;
-    }
-    &:last-child {
-      border-radius: 0 0 0 10px;
-    }
-  }
-
-  @media (min-width: 60em) {
-    &:first-child {
-      border-radius: 10px 0 0 10px;
-    }
-    &:last-child {
-      border-radius: 0 10px 10px 0;
-    }
-  }
-
-
-
-  #img:hover {
+#img:hover {
     opacity: 1;
-    z-index: 1;
     box-shadow: 1em 1em 1em #0004;
     transition: all $time ease(downhill);
     filter: sepia(0%) hue-rotate(0deg);
     border-radius: 5px;
     width: 300%;
-    height: 300%;
-    left: -100%;
+    height: 400%;
+    left: 0%;
     top: -100%;
+    position: absolut;
 
-    @media (min-width: 40em) {
-      width: 250%;
-      height: 500%;
-      left: -75%;
-      top: -200%;
     }
-
-    @media (min-width: 40em) and (orientation: portrait) {
-      width: 300%;
-      height: 300%;
-      left: -100%;
-      top: -100%;
-    }
-
-    @media (min-width: 60em) {
-      width: 350%;
-      height: 150%;
-      left: -75%;
-      top: -25%;
-
-      ~ img {
-        left: 175%;
-      }
-    }
-
-    @media (min-width: 60em) and (orientation: landscape) {
-      width: 300%;
-      height: 300%;
-      left: -75%;
-      top: -100%;
-
-      ~ img {
-        left: 100%;
-      }
-    }
-  }
-}
-
-
 
 
 
@@ -166,16 +88,15 @@ body {
 <br>
 
 <div id="gal" class="galleryt">
-    <img id="img" src='https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1510771463146-e89e6e86560e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
-    <img id="img" src='https://images.unsplash.com/photo-1504595403659-9088ce801e29?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt=''>
+    <img id="img" src="{% static 'main/g1.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g2.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g3.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g4.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g5.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g6.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g7.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g8.jpg' %}" alt=''>
+    <img id="img" src="{% static 'main/g9.jpg' %}" alt=''>
 </div>
 
 
