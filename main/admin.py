@@ -48,7 +48,7 @@ activate.short_description = 'Activate products'
 class ProductAdmin(admin.ModelAdmin):
     actions = [disactivate, activate]
     fields = [
-        'image_tag',
+
         'active',
         'date',
         'NEW_Flag',
