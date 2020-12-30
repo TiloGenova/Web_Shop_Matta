@@ -70,8 +70,7 @@ def home(request):
 
 
     productsall = Product.objects.all()
-    productswomen = Product.objects.filter(gender='WOMAN')
-    context = {'products': productsall, 'productswomen': productswomen, 'cartItems': cartItems}
+    context = {'products': productsall,'cartItems': cartItems}
     return render(request, 'main/home.html', context)
 
 
@@ -81,8 +80,11 @@ def base(request):
 
 
 def about(request):
-    context = {}
-    return render(request, 'main/about.html', {})
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+
+    context = {'cartItems': cartItems}
+    return render(request, 'main/about.html', context)
 
 
 def details(request, product_id):
