@@ -4,15 +4,41 @@
 
 <br>
 
-ABOUT PAGE
-
-
-
-
+<br>
+<br>
+<div class="container ">
+    <div class="row">
+        <div class=" col-sm-12 col-md-12 col-lg-4 ">
+            <div class="container-sm">
+                <!-- Content here -->
+                <h1 style=" font-size: 40px; margin: 0px; text-align: left;">MAGLIAMATTA</h1>
+                <br/>
+                <h2 style="font-size: 20px; margin: 0px; text-align: left; color:#995f15">Produco capi in maglia artigianali, fantasiosi e di buona qualità.
+                    Se apprezzi i prodotti hand-made, non omologati dalle
+                    catene commerciali e ti piace l’idea di avere un capo unico ... sei nel posto giusto.</h2><br/>
+            </div>
+        </div>
+        <div class="box-video col-sm-12 col-md-12 col-lg-6 ">
+            <video id="video" style="width: 100%; height: auto;"  controls Autoplay=autoplay poster="">
+                <source src="{% static 'main/MAGLIAMATTA.mov' %}" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
 
 
 
 <br/>
 <br/>
 <br/>
+
+<script>
+var vid = document.getElementById("video");
+
+  vid.volume = 0.3;
+
+</script>
+
+
 {% endblock %}
+
