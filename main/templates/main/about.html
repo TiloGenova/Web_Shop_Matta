@@ -4,58 +4,48 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
 <style>
-$time: 1s;
-
-body {
-  height: 100vh;
-  width:100vw;
+.containerg {
   display: flex;
-  justify-content: center;
-  align-items: ;
-}
-
-#gal {
-  display: grid;
-  grid-template-rows: repeat(1, 20vh);
-  grid-template-columns: repeat(10, 10vw);
-  transition: all $time ease(gravity);
-  background-color: #995f15;
-  border-radius: 5px;
-  padding: 0.25em;
-  cursor: zoom-in;
-  grid-gap: .15em;
-
-
-}
-
-#img {
-  object-fit: cover;
   width: 100%;
+  padding: 4% 2%;
+  box-sizing: border-box;
+  height: 600px;
+}
+
+.boxg {
+  flex: 2;
+  overflow: hidden;
+  transition: .5s;
+  margin: 0 5px;
+  box-shadow: 0 0px 10px rgba(0,0,0,10);
+  line-height: 0;
+
+
+}
+
+.boxg > img {
+  width: 200%;
+ //height: calc(100% - 10vh);
+  height: calc(100% );
+  object-fit: cover;
+  transition: .5s;
+  opacity: 0.60;
+}
+
+.boxg > span {
+  font-size: 3.8vh;
+  display: block;
+  text-align: center;
+  height: 10vh;
+  line-height: 2.6;
+}
+
+.boxg:hover { flex: 1 4 50%; }
+.boxg:hover > img {
+  width: 150%;
   height: 100%;
-  left: 0;
-  top: 0;
-  transition: all $time/2 ease(downhill);
-  position: relative;
-  box-shadow: 0 0 0 #0000;
-  opacity: 0.40;
-  filter: sepia(80%) hue-rotate(180deg);
-  }
-
-
-#img:hover {
-    opacity: 1;
-    box-shadow: 1em 1em 1em #0004;
-    transition: all $time ease(downhill);
-    filter: sepia(0%) hue-rotate(0deg);
-    border-radius: 5px;
-    width: 300%;
-    height: 400%;
-    left: 0%;
-    top: -100%;
-    position: absolut;
-
-    }
-
+  opacity: 1;
+}
 
 
 </style>
@@ -87,16 +77,39 @@ body {
 <br>
 <br>
 
-<div id="gal" class="galleryt">
-    <img id="img" src="{% static 'main/g1.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g2.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g3.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g4.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g5.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g6.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g7.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g8.jpg' %}" alt=''>
-    <img id="img" src="{% static 'main/g9.jpg' %}" alt=''>
+<div class="containerg">
+    <div class="boxg">
+        <img src="{% static 'main/g1.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g2.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g3.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g4.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g5.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g6.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g7.jpg' %}" alt=''>
+        <span></span>
+    </div>
+    <div class="boxg">
+        <img src="{% static 'main/g8.jpg' %}" alt=''>
+        <span></span>
+    </div>
 </div>
 
 
