@@ -68,10 +68,20 @@
             </div>
         </div>
         <div class="box-video col-sm-12 col-md-12 col-lg-6 ">
-            <video id="video" style="width: 100%; height: auto;"  controls Autoplay=autoplay poster="{% static 'main/MagliaMatta_poster.jpg' %}">
+            <!--video id="video" style="width: 100%; height: auto;"  controls Autoplay=autoplay poster="{% static 'main/MagliaMatta_poster.jpg' %}">
                 <source src="{% static 'main/MagliaMatta_v_md.mp4' %}" type="video/mp4">
                 This browser does not support the video file.
+            </video-->
+            <video id="video" style="width: 100%; height: auto;"  controls Autoplay=autoplay poster="{% static 'main/MagliaMatta_poster.jpg' %}">
+                <source src="https://github.com/TiloGenova/Web_Shop_Matta/blob/main/main/static/main/MagliaMatta_v_lo.m4v?raw=true" type="video/mp4">
+                This browser does not support the video file.
             </video>
+            <!--Hi,Having the same error mentioned above. Just wondering if there have been any changes to this config on server?
+            https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariWebContent/CreatingVideoforSafarioniPhone/CreatingVideoforSafarioniPhone.html#//apple_ref/doc/uid/TP40006514-SW1
+            "HTTP servers hosting media files for iOS must support byte-range requests, which iOS uses to perform random access
+            in media playback. (Byte-range support is also known as content-range or partial-range support.)
+            Most, but not all, HTTP 1.1 servers already support byte-range requests."-->
+
         </div>
     </div>
 </div>
@@ -127,7 +137,7 @@
 <script>
 var vid = document.getElementById("video");
 
-  vid.volume = 0.3;
+  vid.volume = 0.1;
 
 </script>
 
