@@ -25,7 +25,7 @@ h1,h2,h3,h4,h5,h6{
 
 .parallaxbase {
   /* The image used */
-  background-image: url("/static/main/woolbr_smv2.png");
+  background-image: url("/static/main/wool_para.jpg");
 
   /* Set a specific height */
   min-height: 60px;
@@ -39,7 +39,7 @@ h1,h2,h3,h4,h5,h6{
 
 .parallax {
   /* The image used */
-  background-image: url("/static/main/woolbr_smv2.png");
+  background-image: url("/static/main/wool_para.jpg");
 
   /* Set a specific height */
   min-height: 300px;
@@ -50,6 +50,21 @@ h1,h2,h3,h4,h5,h6{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+@media only screen and (max-width:749px) {
+  .parallax {
+    background-attachment: inherit !important;
+
+  }
+}
+
+@media only screen and (max-width:749px) {
+  .parallaxbase {
+
+    background-attachment: inherit !important;
+  }
+}
+
 
 /*
 span{
