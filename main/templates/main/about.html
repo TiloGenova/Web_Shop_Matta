@@ -48,6 +48,49 @@
 }
 
 
+.containergrid {
+  display: grid;
+  grid-gap: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-auto-rows: 300px;
+
+}
+
+.containergrid > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+img {
+  border-radius: 15px;
+  padding: 5px;
+}
+.description {
+  display: none;
+  position: absolute;
+}
+
+.containergrid > div:hover {
+  transform: scale(1.2);
+}
+.containergrid > div:hover .description {
+  display: block;
+  text-align: center;
+}
+
+.containergrid > div:hover img {
+  opacity: 1.0;
+}
+
+.containergrid > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #20263f;
+}
+
 </style>
 
 
@@ -62,7 +105,7 @@
                 <!-- Content here -->
                 <h1 style=" font-size: 40px; margin: 0px; text-align: left;">MAGLIAMATTA</h1>
                 <br/>
-                <h2 style="font-size: 20px; margin: 0px; text-align: left; color:#995f15">Produco capi in maglia artigianali, fantasiosi e di buona qualità.
+                <h2 style="font-size: 20px; margin: 0px; text-align: left; color:hsl(239, 89%, 56%)">Produco capi in maglia artigianali, fantasiosi e di buona qualità.
                     Se apprezzi i prodotti hand-made, non omologati dalle
                     catene commerciali e ti piace l’idea di avere un capo unico ... sei nel posto giusto.</h2><br/>
             </div>
@@ -88,7 +131,7 @@
 <br>
 <br>
 
-<div class="containerg">
+<!--div-- class="containerg">
     <div class="boxg">
         <img src="{% static 'main/g1.jpg' %}" alt=''>
         <span></span>
@@ -121,8 +164,61 @@
         <img src="{% static 'main/g8.jpg' %}" alt=''>
         <span></span>
     </div>
-</div>
+</div-->
 
+
+
+<section class="containergrid">
+
+    <div>
+        <img src="{% static 'main/magliamatta1.jpg' %}" alt="First description" />
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta2.jpg' %}" alt="Second description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta15.jpg' %}" alt="Third description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta4.jpg' %}" alt="Fourth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta5.jpg' %}" alt="Fifth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta3.jpg' %}" alt="Sixth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta7.jpg' %}" alt="Seventh description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta14.jpg' %}" alt="Eighth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta9.jpg' %}" alt="Ninth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta8.jpg' %}" alt="Tenth description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta11.jpg' %}" alt="Eleventh description">
+        <span class="description"></span>
+    </div>
+    <div>
+        <img src="{% static 'main/magliamatta12.jpg' %}" alt="Twelfth description">
+        <span class="description"></span>
+    </div>
+</section>
 
 
 

@@ -9,6 +9,8 @@ body{
 
 }
 
+
+
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -20,7 +22,7 @@ body{
 
 
 h1,h2,h3,h4,h5,h6{
-	color:hsl(0, 0%, 30%);
+	color:hsl(0, 0%, 20%);
 }
 
 .parallaxbase {
@@ -77,7 +79,7 @@ max-width:300px;
 
 
 .box-element{
-	box-shadow:hsl(0, 0%, 60%) 0 0 10px;
+	box-shadow:hsl(239, 89%, 56%) 0 0 10px;
 	background-color: #fff;
 	border-radius: 7px;
 	border: 200px;
@@ -86,7 +88,7 @@ max-width:300px;
 }
 
 .box-video{
-	box-shadow:hsl(0, 0%, 60%) 0 0 10px;
+	box-shadow:hsl(239, 89%, 56%) 0 0 10px;
 	background-color: #fff;
 	border-radius: 7px;
 	border: 100px;
@@ -109,7 +111,7 @@ max-width:300px;
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+	background-color: hsl(239, 89%, 56%) !important;
 }
 
 #cart-icon{
