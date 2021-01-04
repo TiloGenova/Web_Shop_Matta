@@ -27,7 +27,7 @@ h1,h2,h3,h4,h5,h6{
 
 .parallaxbase {
   /* The image used */
-  background-image: url("/static/main/wool_para.jpg");
+  background-image: url("/static/main/woolbr_soft6.jpg");
 
   /* Set a specific height */
   min-height: 60px;
@@ -41,7 +41,7 @@ h1,h2,h3,h4,h5,h6{
 
 .parallax {
   /* The image used */
-  background-image: url("/static/main/wool_para.jpg");
+  background-image: url("/static/main/woolbr_soft6.jpg");
 
   /* Set a specific height */
   min-height: 300px;
@@ -79,7 +79,7 @@ max-width:300px;
 
 
 .box-element{
-	box-shadow:hsl(239, 89%, 56%) 0 0 10px;
+	box-shadow:hsl(178, 79%, 47%) 0 0 10px;
 	background-color: #fff;
 	border-radius: 7px;
 	border: 200px;
@@ -88,7 +88,7 @@ max-width:300px;
 }
 
 .box-video{
-	box-shadow:hsl(239, 89%, 56%) 0 0 10px;
+	box-shadow:hsl(178, 79%, 47%) 0 0 10px;
 	background-color: #fff;
 	border-radius: 7px;
 	border: 100px;
