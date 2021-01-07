@@ -9,6 +9,7 @@ from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 import sqlite3
 from decimal import Decimal
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -263,6 +264,19 @@ def processOrder(request):
             country=data['shipping']['country'],
         )
 
+
+
+
+    send_mail(
+        'Subject: Your Order / MAGLIAMATTA',
+        'Many thanks for your order on www.magliamatta.com. '
+        'We prepare your products for shipping '
+        'You ordered the following products: ....'
+        'THIS IS THE FIRST TEST OF AUTOMATIC EMAIL SENDING',
+        'kingnapalm68@gmail.com',
+        ['martam.colombo@gmail.com', 'tilo.oschatz@googlemail.com'],
+        fail_silently=False,
+    )
 
     return JsonResponse('Payment complete!', safe=False)
 

@@ -124,3 +124,15 @@ USE_TZ = True
 
 
 SITE_ID = 1
+
+
+# https://myaccount.google.com/lesssecureapps
+# https://myaccount.google.com/DisplayUnlockCaptcha
+# https://myaccount.google.com/apppasswords
+#
+# Email Setting
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'kingnapalm68@gmail.com'
+EMAIL_HOST_PASSWORD = 'XXXXXXXX'
+EMAIL_USE_TLS = True
