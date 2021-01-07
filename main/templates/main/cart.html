@@ -4,6 +4,40 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 <!--img id="cart-icon" src="{% static 'main/images/cart.png' %}" -->
+<style>
+
+@media screen and (min-width: 601px) {
+  div.cart-row,h5 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  div.cart-row,h5 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  div.cart-row,h5 {
+    font-size: 11px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  h2 {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 18px;
+  }
+}
+</style>
+
+
 
 <br>
 <br>
@@ -88,8 +122,8 @@
                     <div style="flex:1"></div>
                     <div style="flex:1"></div>
                     <div style="flex:1"></div>
-                    <div style="flex:1"><h5>Prodotti: <strong>{{ order.get_cart_items }}</strong></h5></div>
-                    <div style="flex:1"><h5>Subtotale: <strong>{{ order.get_cart_total }}€</strong></h5></div>
+                    <div style="flex:3"><h5>Prodotti: <strong>{{ order.get_cart_items }}</strong></h5></div>
+                    <div style="flex:4"><h5>Subtotale: <strong>{{ order.get_cart_total }}€</strong></h5></div>
                 </div>
 
                 <!--table class="table">
