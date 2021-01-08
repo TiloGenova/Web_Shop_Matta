@@ -10,6 +10,7 @@ from .utils import cookieCart, cartData, guestOrder
 import sqlite3
 from decimal import Decimal
 from django.core.mail import send_mail
+from django.db import connection
 
 
 # Create your views here.
@@ -118,7 +119,7 @@ def checkout(request):
 
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
-    global order
+    #global order
     order = data['order']
     items = data['items']
     shippingcost = 0
@@ -275,11 +276,28 @@ def processOrder(request):
 
     orderdict = {}
 
+    data = cartData(request)   #function in utils.py
+    order2 = data['order']
+    #o = Order.objects.last()
+
+
+    def my_custom_sql(self):
+        with connection.cursor() as cursor:
+            #cursor.execute("UPDATE bar SET foo = 1 WHERE baz = %s", [self.baz])
+            #cursor.execute("SELECT foo FROM bar WHERE baz = %s", [self.baz])
+            cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= %s",  [order2])
+            row = cursor.fetchone()
+
+        print('row:', row)
+        return row
+
+    my_custom_sql(order2)
+
 
 
     db = sqlite3.connect('db.sqlite3')
     cursor = db.cursor()
-    cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id='66'") #?", (order))
+    #cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= %(key)s" % order)    # '66'")
 
     '''for row in cursor:
         print(row)
@@ -300,10 +318,10 @@ def processOrder(request):
 
     print(orderdict)
     print(order)
-    print(ordernum)
-
     print(type(order))
-    print(type(ordernum))
+    #print(type(o))
+    #print(o)
+
 
 
 
