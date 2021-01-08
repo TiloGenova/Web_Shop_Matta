@@ -118,6 +118,7 @@ def checkout(request):
 
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
+    global order
     order = data['order']
     items = data['items']
     shippingcost = 0
@@ -127,6 +128,7 @@ def checkout(request):
 
     print('ORDER def checkout:', order)
     #print('data def checkout:', data)
+
 
 
     #shipping = order.shipping
@@ -167,6 +169,7 @@ def checkout(request):
                     costsdec = Decimal(costs)
                     shippingcost = round(costsdec, 2)
                 cursor.close()
+                db.close()
 
             except:
                 shippingcost =float(0.00)
@@ -227,6 +230,8 @@ def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
+    print('verfuegbare Angaben checkout:', data)
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -266,8 +271,70 @@ def processOrder(request):
 
 
 
+    # reduction of stock after order:
 
-    send_mail(
+    orderdict = {}
+
+
+
+    db = sqlite3.connect('db.sqlite3')
+    cursor = db.cursor()
+    cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id='66'") #?", (order))
+
+    '''for row in cursor:
+        print(row)
+        product = row[0]
+        quanity = row[1]
+        print('prodID:', product)
+        print('prodQ:', quanity)
+        print('-----')'''
+
+
+    for product_id, quanity in cursor:
+        product_id = product_id
+        print('prodID:', product_id)
+        print('prodQ:', quanity)
+        print('-----')
+
+        orderdict[product_id] = quanity
+
+    print(orderdict)
+    print(order)
+    print(ordernum)
+
+    print(type(order))
+    print(type(ordernum))
+
+
+
+
+    db = sqlite3.connect('db.sqlite3')
+    update_sql = "UPDATE main_product SET stock = 75 WHERE main_product.id = '1' "
+    update_cursor = db.cursor()
+    update_cursor.execute(update_sql)
+    db.commit()
+    update_cursor.close()
+
+
+
+    '''cursor.execute("SELECT stock FROM main_product WHERE id='product_id'")
+
+    for row in cursor:
+        stock = row[0]
+        print('prodStock:', stock)
+        print('-----')
+
+
+    quantityupdate = stock - quantity
+    print('quantityupdate:', quantityupdate)
+
+    cursor.close()'''
+    db.close()
+
+
+
+
+    '''send_mail(
         'Subject: Your Order / MAGLIAMATTA',
         'Many thanks for your order on www.magliamatta.com. '
         'We prepare your products for shipping '
@@ -276,7 +343,7 @@ def processOrder(request):
         'kingnapalm68@gmail.com',
         ['martam.colombo@gmail.com', 'tilo.oschatz@googlemail.com'],
         fail_silently=False,
-    )
+    )'''
 
     return JsonResponse('Payment complete!', safe=False)
 
