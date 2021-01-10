@@ -277,26 +277,29 @@ def processOrder(request):
     orderdict = {}
 
     data = cartData(request)   #function in utils.py
-    order2 = data['order']
+    order = data['order']
     #o = Order.objects.last()
+    #o = Order.objects.values('id')  #query set with all order IDs
+    #ordernum =Order.objects.values_list('id', flat=True)
 
 
-    def my_custom_sql(self):
-        with connection.cursor() as cursor:
-            #cursor.execute("UPDATE bar SET foo = 1 WHERE baz = %s", [self.baz])
-            #cursor.execute("SELECT foo FROM bar WHERE baz = %s", [self.baz])
-            cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= %s",  [order2])
-            row = cursor.fetchone()
+    # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    field_name = 'id'
+    obj = Order.objects.last()  # LAST - POTENTIAL OVERLAP WITH NEW ORDER / OTHER CUSTOMER!?
+    field_object = Order._meta.get_field(field_name)
+    o2 = field_object.value_from_object(obj)
 
-        print('row:', row)
-        return row
 
-    my_custom_sql(order2)
+    # YEAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+    o3 = getattr(order, 'id')
+
+
 
 
 
     db = sqlite3.connect('db.sqlite3')
     cursor = db.cursor()
+    #__________Cursor to get PRODCUT AND QUANTITY:
     #cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= %(key)s" % order)    # '66'")
 
     '''for row in cursor:
@@ -319,8 +322,11 @@ def processOrder(request):
     print(orderdict)
     print(order)
     print(type(order))
-    #print(type(o))
-    #print(o)
+    print(o2)
+    print(type(o2))
+    print(o3)
+    print(type(o3))
+
 
 
 
