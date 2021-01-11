@@ -1,7 +1,7 @@
 import json
 from . models import *
 
-#to bundle are the functions for unregistered users
+#to bundle  the functions for unregistered users
 # to follow the D.R.Y. rules  -  not to repeat code
 
 def cookieCart(request):
@@ -49,6 +49,7 @@ def cookieCart(request):
 
                 },
                 'quantity': cart[i]["quantity"],
+                'stock': product.stock,
                 'get_total': total
             }
             items.append(item)
@@ -60,6 +61,8 @@ def cookieCart(request):
             pass
 
     print('Order2:', order)
+    print('ITEM with stock:', items)
+
 
     return{'cartItems': cartItems, 'order': order, 'items': items}
 

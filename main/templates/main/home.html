@@ -206,7 +206,13 @@
                                 <a  href="{% url 'main:details' product.id %}"><img
                                         src="{% static 'main/novita_acqua.png' %}" class="img-fluid pb-2" width="100" ></a>
                                 {% endif %}
+                                {% if product.stock <= 0 %}
+                                <a class="overlay-venduto" href="{% url 'main:details' product.id %}"><img
+                                        src="{% static 'main/VENDUTO2.png' %}" class="img-fluid pb-2" width="500" ></a>
+                                {% endif %}
                             </div>
+
+
                         </div>
 
                         <h3 class="pt-2"><strong>{{ product.title }}</strong></h3>
@@ -235,10 +241,13 @@
                             <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                 <h2 style="text-align:center;"></h2>
                             </div>
-                            <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
-                                <button data-product="{{product.id}}" data-action="add"
-                                        class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
-                            </div>
+                            {% if product.stock > 0 %}
+                                <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                    <button data-product="{{product.id}}" data-action="add"
+                                            class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                </div>
+                            {% endif %}
+
                         </div>
 
                     </div>

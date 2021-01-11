@@ -31,10 +31,14 @@ padding-left: 0px;
                             <div class="col-lg-4">
                                 <h2 style="text-align:center;">Details</h2>
                             </div>
+                            {% if product.stock > 0 %}
                             <div class="col-lg-4">
                                 <button style="" data-product="{{product.id}}" data-action="add"
                                         class = "btn btn-outline-secondary add-btn update-cart btn-block ">Carrello &#10503</button>
                             </div>
+
+
+                            {% endif %}
                         </div>
 
 

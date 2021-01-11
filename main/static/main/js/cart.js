@@ -8,6 +8,9 @@ for (var i = 0; i < updateBtns.length; i++) {
         var action = this.dataset.action
         console.log('productId:',productId, 'action:', action)
 
+        //var db=openDatabase("db.sqlite3","1.0", "db.sqlite3", 65535);
+
+
         console.log('USER:', user)
         if(user === 'AnonymousUser'){
             addCookieItem(productId, action)
