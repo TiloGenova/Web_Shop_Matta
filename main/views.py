@@ -128,7 +128,11 @@ def checkout(request):
 
 
     print('ORDER def checkout:', order)
-    #print('data def checkout:', data)
+    print(type(order))
+    global ordernumber
+    ordernumber = getattr(order, 'id')
+    print('Got closed order - ordernumber as INT:', ordernumber)
+    print(type(ordernumber))
 
 
 
@@ -227,11 +231,11 @@ def processOrder(request):
 
     #totalwshipping = 0
 
-    print('Data:', request.body)
+    #print('Data:', request.body)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
-    print('verfuegbare Angaben checkout:', data)
+    #print('verfuegbare Angaben checkout:', data)
 
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -248,7 +252,7 @@ def processOrder(request):
     totaldec = Decimal(total)
     total = round(totaldec, 2)
 
-    print('TOTAL FLOAT processOrder:', total)
+    #print('TOTAL FLOAT processOrder:', total)
     print('TOTALwshipping:', totalwshipping)   # NOT DEFINED ????? 
     order.transaction_id = transaction_id
 
@@ -275,32 +279,26 @@ def processOrder(request):
     # reduction of stock after order:
 
     orderdict = {}
-
     data = cartData(request)   #function in utils.py
     order = data['order']
-    #o = Order.objects.last()
-    #o = Order.objects.values('id')  #query set with all order IDs
-    #ordernum =Order.objects.values_list('id', flat=True)
+    #ordernumber = getattr(order, 'id')  #NEW and EMPTY ORDERNUMBER (CART WITHOUT PRODUCTS)
 
 
-    # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    # getting ordernumber as integer - finally getattr() did the job
+    '''o = Order.objects.last()
+    o = Order.objects.values('id')  #query set with all order IDs
+    ordernum =Order.objects.values_list('id', flat=True)
     field_name = 'id'
     obj = Order.objects.last()  # LAST - POTENTIAL OVERLAP WITH NEW ORDER / OTHER CUSTOMER!?
     field_object = Order._meta.get_field(field_name)
-    o2 = field_object.value_from_object(obj)
+    o2 = field_object.value_from_object(obj)'''
 
 
-    # YEAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-    o3 = getattr(order, 'id')
-
-
-
-
-
+    #connecting to database and get the products and quantity for an order
+    #__________Cursor to get PRODCUT AND QUANTITY:
     db = sqlite3.connect('db.sqlite3')
     cursor = db.cursor()
-    #__________Cursor to get PRODCUT AND QUANTITY:
-    #cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= %(key)s" % order)    # '66'")
+    cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= ?", (ordernumber,))
 
     '''for row in cursor:
         print(row)
@@ -317,21 +315,43 @@ def processOrder(request):
         print('prodQ:', quanity)
         print('-----')
 
+
         orderdict[product_id] = quanity
 
-    print(orderdict)
-    print(order)
-    print(type(order))
-    print(o2)
-    print(type(o2))
-    print(o3)
-    print(type(o3))
+    print('Order dict:', orderdict)
+    print('##################################################')
+
+
+
+    #Getting the stock values for the products
+
+    #list of dict keys (product IDs):
+    stockdict = {}
+    x = orderdict.keys()
+    print(x)
+    for prodid in x:
+        cursor.execute("SELECT stock FROM main_product WHERE id= ?", (prodid,))
+        print(prodid)
+        for stock in cursor:
+            print('stock:', stock)
+
+            stockdict[prodid] = stock
+
+            print('-----')
+
+    print('STOCK DICT:', stockdict)
+    print('ORDER DICT:', orderdict)
+
+    cursor.close()
+
+    #Calculating the new stock values of the products
 
 
 
 
 
 
+    #Updating the stock values for the products
     db = sqlite3.connect('db.sqlite3')
     update_sql = "UPDATE main_product SET stock = 75 WHERE main_product.id = '1' "
     update_cursor = db.cursor()
