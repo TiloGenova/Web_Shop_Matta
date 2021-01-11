@@ -329,6 +329,7 @@ def processOrder(request):
     stockdict = {}
     x = orderdict.keys()
     print(x)
+
     for prodid in x:
         cursor.execute("SELECT stock FROM main_product WHERE id= ?", (prodid,))
         print(prodid)
@@ -337,42 +338,38 @@ def processOrder(request):
 
             stockdict[prodid] = stock
 
-            print('-----')
+        print('-----')
 
     print('STOCK DICT:', stockdict)
     print('ORDER DICT:', orderdict)
+    print('*****************')
 
-    cursor.close()
+
 
     #Calculating the new stock values of the products
 
+    # for key in orderdictionary:
+    for item in x:
+        stockoldtup = stockdict.get(item)
+        stockold = stockoldtup[0]
+        orderquantity = orderdict.get(item)
 
+        print('stockold:', stockold)
+        print('orderquantity:', orderquantity)
 
-
+        stocknew = stockold - orderquantity
+        print('New Stock:', stocknew)
+        print('*****************')
 
 
     #Updating the stock values for the products
-    db = sqlite3.connect('db.sqlite3')
-    update_sql = "UPDATE main_product SET stock = 75 WHERE main_product.id = '1' "
-    update_cursor = db.cursor()
-    update_cursor.execute(update_sql)
-    db.commit()
-    update_cursor.close()
+
+        update_cursor = db.cursor()
+        update_cursor.execute("UPDATE main_product SET stock = ? WHERE main_product.id = ? ", (stocknew, item))
+        db.commit()
 
 
 
-    '''cursor.execute("SELECT stock FROM main_product WHERE id='product_id'")
-
-    for row in cursor:
-        stock = row[0]
-        print('prodStock:', stock)
-        print('-----')
-
-
-    quantityupdate = stock - quantity
-    print('quantityupdate:', quantityupdate)
-
-    cursor.close()'''
     db.close()
 
 
