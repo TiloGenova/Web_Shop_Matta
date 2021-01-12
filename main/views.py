@@ -323,7 +323,7 @@ def processOrder(request):
             print('prodQ:', quanity)
             print('-----')
 
-
+            #creating Dictionary
             orderdict[product_id] = quanity
 
 
@@ -382,6 +382,9 @@ def processOrder(request):
 
 
     else:
+        db = sqlite3.connect('db.sqlite3')
+        cursor = db.cursor()
+
         cookieData = cookieCart(request)
         items = cookieData['items']
 
@@ -390,16 +393,67 @@ def processOrder(request):
         for item in items:
             product = Product.objects.get(id=item['product']['id'])
 
-            id = int(item['product']['id'])
-            quanity = int(item['quantity'])
+            product_id = int(item['product']['id'])
+            quantity = int(item['quantity'])
 
             print('product:', product)
-            print('id:', id)
-            print(type(id))
-            print('quantity:', quanity)
-            print(type(quanity))
+            print('product_id:', product_id)
+            print(type(product_id))
+            print('quantity:', quantity)
+            print(type(quantity))
             print('<<<<<<<<<<<<<<<')
 
+            #creating Dictionary
+            orderdict[product_id] = quantity
+
+
+        print('Order dict:', orderdict)
+        print('##################################################')
+
+        #Getting the stock values for the products
+
+        #list of dict keys (product IDs):
+        stockdict = {}
+        x = orderdict.keys()
+        print(x)
+
+        for prodid in x:
+            cursor.execute("SELECT stock FROM main_product WHERE id= ?", (prodid,))
+            print(prodid)
+            for stock in cursor:
+                print('stock:', stock)
+
+                stockdict[prodid] = stock
+
+            print('-----')
+
+        print('STOCK DICT:', stockdict)
+        print('ORDER DICT:', orderdict)
+        print('*****************')
+
+
+        #Calculating the new stock values of the products
+
+        # for key in orderdictionary:
+        for item in x:
+            stockoldtup = stockdict.get(item)
+            stockold = stockoldtup[0]
+            orderquantity = orderdict.get(item)
+
+            print('stockold:', stockold)
+            print('orderquantity:', orderquantity)
+
+            stocknew = stockold - orderquantity
+            print('New Stock:', stocknew)
+            print('*****************')
+
+
+            #Updating the stock values for the products
+
+            update_cursor = db.cursor()
+            update_cursor.execute("UPDATE main_product SET stock = ? WHERE main_product.id = ? ", (stocknew, item))
+            db.commit()
+        db.close()
 
 
 
