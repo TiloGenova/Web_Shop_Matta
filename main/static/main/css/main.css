@@ -278,12 +278,12 @@ img {
   right: 0;
   bottom: 0;
   transition: 1s ease;
-  opacity:0;
+  opacity:0.2;
   color: white;
   font-size: 20px;
   padding: 0px;
   text-align: left;
-  opacity: 1 ; /* value of 0 for standard overlay hover */
+  opacity: 0.7 ; /* value of 0 for standard overlay hover */
 }
 
 /* When you mouse over the container, fade in the overlay title */

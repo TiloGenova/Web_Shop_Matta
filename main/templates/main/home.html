@@ -221,6 +221,9 @@
                         <hr>
                         <p>{{ product.description }}</p>
                         <p>Prodotto_Code: {{ product.id }}</p>
+                        {% if product.stock > 0 %}
+                        <h6>Disponibilità: {{ product.stock }} </h6>
+                        {% endif %}
 
                         <div>Prezzo:
                             {% if product.discount_price %}
@@ -291,10 +294,16 @@
                                     <a  href="{% url 'main:details' product.id %}"><img
                                             src="{% static 'main/novita_acqua.png' %}" class="img-fluid pb-2" width="100" ></a>
                                     {% endif %}
+                                    {% if product.stock <= 0 %}
+                                    <a class="overlay-venduto" href="{% url 'main:details' product.id %}"><img
+                                            src="{% static 'main/VENDUTO2.png' %}" class="img-fluid pb-2" width="500" ></a>
+                                    {% endif %}
                                 </div>
+
+
                             </div>
 
-                            <h3><strong>{{ product.title }}</strong></h3>
+                            <h3 class="pt-2"><strong>{{ product.title }}</strong></h3>
                             <p>Taglia: {{ product.size }}</p>
                             <hr>
                             <p>{{ product.description }}</p>
@@ -320,10 +329,13 @@
                                 <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                     <h2 style="text-align:center;"></h2>
                                 </div>
+                                {% if product.stock > 0 %}
                                 <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                     <button data-product="{{product.id}}" data-action="add"
                                             class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                                 </div>
+                                {% endif %}
+
                             </div>
 
                         </div>
@@ -349,61 +361,70 @@
         {% for product in products %}
             {% if product.active %}
                 {% if product.gender == 'MEN' %}
-                <div class="col-lg-4 col-md-6"  >
-                    <div class="box-element product">
+                    <div class="col-lg-4 col-md-6"  >
+                        <div class="box-element product">
 
-                        <div class="container-overlay">
-                            <a  href="{% url 'main:details' product.id %}"><img
-                                    src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
-                                    style ="box-shadow:hsl(34, 76%, 34%) 3px -3px 14px;"
-                            ></a>
-                            <div class="overlay">
-                                {% if product.discount_Flag %}
+                            <div class="container-overlay">
                                 <a  href="{% url 'main:details' product.id %}"><img
-                                        src="{% static 'main/promozione_red.png' %}" class="img-fluid pb-2" width="100" ></a>
+                                        src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                        style ="box-shadow:hsl(34, 76%, 34%) 3px -3px 14px;"
+                                ></a>
+                                <div class="overlay">
+                                    {% if product.discount_Flag %}
+                                    <a  href="{% url 'main:details' product.id %}"><img
+                                            src="{% static 'main/promozione_red.png' %}" class="img-fluid pb-2" width="100" ></a>
+                                    {% endif %}
+                                    {% if product.NEW_Flag %}
+                                    <a  href="{% url 'main:details' product.id %}"><img
+                                            src="{% static 'main/novita_acqua.png' %}" class="img-fluid pb-2" width="100" ></a>
+                                    {% endif %}
+                                    {% if product.stock <= 0 %}
+                                    <a class="overlay-venduto" href="{% url 'main:details' product.id %}"><img
+                                            src="{% static 'main/VENDUTO2.png' %}" class="img-fluid pb-2" width="500" ></a>
+                                    {% endif %}
+                                </div>
+
+
+                            </div>
+
+                            <h3 class="pt-2"><strong>{{ product.title }}</strong></h3>
+                            <p>Taglia: {{ product.size }}</p>
+                            <hr>
+                            <p>{{ product.description }}</p>
+                            <p>Prodotto_Code: {{ product.id }}</p>
+
+                            <div>Prezzo:
+                                {% if product.discount_price %}
+                                <del>{{ product.price }}€</del>
+                                <h3>
+                                    <span style="color:red">{{ product.discount_price }}€</span>
+                                </h3>
+                                {% else  %}
+                                <h3>{{ product.price }}€</h3>
+
                                 {% endif %}
-                                {% if product.NEW_Flag %}
-                                <a  href="{% url 'main:details' product.id %}"><img
-                                        src="{% static 'main/novita_acqua.png' %}" class="img-fluid pb-2" width="100" ></a>
+                            </div>
+
+                            <div style="text-align:center;" class="row">
+                                <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
+                                    <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
+                                       role="button" aria-pressed="true">Dettagli</a>
+                                </div>
+                                <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
+                                    <h2 style="text-align:center;"></h2>
+                                </div>
+                                {% if product.stock > 0 %}
+                                <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                    <button data-product="{{product.id}}" data-action="add"
+                                            class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                </div>
                                 {% endif %}
+
                             </div>
+
                         </div>
-
-                        <h3><strong>{{ product.title }}</strong></h3>
-                        <p>Taglia: {{ product.size }}</p>
-                        <hr>
-                        <p>{{ product.description }}</p>
-                        <p>Prodotto_Code: {{ product.id }}</p>
-
-                        <div>Prezzo:
-                            {% if product.discount_price %}
-                            <del>{{ product.price }}€</del>
-                            <h3>
-                                <span style="color:red">{{ product.discount_price }}€</span>
-                            </h3>
-                            {% else  %}
-                            <h3>{{ product.price }}€</h3>
-
-                            {% endif %}
-                        </div>
-
-                        <div style="text-align:center;" class="row">
-                            <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
-                                <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
-                                   role="button" aria-pressed="true">Dettagli</a>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
-                                <h2 style="text-align:center;"></h2>
-                            </div>
-                            <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
-                                <button data-product="{{product.id}}" data-action="add"
-                                        class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
-                            </div>
-                        </div>
-
+                        <br>
                     </div>
-                    <br>
-                </div>
                 {% endif%}
             {% endif%}
         {% endfor %}
