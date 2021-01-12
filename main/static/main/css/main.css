@@ -11,23 +11,24 @@ body{
 
 body {
 
-background: rgb(231,144,15);
-	background-image: linear-gradient(
-		90deg,
-		hsla(255,100%,100%,.07) 50%,
-		transparent 50%
-		),
-		linear-gradient(
-			90deg,
-			hsla(255,100%,100%,.17) 50%,
-			transparent 50%
-			),
-	linear-gradient(
-		90deg,
-		transparent 50%,
-		rgba(255,255,255,.21) 50%
-		);
-	background-size: 17px, 37px, 53px;
+	background: rgb(227, 255, 254);
+    	background-image: linear-gradient(
+    		90deg,
+    		hsla(255,100%,100%,.07) 50%,
+    		transparent 90%
+    		),
+    		linear-gradient(
+    			90deg,
+    			hsla(255,100%,100%,.17) 50%,
+    			transparent 20%
+    			),
+    	linear-gradient(
+    		90deg,
+    		transparent 50%,
+    		rgba(255,255,255,.21) 50%
+    		);
+    	background-size: 100px, 37px, 53px;
+
 }
 
 

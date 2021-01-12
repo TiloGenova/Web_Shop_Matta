@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.db import connection
 
 
+
 # Create your views here.
 
 
@@ -129,10 +130,12 @@ def checkout(request):
 
     print('ORDER def checkout:', order)
     print(type(order))
+
     global ordernumber
-    ordernumber = getattr(order, 'id')
-    print('Got closed order - ordernumber as INT:', ordernumber)
-    print(type(ordernumber))
+    if request.user.is_authenticated:
+        ordernumber = getattr(order, 'id')
+        print('Got closed order - ordernumber as INT:', ordernumber)
+        print(type(ordernumber))
 
 
 
@@ -296,81 +299,110 @@ def processOrder(request):
 
     #connecting to database and get the products and quantity for an order
     #__________Cursor to get PRODCUT AND QUANTITY:
-    db = sqlite3.connect('db.sqlite3')
-    cursor = db.cursor()
-    cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= ?", (ordernumber,))
 
-    '''for row in cursor:
-        print(row)
-        product = row[0]
-        quanity = row[1]
-        print('prodID:', product)
-        print('prodQ:', quanity)
-        print('-----')'''
+    if request.user.is_authenticated:
+
+        db = sqlite3.connect('db.sqlite3')
+        cursor = db.cursor()
 
 
-    for product_id, quanity in cursor:
-        product_id = product_id
-        print('prodID:', product_id)
-        print('prodQ:', quanity)
-        print('-----')
+        cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= ?", (ordernumber,))
+
+        '''for row in cursor:
+            print(row)
+            product = row[0]
+            quanity = row[1]
+            print('prodID:', product)
+            print('prodQ:', quanity)
+            print('-----')'''
 
 
-        orderdict[product_id] = quanity
+        for product_id, quanity in cursor:
+            product_id = product_id
+            print('prodID:', product_id)
+            print('prodQ:', quanity)
+            print('-----')
 
-    print('Order dict:', orderdict)
-    print('##################################################')
+
+            orderdict[product_id] = quanity
 
 
-
-    #Getting the stock values for the products
-
-    #list of dict keys (product IDs):
-    stockdict = {}
-    x = orderdict.keys()
-    print(x)
-
-    for prodid in x:
-        cursor.execute("SELECT stock FROM main_product WHERE id= ?", (prodid,))
-        print(prodid)
-        for stock in cursor:
-            print('stock:', stock)
-
-            stockdict[prodid] = stock
-
-        print('-----')
-
-    print('STOCK DICT:', stockdict)
-    print('ORDER DICT:', orderdict)
-    print('*****************')
+        print('Order dict:', orderdict)
+        print('##################################################')
 
 
 
-    #Calculating the new stock values of the products
+        #Getting the stock values for the products
 
-    # for key in orderdictionary:
-    for item in x:
-        stockoldtup = stockdict.get(item)
-        stockold = stockoldtup[0]
-        orderquantity = orderdict.get(item)
+        #list of dict keys (product IDs):
+        stockdict = {}
+        x = orderdict.keys()
+        print(x)
 
-        print('stockold:', stockold)
-        print('orderquantity:', orderquantity)
+        for prodid in x:
+            cursor.execute("SELECT stock FROM main_product WHERE id= ?", (prodid,))
+            print(prodid)
+            for stock in cursor:
+                print('stock:', stock)
 
-        stocknew = stockold - orderquantity
-        print('New Stock:', stocknew)
+                stockdict[prodid] = stock
+
+            print('-----')
+
+        print('STOCK DICT:', stockdict)
+        print('ORDER DICT:', orderdict)
         print('*****************')
 
 
-    #Updating the stock values for the products
 
-        update_cursor = db.cursor()
-        update_cursor.execute("UPDATE main_product SET stock = ? WHERE main_product.id = ? ", (stocknew, item))
-        db.commit()
+        #Calculating the new stock values of the products
+
+        # for key in orderdictionary:
+        for item in x:
+            stockoldtup = stockdict.get(item)
+            stockold = stockoldtup[0]
+            orderquantity = orderdict.get(item)
+
+            print('stockold:', stockold)
+            print('orderquantity:', orderquantity)
+
+            stocknew = stockold - orderquantity
+            print('New Stock:', stocknew)
+            print('*****************')
+
+
+        #Updating the stock values for the products
+
+            update_cursor = db.cursor()
+            update_cursor.execute("UPDATE main_product SET stock = ? WHERE main_product.id = ? ", (stocknew, item))
+            db.commit()
+        db.close()
 
 
 
-    db.close()
+
+    else:
+        cookieData = cookieCart(request)
+        items = cookieData['items']
+
+        print('ITEMS from !!!!!!!!!! STOCK UPDATE:', items)
+
+        for item in items:
+            product = Product.objects.get(id=item['product']['id'])
+
+            id = int(item['product']['id'])
+            quanity = int(item['quantity'])
+
+            print('product:', product)
+            print('id:', id)
+            print(type(id))
+            print('quantity:', quanity)
+            print(type(quanity))
+            print('<<<<<<<<<<<<<<<')
+
+
+
+
 
 
 

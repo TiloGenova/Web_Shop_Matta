@@ -60,8 +60,8 @@ def cookieCart(request):
         except:
             pass
 
-    print('Order2:', order)
-    print('ITEM with stock:', items)
+    #print('Order2:', order)
+    #print('ITEM with stock from cookieCart:', items)
 
 
     return{'cartItems': cartItems, 'order': order, 'items': items}
@@ -83,6 +83,7 @@ def cartData(request):
         order = cookieData['order']
         items = cookieData['items']
 
+    #print('ITEM with stock from cartData:', items)
 
     return {'cartItems': cartItems, 'order': order, 'items': items}
 
