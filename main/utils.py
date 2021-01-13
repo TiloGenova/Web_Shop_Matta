@@ -32,6 +32,7 @@ def cookieCart(request):
 
     #CART CHECK PRODUCTCOUNT
     cartdict = cart
+    countcheck = {}
 
     for item in cartdict:
         print('###########')
@@ -57,8 +58,20 @@ def cookieCart(request):
 
         #DIFFERENCE BETWEEN STOCK AND AMOUNT IN CART
         x = stock - countincart
-        print(x)
+        print('Difference Stock and cart', x)
         #orderquantity = orderdict.get(item)
+
+        #creates empty
+        '''countcheck = {
+
+            'id': product.id,
+            'difference': x
+        }'''
+
+        countcheck['id'] = x
+
+        #items.append(countcheck)
+        print(countcheck)
 
 
 
@@ -109,7 +122,7 @@ def cookieCart(request):
     #print('ITEM with stock from cookieCart:', items)
 
 
-    return{'cartItems': cartItems, 'order': order, 'items': items}
+    return{'cartItems': cartItems, 'order': order, 'items': items, 'countcheck':countcheck}
 
 
 def cartData(request):
