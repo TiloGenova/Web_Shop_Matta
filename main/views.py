@@ -71,9 +71,14 @@ def home(request):
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
 
+    dataCart = cookieCart(request) #function in utils.py
+    differenceStock = dataCart['x']
+    print('DIFFERENCESTOCK', differenceStock)
+    print(type(differenceStock))
+
 
     productsall = Product.objects.all()
-    context = {'products': productsall,'cartItems': cartItems}
+    context = {'products': productsall,'cartItems': cartItems, 'differenceStock': differenceStock}
     return render(request, 'main/home.html', context)
 
 

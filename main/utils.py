@@ -33,6 +33,7 @@ def cookieCart(request):
     #CART CHECK PRODUCTCOUNT
     cartdict = cart
     countcheck = {}
+    x = 0
 
     for item in cartdict:
         print('###########')
@@ -68,10 +69,10 @@ def cookieCart(request):
             'difference': x
         }'''
 
-        countcheck['id'] = x
+        #countcheck['id'] = x
 
         #items.append(countcheck)
-        print(countcheck)
+        #print(countcheck)
 
 
 
@@ -122,7 +123,7 @@ def cookieCart(request):
     #print('ITEM with stock from cookieCart:', items)
 
 
-    return{'cartItems': cartItems, 'order': order, 'items': items, 'countcheck':countcheck}
+    return{'cartItems': cartItems, 'order': order, 'items': items, 'x': x}
 
 
 def cartData(request):

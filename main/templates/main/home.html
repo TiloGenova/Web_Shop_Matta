@@ -54,6 +54,7 @@
 -->
 
 <br>
+{{differenceStock}}
 <br>
 <br>
 <div class="container ">
@@ -226,6 +227,8 @@
                         <p>Prodotto_Code: {{ product.id }}</p>
                         {% if product.stock > 0 %}
                         <h6>Disponibilità: {{ product.stock }} </h6>
+                        {{differenceStock}}
+
                         {% endif %}
 
                         <div>Prezzo:
