@@ -199,6 +199,11 @@ def checkout(request):
 
 
 
+
+
+
+
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -249,6 +254,8 @@ def processOrder(request):
     else:
         customer, order = guestOrder(request, data)
 
+
+    #GETTING THE TOTAL PRICE
 
     # Following block for logged in and not logged in users
     total = float(data['form']['total'])

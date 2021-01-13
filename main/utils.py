@@ -1,8 +1,20 @@
+from django.shortcuts import render, get_object_or_404, redirect
 import json
 from . models import *
 
 #to bundle  the functions for unregistered users
 # to follow the D.R.Y. rules  -  not to repeat code
+
+
+'''#outsource the quantity check  when Cart button is pushed
+def quantityCheck(request):
+
+    cartq = json.loads(request.COOKIES['cart'])  # json.loads  to parse it and to turn it back into a python dict
+    print('Cart from quantityCheck:', cartq)
+
+    return{'cartq': cartq}'''
+
+
 
 def cookieCart(request):
 
@@ -16,6 +28,39 @@ def cookieCart(request):
     order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
     cartItems = order['get_cart_items']
     print('Order:', order)
+
+
+    #CART CHECK PRODUCTCOUNT
+    cartdict = cart
+
+    for item in cartdict:
+        print('###########')
+        print('ITEM ID from cartdict:', item)
+        #print(type(item))
+
+
+        quantdict = cartdict.get(item)
+        #print(quantdict)
+        countincart = quantdict.get('quantity')
+        print('Count from cartdict:', countincart)
+        print('###########')
+
+        item = int(item)
+        print(type(item))
+        product = get_object_or_404(Product, pk=item)
+        #product = Product.objects.get(id=item['product']['id'])
+        print('Prod  from  CARTCHECK DB:', product)
+        print(type(product))
+        stock = getattr(product, 'stock')
+        print('Got STOCK - STOCK as INT:', stock)
+        print(type(stock))
+
+        #DIFFERENCE BETWEEN STOCK AND AMOUNT IN CART
+        x = stock - countincart
+        print(x)
+        #orderquantity = orderdict.get(item)
+
+
 
     for i in cart:   # sum of items to show in cart
         try:    #Errorhandling  / In case there is no valid product in database
