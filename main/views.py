@@ -72,15 +72,14 @@ def home(request):
     cartItems = data['cartItems']
 
     dataCart = cookieCart(request) #function in utils.py
-    countdict = dataCart['countdict']
-    print('DIFFERENCESTOCK from views/home', countdict)
-    print(type(countdict))
+    zerostock = dataCart['zerostock']
 
-    zerostock = (1, 2, 3)
+
+
 
 
     productsall = Product.objects.all()
-    context = {'products': productsall,'cartItems': cartItems, 'countdict': countdict, 'zerostock': zerostock}
+    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock}
     return render(request, 'main/home.html', context)
 
 

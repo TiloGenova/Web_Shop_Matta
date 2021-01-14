@@ -32,55 +32,52 @@ def cookieCart(request):
 
     #CART CHECK PRODUCTCOUNT
     cartdict = cart
-    countdict = {}
-
-    x = 0
+    zerostock = []
+    #x = 0
 
     for item in cartdict:
-        print('###########')
-        print('ITEM ID from cartdict:', item)
-        print(type(item))
+        #print('###########')
+        #print('ITEM ID from cartdict:', item)
+        #print(type(item))
 
-
-        quantdict = cartdict.get(item)
-        print('quantdict:', quantdict)
-        countincart = quantdict.get('quantity')
-        print('Count from quantdict:', countincart)
-        print('###########')
+        quantdict = cartdict.get(item) #to get quantity of product in cart
+        #print('quantdict:', quantdict) #still a dictonary
+        countincart = quantdict.get('quantity') #getting the value for key 'quantity' from dictionary
+        #print('Count from quantdict:', countincart)
+        #print('###########')
 
         item = int(item)
-        print(type(item))
+        print('############################')
+        print('ADDED new Item/Product.id:', item)
+        #print(type(item))
         product = get_object_or_404(Product, pk=item)
         #product = Product.objects.get(id=item['product']['id'])
-        print('Prod  from  CARTCHECK DB:', product)
-        print(type(product))
+        #print('Prod  from  CARTCHECK DB:', product)
+        #print(type(product))
 
         stock = getattr(product, 'stock')
         print('Got STOCK - STOCK as INT:', stock)
-        print(type(stock))
+        #print(type(stock))
+
+        #Block not needed - item can be used
+        #productid = getattr(product, 'id')
+        #print('ProdID  from  CARTCHECK DB:', productid)
+        #print(type(productid))
 
 
         #DIFFERENCE BETWEEN STOCK AND AMOUNT IN CART
         x = stock - countincart
-        print('Difference Stock and cart', x)
+        print('Difference Stock and Cart:', x)
         #orderquantity = orderdict.get(item)
 
         if x <= 0:
-            pass
+            zerostock.append(item)
 
         else:
             pass
 
-
-        countdict[product] = x
-        #countcheckall.update(countcheck)
-
-        #items.append(countcheck)
-        print('Countcheckdict:', countdict)
-        print(type(countdict))
-
-    #print('CCA:', countcheckall)
-    #print(type(countcheckall))
+        print('LIST zerostock for template:', zerostock)
+        print('############################')
 
 
 
@@ -132,7 +129,7 @@ def cookieCart(request):
     #print('ITEM with stock from cookieCart:', items)
 
 
-    return{'cartItems': cartItems, 'order': order, 'items': items, 'x': x, 'countdict': countdict}
+    return{'cartItems': cartItems, 'order': order, 'items': items, 'zerostock': zerostock }
 
 
 def cartData(request):

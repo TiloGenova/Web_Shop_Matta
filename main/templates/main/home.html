@@ -54,10 +54,6 @@
 -->
 
 <br>
-{{countdict}} <br>
-{{zerostock}} <br><br>
-{{products}} <br>
-{{cartItems}}
 <br>
 <br>
 <div class="container ">
@@ -229,7 +225,7 @@
                         <p>{{ product.description }}</p>
                         <p>Prodotto_Code: {{ product.id }}</p>
                         {% if product.stock > 0 %}
-                        <h6>Disponibilità: {{ product.stock }} </h6>
+                        <h6>Disponibile solamente: {{ product.stock }} </h6>
 
                         {{ countdict }}
 
@@ -265,7 +261,7 @@
                                 {% if product.id  in  zerostock %}
                                     <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                         <button disabled data-product="{{product.id}}" data-action="add"
-                                                class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                                class = "btn btn-outline-secondary add-btn update-cart"> Già nel Carrello</button>
                                     </div>
                                 {% endif %}
                             {% endif %}
