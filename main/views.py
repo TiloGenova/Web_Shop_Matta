@@ -64,22 +64,26 @@ def logoutUser(request):
     return redirect('/')
 
 
-
+global zerostock2
+zerostock2 = []
 
 def home(request):
 
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
-
+    productsall = Product.objects.all()
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
 
-    productsall = Product.objects.all()
-    orderitemsall = OrderItem.objects.all() # all ITEMS from DATABASE
-    orderitems = OrderItem.objects.latest('id') # all ITEMS from DATABASE
+    y = zerostock2
 
 
-    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock,'orderitemsall':orderitemsall, 'orderitems':orderitems}
+    print('ZEROSTOCK2 from HOME:', y)
+
+
+
+
+    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
     return render(request, 'main/home.html', context)
 
 
@@ -209,7 +213,7 @@ def checkout(request):
 
 
 zerostockloggedin = []
-zerostock = []
+
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -239,20 +243,23 @@ def updateItem(request):
     print('Difference Stock and Cart:', orderItem.zerostock)
     productident = getattr(product, 'id')
 
+
+    #ORIGINAL BLOCK
     orderItem.save()
 
     if orderItem.quantity <= 0:
         orderItem.delete()
 
 
-    #
+    #BLOCK FOR ZEROSTOCK
+    global zerostock2
     if orderItem.zerostock <= 0:
-        zerostock.append(productident)
+        zerostock2.append(productident)
 
     else:
         pass
 
-    print('ZEROSTEOCKNEU:', zerostock)
+    print('ZEROSTOCKNEU:', zerostock2)
 
     #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
 
