@@ -76,9 +76,10 @@ def home(request):
 
     productsall = Product.objects.all()
     orderitemsall = OrderItem.objects.all() # all ITEMS from DATABASE
+    orderitems = OrderItem.objects.latest('id') # all ITEMS from DATABASE
 
 
-    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock, 'orderitemsall':orderitemsall}
+    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock, 'orderitems':orderitems}
     return render(request, 'main/home.html', context)
 
 
