@@ -74,12 +74,11 @@ def home(request):
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
 
-
-
-
-
     productsall = Product.objects.all()
-    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock}
+    orderitemsall = OrderItem.objects.all() # all ITEMS from DATABASE
+
+
+    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock, 'orderitemsall':orderitemsall}
     return render(request, 'main/home.html', context)
 
 
@@ -208,7 +207,7 @@ def checkout(request):
 
 
 
-
+zerostockloggedin = []
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -226,16 +225,60 @@ def updateItem(request):
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
+
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
 
+    #
+    stock = getattr(product, 'stock')
+    orderItem.zerostock = stock - orderItem.quantity
+    print('Got STOCK - STOCK as INT:', stock)
+    print(type(stock))
+    print('Difference Stock and Cart:', orderItem.zerostock)
+
     orderItem.save()
 
-    if orderItem.quantity <=0:
+    if orderItem.quantity <= 0:
         orderItem.delete()
 
 
-    return JsonResponse('Item was added YEAH', safe=False)  # to just to return a message   no template
+
+
+    #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
+
+    #zerostock = []
+    '''
+    print('###########################')
+    print('orderItem:', orderItem)
+    print(type(orderItem))
+    print('orderIteQuantity:', orderItem.quantity)
+
+    countincart = orderItem.quantity #getting the count of product in cart
+
+    productident = getattr(product, 'id')
+
+    stock = getattr(product, 'stock')
+    print('Got STOCK - STOCK as INT:', stock)
+    print(type(stock))
+
+
+    #DIFFERENCE BETWEEN STOCK AND AMOUNT IN CART
+    x = stock - countincart
+    print('Difference Stock and Cart:', x)
+
+
+    if x <= 0:
+        zerostockloggedin.append(productident)
+
+    else:
+        pass
+
+    print('ZEROSTOCK List:', zerostockloggedin)
+    print('###########################')'''
+
+    return JsonResponse('Item was added YEAH', safe=False)  #  just to return a message   no template
+
+
 
 
 from django.views.decorators.csrf import csrf_exempt

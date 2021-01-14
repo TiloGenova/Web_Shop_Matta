@@ -20,7 +20,7 @@ for (var i = 0; i < updateBtns.length; i++) {
    })
 
 }
-
+/* TEST COMMENT    */
 function addCookieItem(productId, action){
     console.log('Not logged in..')
 

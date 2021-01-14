@@ -52,7 +52,7 @@
     </div>
 </div>
 -->
-
+{{orderitemsall}}
 <br>
 <br>
 <br>
@@ -225,11 +225,18 @@
                         <p>{{ product.description }}</p>
                         <p>Prodotto_Code: {{ product.id }}</p>
                         {% if product.stock > 0 %}
-                        <h6>Disponibile solamente: {{ product.stock }} </h6>
+                            <h6>Disponibile solamente: {{ product.stock }} </h6>{% endif %}
 
-                        {{ countdict }}
 
+
+                        {{OrderItem.zerostock}}
+
+                        {{orderitemsall}}
+                        {% if orderItem.zerostock <= 0 %}
+                            YEAH
                         {% endif %}
+
+
 
                         <div>Prezzo:
                             {% if product.discount_price %}
@@ -334,6 +341,7 @@
 
                                 {% endif %}
                             </div>
+
 
                             <div style="text-align:center;" class="row">
                                 <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
