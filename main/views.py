@@ -229,13 +229,17 @@ def updateItem(request):
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
+
+
+
+
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
 
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity - 1)
 
-    #
+    #BLOCK FOR ZEROSTOCK
     stock = getattr(product, 'stock')
     orderItem.zerostock = stock - orderItem.quantity
     print('Got STOCK - STOCK as INT:', stock)
@@ -251,47 +255,24 @@ def updateItem(request):
         orderItem.delete()
 
 
-    #BLOCK FOR ZEROSTOCK
+
+    #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
     global zerostock2
     if orderItem.zerostock <= 0:
         zerostock2.append(productident)
 
-    else:
-        pass
-
-    print('ZEROSTOCKNEU:', zerostock2)
-
-    #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
-
-    #zerostock = []
-    '''
-    print('###########################')
-    print('orderItem:', orderItem)
-    print(type(orderItem))
-    print('orderIteQuantity:', orderItem.quantity)
-
-    countincart = orderItem.quantity #getting the count of product in cart
-
-    productident = getattr(product, 'id')
-
-    stock = getattr(product, 'stock')
-    print('Got STOCK - STOCK as INT:', stock)
-    print(type(stock))
-
-
-    #DIFFERENCE BETWEEN STOCK AND AMOUNT IN CART
-    x = stock - countincart
-    print('Difference Stock and Cart:', x)
-
-
-    if x <= 0:
-        zerostockloggedin.append(productident)
+    elif orderItem.zerostock != 0:
+        try:
+            zerostock2.remove(productident)
+        except ValueError:
+            print('already removed from list')
 
     else:
         pass
 
-    print('ZEROSTOCK List:', zerostockloggedin)
-    print('###########################')'''
+    print('ZEROSTOCK_logged in:', zerostock2)
+
+
 
     return JsonResponse('Item was added YEAH', safe=False)  #  just to return a message   no template
 
