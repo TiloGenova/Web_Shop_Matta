@@ -76,9 +76,11 @@ def home(request):
     print('DIFFERENCESTOCK from views/home', countdict)
     print(type(countdict))
 
+    zerostock = (1, 2, 3)
+
 
     productsall = Product.objects.all()
-    context = {'products': productsall,'cartItems': cartItems, 'countdict': countdict}
+    context = {'products': productsall,'cartItems': cartItems, 'countdict': countdict, 'zerostock': zerostock}
     return render(request, 'main/home.html', context)
 
 
