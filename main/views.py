@@ -79,7 +79,7 @@ def home(request):
     orderitems = OrderItem.objects.latest('id') # all ITEMS from DATABASE
 
 
-    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock, 'orderitems':orderitems}
+    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock,'orderitemsall':orderitemsall, 'orderitems':orderitems}
     return render(request, 'main/home.html', context)
 
 
@@ -209,6 +209,7 @@ def checkout(request):
 
 
 zerostockloggedin = []
+zerostock = []
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -236,6 +237,7 @@ def updateItem(request):
     print('Got STOCK - STOCK as INT:', stock)
     print(type(stock))
     print('Difference Stock and Cart:', orderItem.zerostock)
+    productident = getattr(product, 'id')
 
     orderItem.save()
 
@@ -243,7 +245,14 @@ def updateItem(request):
         orderItem.delete()
 
 
+    #
+    if orderItem.zerostock <= 0:
+        zerostock.append(productident)
 
+    else:
+        pass
+
+    print('ZEROSTEOCKNEU:', zerostock)
 
     #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
 

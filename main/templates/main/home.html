@@ -52,7 +52,7 @@
     </div>
 </div>
 -->
-{{orderitems}}
+
 <br>
 <br>
 <br>
@@ -226,15 +226,6 @@
                         <p>Prodotto_Code: {{ product.id }}</p>
                         {% if product.stock > 0 %}
                             <h6>Disponibile solamente: {{ product.stock }} </h6>{% endif %}
-
-
-
-                        {{OrderItem.zerostock}}
-
-                        {{orderitems}}
-                        {% if orderItem.zerostock <= 0 %}
-                            YEAH
-                        {% endif %}
 
 
 
