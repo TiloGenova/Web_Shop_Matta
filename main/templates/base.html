@@ -19,6 +19,26 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
+    <!-- to keep scroll position after refresh  -->
+
+    <script src="{% static 'main/js/jquery-3.5.1.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (localStorage.getItem("maglia-quote-scroll") != null) {
+                $(window).scrollTop(localStorage.getItem("maglia-quote-scroll"));
+            }
+
+            $(window).on("scroll", function() {
+                localStorage.setItem("maglia-quote-scroll", $(window).scrollTop());
+            });
+
+          });
+    </script>
+
+
+
     <!-- USer inheriting to  cart.js   -->
     <script type="text/javascript">
         var user = '{{request.user}}'
@@ -71,153 +91,148 @@
         }
 
 
-
         console.log('Cart:', cart)
     </script>
-
-
-
-
-
-
-
 
     <title>MagliaMatta</title>
     <link rel="icon" type="image/png" href="{% static 'main/favicon_sm.png'%}"/>
 
+
+    <style>
+
+        body {
+          background-image: url("/static/main/bgbubbles25.jpg") ;
+        }
+
+
+
+    </style>
+
 </head>
-<body>
-
-
-<style>
-
-body {
-  background-image: url("/static/main/bgbubbles25.jpg") ;
-}
+<body onScroll="document.cookie='ypos=' + window.pageYOffset" onLoad="window.scrollTo(0,readCookie('ypos'))">
 
 
 
-</style>
 
-<!--div class="parallaxbase"></div-->
+    <!--div class="parallaxbase"></div-->
 
-<nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar pt-0 pb-1 "
-      style ="box-shadow:hsl(178, 79%, 47%) 10px 3px 10px;">
-    <!--a href="{% url 'main:home' %}"-->
-    <a href="/admin">
-        <img src="{% static 'main/LOGO_matta3.jpg' %}" style="border-radius: 15px; padding-top:3px;" width="250 " height="90"  class="d-inline-block align-top pb-0">
-    </a>
+    <nav  class="navbar sticky-top navbar-expand-lg navbar-light bg-light scrolling-navbar pt-0 pb-1 "
+          style ="box-shadow:hsl(178, 79%, 47%) 10px 3px 10px;">
+        <!--a href="{% url 'main:home' %}"-->
+        <a href="/admin">
+            <img src="{% static 'main/LOGO_matta3.jpg' %}" style="border-radius: 15px; padding-top:3px;" width="250 " height="90"  class="d-inline-block align-top pb-0">
+        </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
 
-    <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
-        <ul class="navbar-nav" style="padding-left:7px; padding-right:5px;">
-            <div class="container pr-0">
-                <li class="nav-item ">
-                    <a class="nav-link" href="/">MAGLIAMATTA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/about">ABOUT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/#donne">DONNA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/#uomini">UOMO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="/checkout">PAGAMENTO</a>
-                </li>
-                <div class="form-inline my-2 my-lg-0 pr-2">
 
-                    <a href="/cart">
-                        <img id="cart-icon" src="{% static 'main/images/cartblack.png'%}" alt="Cart" class="pl-0 ml-0">
-                    </a>
-                    <p id="cart-total">{{cartItems}}</p>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+            <ul class="navbar-nav" style="padding-left:7px; padding-right:5px;">
+                <div class="container pr-0">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/">MAGLIAMATTA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="/about">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="/#donne">DONNA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="/#uomini">UOMO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="/checkout">PAGAMENTO</a>
+                    </li>
+                    <div class="form-inline my-2 my-lg-0 pr-2">
+
+                        <a href="/cart">
+                            <img id="cart-icon" src="{% static 'main/images/cartblack.png'%}" alt="Cart" class="pl-0 ml-0">
+                        </a>
+                        <p id="cart-total">{{cartItems}}</p>
+                    </div>
+                    <li>
+                        {% if user.username %}
+                            <a href="/logout" class="btn btn-outline-danger " > LOGOUT
+                                {% if user.first_name %}
+                                    {{request.user.first_name}}
+                                {% else %}
+                                    {{request.user}}
+                                {% endif %}
+
+                            </a>
+
+                        {% endif %}
+
+                        {% if not user.username %}
+                            <a href="/login" class="btn btn-outline-danger ">LOGIN
+
+                            </a>
+
+                        {% endif %}
+
+                    </li>
+
                 </div>
-                <li>
-                    {% if user.username %}
-                        <a href="/logout" class="btn btn-outline-danger " > LOGOUT
-                            {% if user.first_name %}
-                                {{request.user.first_name}}
-                            {% else %}
-                                {{request.user}}
-                            {% endif %}
 
-                        </a>
-
-                    {% endif %}
-
-                    {% if not user.username %}
-                        <a href="/login" class="btn btn-outline-danger ">LOGIN
-
-                        </a>
-
-                    {% endif %}
-
-                </li>
-
-            </div>
-
-        </ul>
-    </div>
-    <!---h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
-        {% if user.username %}
-        Ciao
-            {% if user.first_name %}
-                {{ user.first_name }}...
-            {% else %}
-                {{ user.username }}...
+            </ul>
+        </div>
+        <!---h2 style="font-size: 10px; margin: 0px; text-align: right; color:#995f15">
+            {% if user.username %}
+            Ciao
+                {% if user.first_name %}
+                    {{ user.first_name }}...
+                {% else %}
+                    {{ user.username }}...
+                {% endif %}
             {% endif %}
-        {% endif %}
 
-        {% if not user.username %}
-            NOT logged in!....
-        {% endif %}
-    </h2-->
-</nav>
-
+            {% if not user.username %}
+                NOT logged in!....
+            {% endif %}
+        </h2-->
+    </nav>
 
 
-{% block content %}
+
+    {% block content %}
 
 
-{% endblock %}
+    {% endblock %}
 
 
-<br/>
-<br/>
-<br/><br/>
-<br/>
+    <br/>
+    <br/>
+    <br/><br/>
+    <br/>
+    <footer>
+        <div class="container-fluid footer text-center">
 
+            <img src="{% static 'main/LOGO_matta3.jpg' %} " style="border-radius: 15px;" width="200">
+            <br/>
+            <br/>
+            <a> Via XXXXX 11/11, Genova </a>|
+            <a> +393460803464 </a>|
+            <a> martam.colombo@gmail.com</a>|
+            <a href="https://www.facebook.com/MagliaMatta/" target="_blank">
+                <img id="facebook-icon" src="{% static 'main/facebook.png'%}"
+                     alt="Facebook" class="pl-0 ml-0"></a>
+
+            <br/>
+            <br/>
+            <a>©All rights reserved. Privacy Policy </a>|<a> Cookie Policy</a>
+            <br>
+        </div>
+        <br>
+
+    </footer>
 
 </body>
-<footer>
-    <div class="container-fluid footer text-center">
 
-        <img src="{% static 'main/LOGO_matta3.jpg' %} " style="border-radius: 15px;" width="200">
-        <br/>
-        <br/>
-        <a> Via XXXXX 11/11, Genova </a>|
-        <a> +393460803464 </a>|
-        <a> martam.colombo@gmail.com</a>|
-        <a href="https://www.facebook.com/MagliaMatta/" target="_blank">
-            <img id="facebook-icon" src="{% static 'main/facebook.png'%}"
-                 alt="Facebook" class="pl-0 ml-0"></a>
-
-        <br/>
-        <br/>
-        <a>©All rights reserved. Privacy Policy </a>|<a> Cookie Policy</a>
-        <br>
-    </div>
-    <br>
-
-</footer>
 <div class="parallaxbase"></div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
