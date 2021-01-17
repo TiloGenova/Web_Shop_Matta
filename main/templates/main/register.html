@@ -1,10 +1,74 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
 <br/>
 <br/>
 
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin: auto" class="box-element " >
+
+                <h5>Registrazione</h5>
+
+                <form id="form" style="margin: auto; text-align: center" method="post">
+                    {% csrf_token %}
+
+                    <ul style="list-style-type:none;  text-align: center">
+
+                        <li>
+                            <div style="text-align: center" class="formani">
+                                <input  type="text" name="{{form.username}}" autocomplete="off" required >
+                                <label  for="form.username" class="label-name">
+                                    <span class="content-name left" style="">{{form.username.label}}:</span>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="text-align: center" class="formani">
+                                <input  type="text" name="{{form.email}}" autocomplete="off" required >
+                                <label  for="form.email" class="label-name">
+                                    <span class="content-name left" style="">{{form.email.label}}:</span>
+                                </label>
+                            </div>
+                        </li>
+
+
+                    {{form.first_name.label}}: {{form.first_name}}<br><br>
+                    {{form.last_name.label}}: {{form.last_name}}<br><br>
+                    {{form.password1.label}}: {{form.password1}}<br><br>
+                    {{form.password2.label}}: {{form.password2}}<br><br>
+                    <br>
+                    <div style="margin: auto" class="col-md-12">
+                        <p>Your password can’t be too similar to your other personal information.</p>
+                        <p> Your password must contain at least 8 characters.</p>
+                        <p> Your password can’t be a commonly used password.</p>
+                        <p>  Your password can’t be entirely numeric.
+                        </p>
+
+                    </div>
+
+                    <button  class="btn btn-success btn-block" type="submit">Submit</button>
+                    <br>
+                    <div class="d-flex justify-content-center links" style="font-size: 18px">
+                        Already have an account? <a href="/login" class="ml-2">LOGIN</a>
+                    </div>
+
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -17,6 +81,7 @@
 
                 <form style="margin: auto; text-align: center" method="post">
                     {% csrf_token %}
+
 
                     {{form.username.label}}: {{form.username}}<br><br>
                     {{form.email.label}}: {{form.email}}<br><br>
