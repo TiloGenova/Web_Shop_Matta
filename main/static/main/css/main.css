@@ -294,7 +294,7 @@ img {
 .formani input{
  	width:100%;
  	height:50px;
-    color: #595f6e ;
+    color: #1e7571 ;
     padding-top:10px;
     border: none;
     outline: none;
@@ -323,7 +323,7 @@ img {
     width:100%;
     height:100%;
 
-    border-bottom: 2px solid #b58240  ;
+    border-bottom: 2px solid #1e7571  ;
     transform: translateX(-100%);
     transition: transform .5s ease;
 
@@ -340,7 +340,7 @@ img {
 .formani input:valid + .label-name  .content-name{
     transform: translateY(-25px);
     font-size: 10px;
-    color: #b58240;
+    color: #1e7571;
  	}
 
 .formani input:focus + .label-name::after,

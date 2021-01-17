@@ -9,7 +9,21 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
     <meta charset="UTF-8">
     <title>MagliaMatta</title>
+    <script src="{% static 'main/js/jquery-3.5.1.min.js' %}"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (localStorage.getItem("maglia-quote-scroll") != null) {
+                $(window).scrollTop(localStorage.getItem("maglia-quote-scroll"));
+            }
+
+            $(window).on("scroll", function() {
+                localStorage.setItem("maglia-quote-scroll", $(window).scrollTop());
+            });
+
+          });
+    </script>
 
 </head>
 
@@ -195,7 +209,7 @@
     <hr>
 
     <div class="container  ">
-        <h2  class="mt-5 text-left" >PRODUCT OVERVIEW</h2>
+        <h2  class="mt-5 text-left" >TUTTI I PRODOTTI</h2>
     </div>
     <div class=" container ">
         <div class="row"  >
@@ -234,7 +248,8 @@
                             <p>{{ product.description }}</p>
                             <p>Prodotto_Code: {{ product.id }}</p>
                             {% if product.stock > 0 %}
-                                <h6>Disponibile solamente: {{ product.stock }} </h6>{% endif %}
+                                <h6>Disponibile solamente: {{ product.stock }} </h6>
+                            {% endif %}
 
 
 
@@ -306,10 +321,10 @@
     <hr>
     <div class="parallax"></div>
     <hr>
-    <a id="donne"></a>
+    <a id="donna"></a>
     <br><br><br><br><br><br>
     <div class="container">
-        <h2  class="mt-5 text-left" >DONNE</h2>
+        <h2  class="mt-5 text-left" >DONNA</h2>
     </div>
 
     <div class=" container">
@@ -348,6 +363,11 @@
                                 <hr>
                                 <p>{{ product.description }}</p>
                                 <p>Prodotto_Code: {{ product.id }}</p>
+                                {% if product.stock > 0 %}
+                                    <h6>Disponibile solamente: {{ product.stock }} </h6>
+                                {% endif %}
+
+
 
                                 <div>Prezzo:
                                     {% if product.discount_price %}
@@ -361,7 +381,6 @@
                                     {% endif %}
                                 </div>
 
-
                                 <div style="text-align:center;" class="row">
                                     <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                         <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
@@ -371,10 +390,37 @@
                                         <h2 style="text-align:center;"></h2>
                                     </div>
                                     {% if product.stock > 0 %}
+
+                                    {% if user.is_anonymous %}
+                                    {% if product.id not in zerostock  %}
                                     <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                         <button data-product="{{product.id}}" data-action="add"
                                                 class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                                     </div>
+                                    {% endif %}
+                                    {% if product.id  in zerostock  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button disabled data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart"> Già nel Carrello</button>
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    {% if product.id not in zerostock2  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                    </div>
+                                    {% endif %}
+                                    {% if product.id  in  zerostock2  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button disabled data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart"> Già nel Carrello</button>
+                                    </div>
+                                    {% endif %}
+
+                                    {% endif %}
+
                                     {% endif %}
 
                                 </div>
@@ -392,10 +438,10 @@
     <hr>
     <div class="parallax"></div>
     <hr>
-    <a id="uomini"></a>
+    <a id="uomo"></a>
     <br><br><br><br><br><br>
     <div class="container">
-        <h2  class="mt-5 text-left" >UOMINI</h2>
+        <h2  class="mt-5 text-left" >UOMO</h2>
     </div>
     <div class=" container">
         <div class="row"  >
@@ -433,6 +479,11 @@
                                 <hr>
                                 <p>{{ product.description }}</p>
                                 <p>Prodotto_Code: {{ product.id }}</p>
+                                {% if product.stock > 0 %}
+                                    <h6>Disponibile solamente: {{ product.stock }} </h6>
+                                {% endif %}
+
+
 
                                 <div>Prezzo:
                                     {% if product.discount_price %}
@@ -454,11 +505,39 @@
                                     <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                         <h2 style="text-align:center;"></h2>
                                     </div>
+
+                                    <!-- CART BUTTON -->
                                     {% if product.stock > 0 %}
+                                        {% if user.is_anonymous %}
+                                             {% if product.id not in zerostock  %}
+                                                <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                                    <button data-product="{{product.id}}" data-action="add"
+                                                            class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                                </div>
+                                            {% endif %}
+                                    {% if product.id  in zerostock  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button disabled data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart"> Già nel Carrello</button>
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    {% if product.id not in zerostock2  %}
                                     <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                         <button data-product="{{product.id}}" data-action="add"
                                                 class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
                                     </div>
+                                    {% endif %}
+                                    {% if product.id  in  zerostock2  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button disabled data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart"> Già nel Carrello</button>
+                                    </div>
+                                    {% endif %}
+
+                                    {% endif %}
+
                                     {% endif %}
 
                                 </div>

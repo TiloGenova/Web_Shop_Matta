@@ -74,7 +74,6 @@ def home(request):
     productsall = Product.objects.all()
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
-
     y = zerostock2
 
 
@@ -107,7 +106,15 @@ def details(request, product_id):
 
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
-    return render(request, 'main/details.html', {'products': productsall, 'product': product, 'cartItems': cartItems})
+
+    dataCart = cookieCart(request) #function in utils.py
+    zerostock = dataCart['zerostock']
+
+
+
+    return render(request, 'main/details.html', {'products': productsall,
+                                                 'product': product, 'cartItems': cartItems,
+                                                 'zerostock': zerostock,'zerostock2': zerostock2})
 
 
 
