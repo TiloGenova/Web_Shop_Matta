@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MagliaMatta</title>
+</head>
+<body>
+<div class="container" style=" justify-content: center;">
+    <div class="row">
+        <div class="col-lg-12" style="display: flex; justify-content: center;">
+            <div class="box-element" id="form-wrapper" style="width: 50%">
+                <div class="col-lg-3">
+                    <a style="" class="btn btn-outline-dark btn-block"
+                       href="{% url 'main:home' %}">&#10502; Shop</a>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+{% endblock %}

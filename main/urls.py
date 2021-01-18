@@ -17,6 +17,9 @@ urlpatterns = [
 
     path('', views.home, name="home"),
     path('base/', views.base, name="base"),
+    path('cookie_policy/', views.cookiePolicy, name="cookie_policy"),
+
+
 
     path('<int:product_id>', views.details, name="details"),
     path('about/', views.about, name="about"),

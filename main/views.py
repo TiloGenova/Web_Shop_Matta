@@ -91,12 +91,19 @@ def base(request):
     return render(request, 'base_site.html', {'user': user})
 
 
+
+
 def about(request):
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
 
     context = {'cartItems': cartItems}
     return render(request, 'main/about.html', context)
+
+
+def cookiePolicy(request):
+
+    return render(request, 'main/cookie_policy.html', {})
 
 
 def details(request, product_id):
