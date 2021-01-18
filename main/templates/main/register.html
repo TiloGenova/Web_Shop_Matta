@@ -1,61 +1,89 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+    <meta charset="UTF-8">
+    <title>MagliaMatta</title>
 
+
+    <style>
+      .center {
+          margin-left: auto;
+          margin-right: auto;
+       }
+    </style>
+
+</head>
+
+<body >
 <br/>
 <br/>
 
 
 
-<div class="container">
+<div class="container" style=" display: flex; justify-content: center;" >
     <div class="row">
         <div class="col-md-12">
             <div style="margin: auto" class="box-element " >
 
                 <h5>Registrazione</h5>
 
-                <form id="form" style="margin: auto; text-align: center" method="post">
+                <form id="form" style="margin: auto; text-align: right" method="post">
                     {% csrf_token %}
 
-                    <ul style="list-style-type:none;  text-align: center">
 
-                        <li>
-                            <div style="text-align: center" class="formani">
-                                <input  type="text" name="{{form.username}}" autocomplete="off" required >
-                                <label  for="form.username" class="label-name">
-                                    <span class="content-name left" style="">{{form.username.label}}:</span>
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div style="text-align: center" class="formani">
-                                <input  type="text" name="{{form.email}}" autocomplete="off" required >
-                                <label  for="form.email" class="label-name">
-                                    <span class="content-name left" style="">{{form.email.label}}:</span>
-                                </label>
-                            </div>
-                        </li>
+                    <table class= "center" style="width: 100%, text-align: left">
+
+                        <tr>
+                            <td>{{form.username.label}}:</td>
+                            <td>{{form.username}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{form.email.label}}:</td>
+                            <td> {{form.email}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{form.first_name.label}}:</td>
+                            <td>{{form.first_name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{form.last_name.label}}:</td>
+                            <td>{{form.last_name}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{form.password1.label}}:</td>
+                            <td>{{form.password1}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>{{form.password2.label}}:</td>
+                            <td>{{form.password2}}</td>
+
+                        </tr>
+                    </table>
 
 
-                    {{form.first_name.label}}: {{form.first_name}}<br><br>
-                    {{form.last_name.label}}: {{form.last_name}}<br><br>
-                    {{form.password1.label}}: {{form.password1}}<br><br>
-                    {{form.password2.label}}: {{form.password2}}<br><br>
                     <br>
-                    <div style="margin: auto" class="col-md-12">
-                        <p>Your password can’t be too similar to your other personal information.</p>
-                        <p> Your password must contain at least 8 characters.</p>
-                        <p> Your password can’t be a commonly used password.</p>
-                        <p>  Your password can’t be entirely numeric.
-                        </p>
+                    <div style="margin: auto; text-align: center" class="col-md-12">
+
+
+                        <p> La tua password non può essere troppo simile alle altre tue informazioni personali. </p>
+                        <p> La tua password deve contenere almeno 8 caratteri. </p>
+                        <p> La tua password non può essere una password comunemente utilizzata. </p>
+                        <p> La tua password non può essere interamente numerica.</p>
 
                     </div>
 
                     <button  class="btn btn-success btn-block" type="submit">Submit</button>
                     <br>
                     <div class="d-flex justify-content-center links" style="font-size: 18px">
-                        Already have an account? <a href="/login" class="ml-2">LOGIN</a>
+                        Hai già un account? <a href="/login" class="ml-2">LOGIN</a>
                     </div>
 
 
@@ -70,7 +98,7 @@
     </div>
 </div>
 
-<div class="container">
+<!--div class="container">
     <div class="row">
         <div class="col-md-12">
             <div style="margin: auto" class="box-element " >
@@ -83,7 +111,7 @@
                     {% csrf_token %}
 
 
-                    {{form.username.label}}: {{form.username}}<br><br>
+                    {{form.username.label}}: {{form.username}} <br><br>
                     {{form.email.label}}: {{form.email}}<br><br>
                     {{form.first_name.label}}: {{form.first_name}}<br><br>
                     {{form.last_name.label}}: {{form.last_name}}<br><br>
@@ -115,14 +143,14 @@
         </div>
 
     </div>
-</div>
-
-
-
+</div-->
 
 
 
 <br/>
 <br/>
 <br/>
+
+</body>
+</html>
 {% endblock %}

@@ -45,7 +45,7 @@
 <div class="container" style=" justify-content: center;">
     <div class="row">
         <div class="col-lg-12" style="display: flex; justify-content: center;">
-            <div class="box-element" id="form-wrapper">
+            <div class="box-element" id="form-wrapper" style="width: 50%">
                 <form id="form">
                     <div id="user-info">
                         <p>NUOVO CLIENTE:</p>
@@ -68,9 +68,10 @@
                                 </div>
                             </li>
                         </ul>
+                        <hr>
                     </div>
                     <div id="shipping-info">
-                        <hr>
+
                         <p>INDIRIZZO DI SPEDIZIONE:</p>
                         <ul style="list-style-type:none;  text-align: center">
 
@@ -130,7 +131,7 @@
         <div class="col-lg-12" style="display: flex; justify-content: center;">
 
 
-            <div class="box-element hidden" id="payment-info">
+            <div class="box-element hidden" id="payment-info" style="width: 50%">
 
 
                 <small style="text-align: center;">PAYMENT OPTIONS</small>
@@ -140,7 +141,7 @@
                 </div>
 
 
-                <div class="col-md-12">
+                <!--div class="col-md-12">
                     <p>XXXXXBonifico Bancario:</p>
                     <p>Ti preghiamo di completare l'acquisto ed effettuare il bonifico entro 3 giorni.
                         Dati per il bonifico:</p>
@@ -154,7 +155,7 @@
                     <p>La causale da riportare nel bonifico bancario dovrà indicare la data e il numero
                         di ordine, presente nell'oggetto dell'email di conferma.</p>
 
-                </div>
+                </div-->
 
             </div>
          </div>
@@ -206,7 +207,7 @@
                 <div class="cart-row">
                     <div style="flex:1"></div>
                     <div style="flex:1"></div>
-                    <div style="flex:2"><h6>Items: {{ order.get_cart_items }}</h6></div>
+                    <div style="flex:2"><h6>Articoli: {{ order.get_cart_items }}</h6></div>
                     <div style="flex:1"></div>
                     <div style="flex:1"></div>
                     <div style="flex:5"><h6 style="text-align:right; " class="pr-3">Subtotale: {{ order.get_cart_total }} €</h6></div>
