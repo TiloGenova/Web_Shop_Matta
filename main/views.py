@@ -102,8 +102,12 @@ def about(request):
 
 
 def cookiePolicy(request):
-
     return render(request, 'main/cookie_policy.html', {})
+
+
+def privacyPolicy(request):
+    return render(request, 'main/privacy_policy.html', {})
+    #websitepolicies  kingnapalm  word:YFtD0jo3
 
 
 def details(request, product_id):

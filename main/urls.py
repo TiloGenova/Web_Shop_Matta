@@ -18,6 +18,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('base/', views.base, name="base"),
     path('cookie_policy/', views.cookiePolicy, name="cookie_policy"),
+    path('privacy_policy/', views.privacyPolicy, name="privacy_policy"),
 
 
 
