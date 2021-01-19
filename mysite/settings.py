@@ -133,6 +133,6 @@ SITE_ID = 1
 # Email Setting
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'kingnapalm68@gmail.com'
-EMAIL_HOST_PASSWORD = 'XXXXXXXX'
+EMAIL_HOST_USER = 'magliamatta@gmail.com'
+EMAIL_HOST_PASSWORD = 'magliamatta2021'
 EMAIL_USE_TLS = True

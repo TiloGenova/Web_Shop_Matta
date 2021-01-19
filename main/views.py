@@ -10,6 +10,7 @@ from .utils import cookieCart, cartData, guestOrder
 import sqlite3
 from decimal import Decimal
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.db import connection
 
 
@@ -78,8 +79,6 @@ def home(request):
 
 
     print('ZEROSTOCK2 from HOME:', y)
-
-
 
 
     context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
@@ -330,6 +329,12 @@ def processOrder(request):
     #print('TOTAL FLOAT processOrder:', total)
     print('TOTALwshipping:', totalwshipping)   # NOT DEFINED ????? 
     order.transaction_id = transaction_id
+    print('ORDER ORDER ORDER:', order)
+    print(type(order))
+    orderint = getattr(order, 'id')
+    print('ORDER ORDER ORDER INT:', orderint)
+    print(type(orderint))
+
 
 
                 # if total == order.get_cart_total:  =  without shippingcosts
@@ -529,20 +534,92 @@ def processOrder(request):
 
 
 
+    # SENDING CONFIRMATION EMAIL
+    #necessary settings Google mail account:
+    #https://myaccount.google.com/lesssecureapps
+    #https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
+    db = sqlite3.connect('db.sqlite3')
+    cursor = db.cursor()
+
+    cursor.execute("SELECT customer_id FROM main_order WHERE id= ?", (orderint,))
+    customer_id = cursor.fetchone()
+    print('CUSTOMERID:', customer_id)
+    customer = customer_id[0]
+
+    cursor.execute("SELECT name FROM main_customer WHERE id= ?", (customer,))
+    customertup = cursor.fetchone()
+    print('CUSTOMERNAME:', customer)
+    nameanony = customertup[0]
+
+    cursor.execute("SELECT email FROM main_customer WHERE id= ?", (customer,))
+    customertup = cursor.fetchone()
+    print('CUSTOMEREMAIL:', customer)
+    emailanony = customertup[0]
+
+    cursor.execute("SELECT address FROM main_shippingaddress WHERE order_id= ?", (orderint,))
+    addresstup = cursor.fetchone()
+    print('ADDRESSE:', addresstup)
+    address = addresstup[0]
+
+    cursor.execute("SELECT zipcode FROM main_shippingaddress WHERE order_id= ?", (orderint,))
+    ziptup = cursor.fetchone()
+    print('ZIP:', ziptup)
+    zip = ziptup[0]
+
+    cursor.execute("SELECT city FROM main_shippingaddress WHERE order_id= ?", (orderint,))
+    citytup = cursor.fetchone()
+    print('CITY:', citytup)
+    city = citytup[0]
+
+    cursor.execute("SELECT state FROM main_shippingaddress WHERE order_id= ?", (orderint,))
+    statetup = cursor.fetchone()
+    print('STATE:', statetup)
+    state = statetup[0]
+
+    cursor.execute("SELECT country FROM main_shippingaddress WHERE order_id= ?", (orderint,))
+    countrytup = cursor.fetchone()
+    print('COUNTRY:', countrytup)
+    country = countrytup[0]
 
 
 
+    cursor.execute("SELECT * FROM main_orderitem WHERE order_id= ?", (orderint,))
+    orderitems = cursor.fetchall()
+    print('ITEMS:', orderitems)
 
-    '''send_mail(
-        'Subject: Your Order / MAGLIAMATTA',
-        'Many thanks for your order on www.magliamatta.com. '
-        'We prepare your products for shipping '
-        'You ordered the following products: ....'
-        'THIS IS THE FIRST TEST OF AUTOMATIC EMAIL SENDING',
-        'kingnapalm68@gmail.com',
-        ['martam.colombo@gmail.com', 'tilo.oschatz@googlemail.com'],
+
+    db.close()
+
+
+    if request.user.is_anonymous:
+        name = nameanony
+        email = emailanony
+    else:
+        name = request.user.first_name
+        email = request.user.email
+
+
+    context = {
+        'customer': name,
+        'order': orderint,
+        'items': orderitems,
+        'shipping_address': address,
+        'shipping_zip': zip,
+        'shipping_city': city,
+        'shipping_state': state,
+        'shipping_country': country,
+
+    }
+    template = render_to_string('main/email_confirmation.html', context)
+
+    send_mail(
+        'Your Order / MAGLIAMATTA', #Subject
+        template,
+        settings.EMAIL_HOST_USER,
+        [email], # Receiver
         fail_silently=False,
-    )'''
+    )
 
     return JsonResponse('Payment complete!', safe=False)
 

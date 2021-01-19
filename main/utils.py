@@ -182,6 +182,7 @@ def guestOrder(request, data):
         complete=False,
     )
 
+
     for item in items:
         product = Product.objects.get(id=item['product']['id'])
 
@@ -192,4 +193,5 @@ def guestOrder(request, data):
         )
 
     return customer, order
+
 
