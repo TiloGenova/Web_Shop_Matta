@@ -584,13 +584,30 @@ def processOrder(request):
 
 
 
-    cursor.execute("SELECT * FROM main_orderitem WHERE order_id= ?", (orderint,))
-    orderitems = cursor.fetchall()
-    print('ITEMS:', orderitems)
 
+
+    cursor.execute("SELECT product_id, quantity FROM main_orderitem WHERE order_id= ?", (orderint,))
+    orderitems = cursor.fetchall()
+    print('ITEMSITEMSITEMS:', orderitems)
+
+    productdict = {}
+    for orderitem in orderitems:
+        cursor.execute("SELECT title FROM main_product WHERE id= ?", (orderitem[0],))
+        for producttitle in cursor:
+            print(producttitle)
+
+        productdict[producttitle] = orderitem
+    print(productdict)
 
     db.close()
 
+    text = '.'.join("Articolo:{!s}  ID/Quantità:{!r}".format(key, val) for (key, val) in productdict.items())
+
+    #for (key, val) in productdict:
+       # 'Articolo'.join("{!s}  ID/Quantità:{!r}".format(key, val)
+
+
+    print(text)
 
     if request.user.is_anonymous:
         name = nameanony
