@@ -553,9 +553,9 @@ def processOrder(request):
     nameanony = customertup[0]
 
     cursor.execute("SELECT email FROM main_customer WHERE id= ?", (customer,))
-    customertup = cursor.fetchone()
-    print('CUSTOMEREMAIL:', customer)
-    emailanony = customertup[0]
+    emailtup = cursor.fetchone()
+    print('CUSTOMEREMAIL:', emailtup)
+    emailanony = emailtup[0]
 
     cursor.execute("SELECT address FROM main_shippingaddress WHERE order_id= ?", (orderint,))
     addresstup = cursor.fetchone()
