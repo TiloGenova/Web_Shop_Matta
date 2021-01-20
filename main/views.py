@@ -9,7 +9,7 @@ from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 import sqlite3
 from decimal import Decimal
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.db import connection
 
@@ -646,13 +646,15 @@ def processOrder(request):
     }
     template = render_to_string('main/email_confirmation.html', context)
 
-    send_mail(
-        'Your Order / MAGLIAMATTA', #Subject
+    email = EmailMessage(
+        'Il tuo ORDINE / MAGLIAMATTA', #Subject
         template,
         settings.EMAIL_HOST_USER,
         [email], # Receiver
-        fail_silently=False,
-    )
+        ['kingnapalm68@gmail.com', 'martam.colombo@gmail.com'],  # BCC
 
+    )
+    email.send(fail_silently=False)
+    
     return JsonResponse('Payment complete!', safe=False)
 
