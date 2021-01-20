@@ -67,8 +67,9 @@ class ProductAdmin(admin.ModelAdmin):
         'url',
     ]
     list_display =[
-        'stock',
+
         'title',
+        'stock',
         'id',
         'size',
         'gender',

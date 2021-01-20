@@ -108,8 +108,19 @@
                     <div style="flex:1">
                         <p class="quantity">{{ item.quantity }}</p>
                         <div class="quantity">
-                            <img data-product="{{item.product.id}}" data-action="add"
-                                 class="chg-quantity update-cart" src="{% static  'main/images/arrowup.png' %}">
+                            {% if user.is_anonymous %}
+                                {% if item.product.id not in zerostock  %}
+                                    <img data-product="{{item.product.id}}" data-action="add"
+                                         class="chg-quantity update-cart" src="{% static  'main/images/arrowup.png' %}">
+                                {% endif %}
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                {% if item.product.id not in zerostock2  %}
+                                    <img data-product="{{item.product.id}}" data-action="add"
+                                         class="chg-quantity update-cart" src="{% static  'main/images/arrowup.png' %}">
+                                {% endif %}
+                            {% endif %}
+
 
                             <img data-product="{{item.product.id}}" data-action="remove"
                                  class="chg-quantity update-cart" src="{% static  'main/images/arrowdown.png' %}">

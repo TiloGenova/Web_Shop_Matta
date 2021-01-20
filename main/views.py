@@ -130,13 +130,17 @@ def details(request, product_id):
 
 def cart(request):
 
+    productsall = Product.objects.all()
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
+    dataCart = cookieCart(request) #function in utils.py
+    zerostock = dataCart['zerostock']
+    print('ZEROSTOCK from CART:', zerostock)
 
 
-    context = {'items': items, 'order': order,'cartItems':cartItems}
+    context = {'products': productsall,'items': items, 'order': order,'cartItems':cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
     return render(request, 'main/cart.html', context)
 
 
