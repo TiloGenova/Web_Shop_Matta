@@ -599,28 +599,44 @@ def processOrder(request):
         productdict[producttitle] = orderitem
     print(productdict)
 
+    z = 0
+    alltextmail =''
+    linemail = 'Articolo-ID: {}   Articolo: {}    Quantità: {}  \n'
+    for item in productdict:
+        title = list(productdict.keys())[z]
+        print('TITLE:', title)
+        print(type(title))
+        values = list(productdict.values())[z]
+        print('VALUES ID/QUANTITY:', values)
+        print(type(values))
+
+        a=linemail.format(values[0], title[0], values[1])
+        print(a)
+        alltextmail += a
+        z += 1
+
+    print(alltextmail)
+
+
     db.close()
 
-    text = '.'.join("Articolo:{!s}  ID/Quantità:{!r}".format(key, val) for (key, val) in productdict.items())
 
-    #for (key, val) in productdict:
-       # 'Articolo'.join("{!s}  ID/Quantità:{!r}".format(key, val)
-
-
-    print(text)
 
     if request.user.is_anonymous:
         name = nameanony
         email = emailanony
+        shipname = nameanony
     else:
         name = request.user.first_name
         email = request.user.email
+        shipname = request.user.first_name +' '+ request.user.last_name
 
 
     context = {
         'customer': name,
         'order': orderint,
-        'items': orderitems,
+        'items': alltextmail,
+        'shipping_name': shipname,
         'shipping_address': address,
         'shipping_zip': zip,
         'shipping_city': city,
