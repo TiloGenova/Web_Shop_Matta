@@ -6,11 +6,23 @@
 
 <br/>
 <br/>
+<style>
+@media screen and (min-width: 1000px) {
+div.box-element {
+width: 30%;
+}
+}
 
+@media screen and (max-width: 1000px) {
+div.box-element {
+width: 100%;
+}
+}
+</style>
 
-<div class="container" style=" display: flex; justify-content: center;">
+<div class="container" >
     <div class="row">
-        <div class="col-md-12" style="flex:1">
+        <div class="col-md-12" style=" display: flex; justify-content: center;" >
             <div style="margin: auto" class="box-element "  >
 
                 <h5>LOGIN</h5>
@@ -53,7 +65,8 @@
                 </form>
                 <br>
                 <div class="d-flex justify-content-center links" style="font-size: 18px">
-                    Nuovo cliente? <a href="/register" class="ml-2">INIZIA QUI</a>
+                    Nuovo cliente?  <a  href="/register" class="ml-2" style="font-size: 20px; margin: 0px; text-align: left; color:hsl(297, 82%, 42%);
+                            text-decoration: underline;">INIZIA QUI</a>
                 </div>
             </div>
 

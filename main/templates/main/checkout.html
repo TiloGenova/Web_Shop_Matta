@@ -37,7 +37,17 @@
     font-size: 0.5vw;
   }
 }
+@media screen and (min-width: 1000px) {
+  div.box-element {
+    width: 50%;
+  }
+}
 
+@media screen and (max-width: 1000px) {
+  div.box-element {
+    width: 100%;
+  }
+}
 
 </style>
 <br>
@@ -45,7 +55,7 @@
 <div class="container" style=" justify-content: center;">
     <div class="row">
         <div class="col-lg-12" style="display: flex; justify-content: center;">
-            <div class="box-element" id="form-wrapper" style="width: 50%">
+            <div class="box-element" id="form-wrapper" >
                 <form id="form">
                     <div id="user-info">
                         <p>NUOVO CLIENTE:</p>
@@ -134,7 +144,7 @@
         <div class="col-lg-12" style="display: flex; justify-content: center;">
 
 
-            <div class="box-element hidden" id="payment-info" style="width: 50%">
+            <div class="box-element hidden" id="payment-info" >
 
 
                 <small style="text-align: center;">PAYMENT OPTIONS</small>
@@ -150,7 +160,7 @@
                         Dati per il bonifico:</p>
 
                     <p>Beneficiario:
-                        EATALY NET S.R.L.
+                        maglia
                         IBAN: IT68V0306922504100000064120
                         BIC/SWIFT: BCITITMM
                         Banca: INTESA SAN PAOLO - ALBA</p>
@@ -170,10 +180,10 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-lg-12">
-            <div class="box-element">
+        <div style="display: flex; justify-content: center;" class="col-lg-12"  >
+            <div class="box-element" style="width: 100%">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" >
                         <a  class="btn btn-outline-dark btn-block" href="{% url 'main:cart' %}">&#10502; Carrello</a>
                     </div>
                     <div class="col-lg-6">
