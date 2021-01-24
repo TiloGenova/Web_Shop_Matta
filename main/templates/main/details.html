@@ -34,7 +34,7 @@
                         <div class="row pt-2">
                             <div class="col-lg-4">
                                 <a style="" class="btn btn-outline-dark btn-block"
-                                   href="{% url 'main:home' %}">&#10502; Shop</a>
+                                   href="{% url 'main:home' %}"><i class="fas fa-chevron-left"></i> Shop</a>
                             </div>
                             <div class="col-lg-4">
                                 <h2 style="text-align:center;">Dettagli</h2>
@@ -46,21 +46,21 @@
                                 {% if user.is_anonymous %}
                                 {% if product.id not in zerostock  %}
                                     <button data-product="{{product.id}}" data-action="add"
-                                            class = "btn btn-outline-secondary add-btn update-cart btn-block">Carrello &#10503</button>
+                                            class = "btn btn-outline-dark add-btn update-cart btn-block">Carrello <i class="fas fa-chevron-right"></i></button>
                                 {% endif %}
                                 {% if product.id  in zerostock  %}
                                     <button disabled data-product="{{product.id}}" data-action="add"
-                                            class = "btn btn-outline-secondary add-btn update-cart btn-block"> Già nel Carrello</button>
+                                            class = "btn btn-outline-dark add-btn update-cart btn-block"> Già nel Carrello</button>
                                 {% endif %}
                                 {% endif %}
                                 {% if user.is_authenticated %}
                                 {% if product.id not in zerostock2  %}
                                     <button data-product="{{product.id}}" data-action="add"
-                                            class = "btn btn-outline-secondary add-btn update-cart btn-block">Carrello &#10503</button>
+                                            class = "btn btn-outline-dark add-btn update-cart btn-block">Carrello <i class="fas fa-chevron-right"></i></button>
                                 {% endif %}
                                 {% if product.id  in  zerostock2  %}
                                     <button disabled data-product="{{product.id}}" data-action="add"
-                                            class = "btn btn-outline-secondary add-btn update-cart btn-block"> Già nel Carrello</button>
+                                            class = "btn btn-outline-dark add-btn update-cart btn-block"> Già nel Carrello</button>
                                 {% endif %}
 
                                 {% endif %}
