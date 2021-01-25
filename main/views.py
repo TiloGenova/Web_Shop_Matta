@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 import datetime
-from .forms import CreateUserForm, Contactformmail
+from .forms import CreateUserForm, ContactForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
 import sqlite3
 from decimal import Decimal
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import send_mail, EmailMessage, BadHeaderError
 from django.template.loader import render_to_string
 from django.db import connection
 
@@ -17,10 +17,26 @@ from django.db import connection
 
 # Create your views here.
 def contactmail(request):
-    if request.method == 'GET':
-        form = Contactformmail()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = "Richiesta di informazioni sito MagliaMatta"
+        body = {
+            'first_name': form.cleaned_data['first_name'],
+            'last_name': form.cleaned_data['last_name'],
+            'email': form.cleaned_data['email_address'],
+            'message':form.cleaned_data['message'],
+        }
+        message = "\n".join(body.values())
 
-    return render(request, 'main/contact.html', {'form': form})
+        try:
+            send_mail(subject, message, 'magliamatta@gmail.com', ['magliamatta@gmail.com'])
+        except BadHeaderError:
+            return HttpResponse('Invalid header found.')
+        return redirect("main:home")
+
+    form = ContactForm()
+    return render(request, "main/contact.html", {'form': form})
 
 
 

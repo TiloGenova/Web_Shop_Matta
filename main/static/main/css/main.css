@@ -142,11 +142,11 @@ div.carousel-inner{
 #cart-icon{
 	width:33px;
 	display: inline-block;
-	margin-left: 15px;
+	margin-left: 0px;
 }
 
 #contact-icon{
-	width:28px;
+	width:37px;
 	display: inline-block;
 	margin-left: 15px;
 }

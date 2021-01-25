@@ -44,12 +44,23 @@
                             </div>
 
                             <br><br>
-                            <div> {{form}}</div>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{form.as_p}}
+
+                                <input type="checkbox" id="check" />
+                                <label for="check"> Accetto l'Informativa sulla Privacy. <a href="/privacy_policy">Maggiori Informazioni</a> </label>
+                                <br>
+                                <input class="btn btn-success btn-block inputButton" type="submit" id="submit" value="Submit" disabled />
+
+
+
+                            </form>
 
                             <br><br>
 
 
-                            <form id="form">
+                            <!--form id="form">
 
                                 <div id="contact-email">
 
@@ -84,7 +95,7 @@
                                 </div>
                                 <hr>
                                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Send">
-                            </form>
+                            </form-->
 
                         </div>
 
@@ -125,5 +136,15 @@
 <br/>
 </body>
 </html>
+
+<script>
+$('#check').click(function() {
+  if ($(this).is(':checked')) {
+    $('#submit').removeAttr('disabled');
+  } else {
+    $('#submit').attr('disabled', 'disabled');
+  }
+});
+</script>
 
 {% endblock %}
