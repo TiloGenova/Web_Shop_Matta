@@ -19,6 +19,7 @@ urlpatterns = [
     path('base/', views.base, name="base"),
     path('cookie_policy/', views.cookiePolicy, name="cookie_policy"),
     path('privacy_policy/', views.privacyPolicy, name="privacy_policy"),
+    path('contact/', views.contactmail, name="contact"),
 
 
 

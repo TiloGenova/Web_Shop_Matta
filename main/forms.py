@@ -12,4 +12,9 @@ class CreateUserForm(UserCreationForm):  #takes basically the django class
         fields = ['username', 'first_name', 'last_name',
                   'email', 'password1', 'password2']
         labels = {'email': 'Email', 'first_name': 'Nome', 'last_name': 'Cognome', 'password2': 'Conferma Password'}
-#
+
+
+class Contactformmail(forms.Form):
+    fromemail = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)

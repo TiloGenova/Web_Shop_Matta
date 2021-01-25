@@ -145,6 +145,12 @@ div.carousel-inner{
 	margin-left: 15px;
 }
 
+#contact-icon{
+	width:28px;
+	display: inline-block;
+	margin-left: 15px;
+}
+
 #facebook-icon{
 	width:25px;
 	display: inline-block;

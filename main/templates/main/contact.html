@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+    <script src="{% static 'main/js/jquery-3.5.1.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <title>MagliaMatta</title>
+    <style>
+        ul {
+        display: block;
+        list-style-type: circle;
+        margin-top: 1em;
+        margin-bottom: 1 em;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0px;
+        }
+    </style>
+
+</head>
+<body >
+
+<br/>
+<div class="container">
+        <div class="row">
+            <div class="col-lg-9 mt-4 text-center">
+                <div class="box-element">
+                    <h1 style="mt-2; padding-left:10px ; font-size: 35px; ; text-align: left;">Contatti</h1>
+
+                        <div class="row pt-2">
+                            <div class="col-lg-4">
+                                <a style="" class="btn btn-outline-dark btn-block"
+                                   href="{% url 'main:home' %}"><i class="fas fa-chevron-left"></i> Shop</a>
+                                <br>
+                            </div>
+                            <div class="col-lg-4">
+                                <h2 style="text-align:center;">.</h2>
+                            </div>
+                            <div class="col-lg-4">
+
+
+                            </div>
+
+                            <br><br>
+                            <div> {{form}}</div>
+
+                            <br><br>
+
+
+                            <form id="form">
+
+                                <div id="contact-email">
+
+                                    <ul style="list-style-type:none;  text-align: center">
+
+                                        <li>
+                                            <div style="text-align: center" class="formani">
+                                                <input  type="text" name="address" autocomplete="off" required >
+                                                <label  for="address" class="label-name">
+                                                    <span class="content-name left" style="">EMAIL ADDRESS</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div style="text-align: center" class="formani">
+                                                <input  type="text" name="city" autocomplete="off" required >
+                                                <label  for="city" class="label-name">
+                                                    <span class="content-name left">SUBJECT</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div style="text-align: center" class="formani">
+                                                <input  type="text" name="state" autocomplete="off" required >
+                                                <label  for="state" class="label-name">
+                                                    <span class="content-name left">MESSAGE</span>
+                                                </label>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <hr>
+                                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Send">
+                            </form>
+
+                        </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-3  col-sm-12 mt-4">
+                <div class="box-element">
+
+                    <!-- Content here -->
+                    <h6 class="pb-1 mb-1" style="; pb-0; font-size: 25px; margin: 0px; text-align: left;">Altri prodotti</h6>
+
+                    {% for product in products %}
+                    {% if product.active %}
+
+                        <a  href="{% url 'main:details' product.id %}">
+                            <img  src="{{ product.imageURL }}"
+                                  style ="box-shadow:hsl(34, 76%, 34%) 3px -3px 14px;"
+                                  class="img-fluid" width="400" ></a>
+                        <h4 class=" pt-2 mb-0">{{ product.title }} </h4>
+                        <p>Taglia: {{ product.size }}</p>
+                        <hr>
+
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+                </div>
+            </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+</body>
+</html>
+
+{% endblock %}

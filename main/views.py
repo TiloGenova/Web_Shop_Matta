@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from .forms import CreateUserForm
+from .forms import CreateUserForm, Contactformmail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
@@ -16,6 +16,13 @@ from django.db import connection
 
 
 # Create your views here.
+def contactmail(request):
+    if request.method == 'GET':
+        form = Contactformmail()
+
+    return render(request, 'main/contact.html', {'form': form})
+
+
 
 
 def registerPage(request):
@@ -89,6 +96,16 @@ def base(request):
     user = User.objects.all()
     return render(request, 'base_site.html', {'user': user})
 
+
+def contact(request):
+    #ERRORHANDLING!?
+    productsall = Product.objects.all()
+
+
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+
+    return render(request, 'main/contact.html', {'products': productsall, 'cartItems': cartItems})
 
 
 
