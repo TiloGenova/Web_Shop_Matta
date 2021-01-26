@@ -14,8 +14,11 @@ from django.template.loader import render_to_string
 from django.db import connection
 
 
+def success(request):
+    return render(request, "main/success.html", {})
 
-# Create your views here.
+
+
 def contactmail(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -25,7 +28,7 @@ def contactmail(request):
             'first_name': form.cleaned_data['first_name'],
             'last_name': form.cleaned_data['last_name'],
             'email': form.cleaned_data['email_address'],
-            'message':form.cleaned_data['message'],
+            'message': form.cleaned_data['message'],
         }
         message = "\n".join(body.values())
 
@@ -33,7 +36,7 @@ def contactmail(request):
             send_mail(subject, message, 'magliamatta@gmail.com', ['magliamatta@gmail.com'])
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
-        return redirect("main:home")
+        return redirect("main:success")
 
     form = ContactForm()
     return render(request, "main/contact.html", {'form': form})
