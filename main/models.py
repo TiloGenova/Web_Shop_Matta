@@ -5,12 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class Contact(models.Model):
-    first_name = models.CharField(max_length=80)
-    last_name = models.CharField(max_length=80)
-    email = models.EmailField(max_length=100)
-    message = models.TextField(max_length=1000)
-
 
 
 

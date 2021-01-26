@@ -15,7 +15,10 @@ from django.db import connection
 
 
 def success(request):
-    return render(request, "main/success.html", {})
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+
+    return render(request, "main/success.html", {'cartItems': cartItems})
 
 
 
@@ -26,7 +29,6 @@ def contactmail(request):
             subject = "Richiesta di informazioni sito MagliaMatta"
         body = {
             'first_name': form.cleaned_data['first_name'],
-            'last_name': form.cleaned_data['last_name'],
             'email': form.cleaned_data['email_address'],
             'message': form.cleaned_data['message'],
         }
@@ -39,7 +41,11 @@ def contactmail(request):
         return redirect("main:success")
 
     form = ContactForm()
-    return render(request, "main/contact.html", {'form': form})
+
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+
+    return render(request, "main/contact.html", {'form': form, 'cartItems': cartItems})
 
 
 
@@ -113,7 +119,10 @@ def home(request):
 
 def base(request):
     user = User.objects.all()
-    return render(request, 'base_site.html', {'user': user})
+
+
+
+    return render(request, 'base_site.html', {'user': user  })
 
 
 def contact(request):
