@@ -21,6 +21,13 @@ def success(request):
     return render(request, "main/success.html", {'cartItems': cartItems})
 
 
+def servizi(request):
+    data = cartData(request)   #function in utils.py
+    cartItems = data['cartItems']
+
+    return render(request, "main/servizi.html", {'cartItems': cartItems})
+
+
 
 def contactmail(request):
     if request.method == 'POST':
