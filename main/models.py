@@ -162,6 +162,16 @@ class ShippingCost(models.Model):
 
 
 
+class Message(models.Model):
+
+    active = models.BooleanField()
+    message = models.CharField(max_length=1000, null=False)
+
+    def __str__(self):
+        return self.message
+
+
+
 
 
 

@@ -1,8 +1,21 @@
 from django.contrib import admin
-from .models import Product, OrderItem, Order, Customer, ShippingAddress, User, ShippingCost
+from .models import Product, OrderItem, Order, Customer, ShippingAddress, User, ShippingCost, Message
 
 
 # Register your models here.
+class MessageAdmin(admin.ModelAdmin):
+    fields = [
+
+        'active',
+        'message',
+    ]
+
+    list_display =[
+        'message',
+        'id',
+        'active',
+
+    ]
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -213,3 +226,4 @@ admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(ShippingAddress, ShippingAddressAdmin)
 admin.site.register(ShippingCost, ShippingCostAdmin)
+admin.site.register(Message, MessageAdmin)

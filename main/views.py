@@ -21,11 +21,11 @@ def success(request):
     return render(request, "main/success.html", {'cartItems': cartItems})
 
 
-def servizi(request):
+def info(request):
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
 
-    return render(request, "main/servizi.html", {'cartItems': cartItems})
+    return render(request, "main/info.html", {'cartItems': cartItems})
 
 
 
@@ -112,6 +112,7 @@ def home(request):
     data = cartData(request)   #function in utils.py
     cartItems = data['cartItems']
     productsall = Product.objects.all()
+    messagesall = Message.objects.all()
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
     y = zerostock2
@@ -120,7 +121,7 @@ def home(request):
     print('ZEROSTOCK2 from HOME:', y)
 
 
-    context = {'products': productsall,'cartItems': cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
+    context = {'products': productsall,'messages': messagesall, 'cartItems': cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
     return render(request, 'main/home.html', context)
 
 
