@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'js4%-l-c(#c#ao78)07766u=n-xz0$x^6!hi*3b!mca^*+326o'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,6 +79,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
+
+CSRF_COOKIE_SECURE = True
 
 
 # Database
@@ -135,7 +138,7 @@ SITE_ID = 1
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'magliamatta@gmail.com'
-EMAIL_HOST_PASSWORD = 'magliamatta2021'
+EMAIL_HOST_PASSWORD = os.environ.get('MAGLIAMATTAGMAIL')
 EMAIL_USE_TLS = True
 
 
