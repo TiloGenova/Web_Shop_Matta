@@ -162,6 +162,13 @@ div.carousel-inner{
 	margin-right: 15px;
 }
 
+#weblion{
+	width:200px;
+	display: inline-block;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 #cart-total{
 	display: block;
 	text-align: center;
