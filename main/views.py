@@ -708,7 +708,7 @@ def processOrder(request):
         template,
         settings.EMAIL_HOST_USER,
         [email], # Receiver
-        ['kingnapalm68@gmail.com', 'martam.colombo@gmail.com'],  # BCC
+        ['magliamatta@gmail.com', 'martam.colombo@gmail.com'],  # BCC
 
     )
     email.send(fail_silently=False)
