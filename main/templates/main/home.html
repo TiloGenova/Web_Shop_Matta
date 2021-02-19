@@ -258,7 +258,7 @@
                                         {% endif %}
                                     {% endif %}
                                     {% if user.is_authenticated %}
-                                        {% if product.id not in zerostock2  %}
+                                        {% if product.id not in zerostock2 or zerostock2 is None  %}
                                             <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                                 <button data-product="{{product.id}}" data-action="add"
                                                         class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>

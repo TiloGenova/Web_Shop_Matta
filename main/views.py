@@ -107,8 +107,8 @@ def logoutUser(request):
     return redirect('/')
 
 
-global zerostock2
-zerostock2 = []
+#global zerostock2
+#zerostock2 = []
 
 def home(request):
 
@@ -118,7 +118,9 @@ def home(request):
     messagesall = Message.objects.all()
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
-    y = zerostock2
+    #y = zerostock2
+    y = request.session.get('ZERO')
+    zerostock2 = y
 
 
     print('ZEROSTOCK2 from HOME:', y)
@@ -176,6 +178,9 @@ def details(request, product_id):
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
 
+    y = request.session.get('ZERO')   #List for logged in Users (Articles with 0 stock)
+    zerostock2 = y
+
 
 
     return render(request, 'main/details.html', {'products': productsall,
@@ -194,6 +199,9 @@ def cart(request):
     dataCart = cookieCart(request) #function in utils.py
     zerostock = dataCart['zerostock']
     print('ZEROSTOCK from CART:', zerostock)
+
+    y = request.session.get('ZERO')  #List for logged in Users (Articles with 0 stock)
+    zerostock2 = y
 
 
     context = {'products': productsall,'items': items, 'order': order,'cartItems':cartItems, 'zerostock': zerostock,'zerostock2': zerostock2}
@@ -334,29 +342,37 @@ def updateItem(request):
 
 
     #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
-    global zerostock2
+    #global zerostock2
+    zerostock2 = []
     if orderItem.zerostock <= 0:
         zerostock2.append(productident)
+
         print(request.session)
         request.session['ZERO'] = zerostock2
         request.session.modified = True
 
         yes = request.session.get('ZERO')
-        print('OUT OF SESSION STORAGE:', yes)
+        print('OUT OF SESSION STORAGE / BESTAND = 0:', yes)
 
 
     elif orderItem.zerostock != 0:
         try:
             zerostock2.remove(productident)
 
+            print(request.session)
+            request.session['ZERO'] = zerostock2
+            request.session.modified = True
+
+            yes = request.session.get('ZERO')
+            print('OUT OF SESSION STORAGE / BESTAND GROESSER ALS 0:', yes)
+
+
+
         except ValueError:
             print('already removed from list')
 
     else:
         pass
-
-
-
 
 
     print('ZEROSTOCK2_logged in:', zerostock2)
