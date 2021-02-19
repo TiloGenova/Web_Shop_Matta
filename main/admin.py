@@ -113,6 +113,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class OrderItemAdmin(admin.ModelAdmin):
     fields = [
+
         'product',
         'order',
         'quantity',
@@ -120,12 +121,12 @@ class OrderItemAdmin(admin.ModelAdmin):
     ]
 
     list_display =[
+
         'product',
         'order',
         'quantity',
         'date_added',
     ]
-
 
     readonly_fields = ['date_added']
     class Meta:

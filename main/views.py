@@ -12,6 +12,9 @@ from decimal import Decimal
 from django.core.mail import send_mail, EmailMessage, BadHeaderError
 from django.template.loader import render_to_string
 from django.db import connection
+from django.contrib.sessions.backends.db import SessionStore
+
+
 
 
 def success(request):
@@ -322,7 +325,7 @@ def updateItem(request):
     productident = getattr(product, 'id')
 
 
-    #ORIGINAL BLOCK
+    #ORIGINAL BLOCK OF CODE
     orderItem.save()
 
     if orderItem.quantity <= 0:
@@ -334,17 +337,29 @@ def updateItem(request):
     global zerostock2
     if orderItem.zerostock <= 0:
         zerostock2.append(productident)
+        print(request.session)
+        request.session['ZERO'] = zerostock2
+        request.session.modified = True
+
+        yes = request.session.get('ZERO')
+        print('OUT OF SESSION STORAGE:', yes)
+
 
     elif orderItem.zerostock != 0:
         try:
             zerostock2.remove(productident)
+
         except ValueError:
             print('already removed from list')
 
     else:
         pass
 
-    print('ZEROSTOCK_logged in:', zerostock2)
+
+
+
+
+    print('ZEROSTOCK2_logged in:', zerostock2)
 
 
 

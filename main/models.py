@@ -126,7 +126,8 @@ class OrderItem(models.Model):
 
 
     def __str__(self):
-        return self.product.title
+        return str(self.product.title)
+
 
     @property
     def get_total(self):
