@@ -346,26 +346,12 @@ def updateItem(request):
     zerostock2 = []
     if orderItem.zerostock <= 0:
         zerostock2.append(productident)
-
-        print(request.session)
-        request.session['ZERO'] = zerostock2
-        request.session.modified = True
-
-        yes = request.session.get('ZERO')
-        print('OUT OF SESSION STORAGE / BESTAND = 0:', yes)
+        print('LIST zerostock2:', zerostock2)
 
 
     elif orderItem.zerostock != 0:
         try:
             zerostock2.remove(productident)
-
-            print(request.session)
-            request.session['ZERO'] = zerostock2
-            request.session.modified = True
-
-            yes = request.session.get('ZERO')
-            print('OUT OF SESSION STORAGE / BESTAND GROESSER ALS 0:', yes)
-
 
 
         except ValueError:
@@ -373,6 +359,13 @@ def updateItem(request):
 
     else:
         pass
+
+    # SAVING LIST TO SESSION
+    print(request.session)
+    request.session['ZERO'] = zerostock2
+    request.session.modified = True
+    yes = request.session.get('ZERO')
+    print('OUT OF SESSION STORAGE / BESTAND = 0:', yes)
 
 
     print('ZEROSTOCK2_logged in:', zerostock2)
