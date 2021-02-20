@@ -298,9 +298,10 @@ def checkout(request):
 
 
 zerostockloggedin = []
-
+zerostock2 = []
 
 def updateItem(request):
+
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
@@ -343,12 +344,12 @@ def updateItem(request):
 
     #CREATING ZEROSTOCK-LIST TO DISABLE BUTTONS FOR LOGGED IN USERS:
     #global zerostock2
-    zerostock2 = []
+
     if orderItem.zerostock <= 0:
         zerostock2.append(productident)
+        #zerostock2.append(3)
+
         print('LIST zerostock2:', zerostock2)
-
-
     elif orderItem.zerostock != 0:
         try:
             zerostock2.remove(productident)
@@ -360,6 +361,7 @@ def updateItem(request):
     else:
         pass
 
+
     # SAVING LIST TO SESSION
     print(request.session)
     request.session['ZERO'] = zerostock2
@@ -368,7 +370,7 @@ def updateItem(request):
     print('OUT OF SESSION STORAGE / BESTAND = 0:', yes)
 
 
-    print('ZEROSTOCK2_logged in:', zerostock2)
+    #print('ZEROSTOCK2_logged in:', zerostock2)
 
 
 
