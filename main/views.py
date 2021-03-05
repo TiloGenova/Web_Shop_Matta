@@ -351,12 +351,14 @@ def updateItem(request):
 
         print('LIST zerostock2:', zerostock2)
     elif orderItem.zerostock != 0:
-        try:
+        zerostock2.remove(productident)
+
+        '''try:
             zerostock2.remove(productident)
 
 
         except ValueError:
-            print('already removed from list')
+            print('already removed from list')'''
 
     else:
         pass
