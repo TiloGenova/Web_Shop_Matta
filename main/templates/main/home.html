@@ -233,6 +233,13 @@
                                 {% endif %}
                             </div>
 
+                            <div class="showcase">
+                                {% if product.showcase %}
+                                    <h5>{{ product.showtext }}</h5>
+                                {% endif %}
+                            </div>
+
+
                             <div style="text-align:center;" class="row">
                                 <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                     <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
@@ -241,7 +248,8 @@
                                 <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                     <h2 style="text-align:center;"></h2>
                                 </div>
-                                {% if product.stock > 0 %}
+                                {% if product.stock > 0  %}
+                                {% if not product.showcase %}
 
                                     {% if user.is_anonymous %}
                                         {% if product.id not in zerostock  %}
@@ -274,6 +282,7 @@
                                     {% endif %}
 
                                 {% endif %}
+                                {% endif %}
 
                             </div>
 
@@ -305,7 +314,7 @@
 
                                 <div class="container-overlay">
                                     <a  href="{% url 'main:details' product.id %}"><img
-                                            src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                            src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width=410
                                             style ="box-shadow:hsl(34, 76%, 34%) 3px -3px 14px;"
                                     ></a>
                                     <div class="overlay">
@@ -332,7 +341,7 @@
                                 <p>{{ product.description }}</p>
                                 <p>Prodotto_Code: {{ product.id }}</p>
                                 {% if product.stock > 0 %}
-                                    <h6>Disponibile solamente: {{ product.stock }} </h6>
+                                <h6>Disponibile solamente: {{ product.stock }} </h6>
                                 {% endif %}
 
 
@@ -349,6 +358,13 @@
                                     {% endif %}
                                 </div>
 
+                                <div class="showcase">
+                                    {% if product.showcase %}
+                                    <h5>{{ product.showtext }}</h5>
+                                    {% endif %}
+                                </div>
+
+
                                 <div style="text-align:center;" class="row">
                                     <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                         <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
@@ -357,7 +373,8 @@
                                     <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                         <h2 style="text-align:center;"></h2>
                                     </div>
-                                    {% if product.stock > 0 %}
+                                    {% if product.stock > 0  %}
+                                    {% if not product.showcase %}
 
                                     {% if user.is_anonymous %}
                                     {% if product.id not in zerostock  %}
@@ -390,6 +407,7 @@
                                     {% endif %}
 
                                     {% endif %}
+                                    {% endif %}
 
                                 </div>
 
@@ -421,7 +439,7 @@
 
                                 <div class="container-overlay">
                                     <a  href="{% url 'main:details' product.id %}"><img
-                                            src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width="410"
+                                            src="{{ product.imageURL }}" class="img-fluid pb-0 pr-0" width=410
                                             style ="box-shadow:hsl(34, 76%, 34%) 3px -3px 14px;"
                                     ></a>
                                     <div class="overlay">
@@ -448,7 +466,7 @@
                                 <p>{{ product.description }}</p>
                                 <p>Prodotto_Code: {{ product.id }}</p>
                                 {% if product.stock > 0 %}
-                                    <h6>Disponibile solamente: {{ product.stock }} </h6>
+                                <h6>Disponibile solamente: {{ product.stock }} </h6>
                                 {% endif %}
 
 
@@ -465,6 +483,13 @@
                                     {% endif %}
                                 </div>
 
+                                <div class="showcase">
+                                    {% if product.showcase %}
+                                    <h5>{{ product.showtext }}</h5>
+                                    {% endif %}
+                                </div>
+
+
                                 <div style="text-align:center;" class="row">
                                     <div align="left" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4  " >
                                         <a href="{% url 'main:details' product.id %}" class="btn btn-outline-secondary add-btn"
@@ -473,16 +498,16 @@
                                     <div class="col-2 col-sm-2 col-md-2 col-lg-4 col-xl-4">
                                         <h2 style="text-align:center;"></h2>
                                     </div>
+                                    {% if product.stock > 0  %}
+                                    {% if not product.showcase %}
 
-                                    <!-- CART BUTTON -->
-                                    {% if product.stock > 0 %}
-                                        {% if user.is_anonymous %}
-                                             {% if product.id not in zerostock  %}
-                                                <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
-                                                    <button data-product="{{product.id}}" data-action="add"
-                                                            class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
-                                                </div>
-                                            {% endif %}
+                                    {% if user.is_anonymous %}
+                                    {% if product.id not in zerostock  %}
+                                    <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <button data-product="{{product.id}}" data-action="add"
+                                                class = "btn btn-outline-secondary add-btn update-cart">Carrello</button>
+                                    </div>
+                                    {% endif %}
                                     {% if product.id  in zerostock  %}
                                     <div align="right" class="col-5 col-sm-5 col-md-5 col-lg-4 col-xl-4">
                                         <button disabled data-product="{{product.id}}" data-action="add"
@@ -506,6 +531,7 @@
 
                                     {% endif %}
 
+                                    {% endif %}
                                     {% endif %}
 
                                 </div>

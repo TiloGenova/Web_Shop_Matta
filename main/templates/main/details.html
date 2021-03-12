@@ -40,8 +40,9 @@
                                 <h2 style="text-align:center;">Dettagli</h2>
                             </div>
                             {% if product.stock > 0 %}
-                            <div class="col-lg-4">
 
+                            <div class="col-lg-4">
+                                {% if not product.showcase %}
                                 {% if product.stock > 0 %}
                                 {% if user.is_anonymous %}
                                 {% if product.id not in zerostock  %}
@@ -66,6 +67,8 @@
                                 {% endif %}
 
                                 {% endif %}
+                                {% endif %}
+
                             </div>
 
 
@@ -95,6 +98,12 @@
                         {% else  %}
                         <h3>{{ product.price }}€</h3>
 
+                        {% endif %}
+                    </div>
+
+                    <div class="showcase">
+                        {% if product.showcase %}
+                        <h5>{{ product.showtext }}</h5>
                         {% endif %}
                     </div>
 
