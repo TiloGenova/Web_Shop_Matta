@@ -28,7 +28,7 @@ class Product(models.Model):
     date = models.DateField(auto_now_add=True)
     NEW_Flag = models.BooleanField(default=False)
     showcase = models.BooleanField(default=False)
-    showtext = models.TextField(max_length=150, default="Si prega di chiamare per ulteriori informazioni.")
+    showtext = models.TextField(max_length=150, default="Contattami e ti darò informazioni precise.")
     gender = models.CharField(choices=GENDER.choices, max_length=5)
     size = models.CharField(choices=SIZETYPES.choices, max_length=4)
     category = models.CharField(max_length=150, null=False, choices=CHOICESCAT)
